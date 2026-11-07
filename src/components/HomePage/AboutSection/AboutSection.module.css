@@ -1,11 +1,6 @@
 .section {
   background-color: var(--white);
-}
-
-.inner {
-  max-width: 1344px;
-  margin: 0 auto;
-  padding: 12rem 26px 10rem;
+  padding: 10rem 0rem;
 }
 
 /* ── Heading + small image ── */
@@ -19,12 +14,12 @@
 
 .topImg {
   position: relative;
-  width: 240px;
-  aspect-ratio: 16 / 10;
+  width: 317px;
+  aspect-ratio: 1 / 1;
   border-radius: 5px;
   overflow: hidden;
   flex-shrink: 0;
-  background-color: var(--lightGray);
+  /* background-color: var(--lightGray); */
 }
 
 .img {
@@ -83,13 +78,13 @@
 }
 
 .cardGold {
-  background-color: var(--gold);
+  background-color: var(--champagne);
   color: var(--midnight);
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
   align-items: stretch;
   gap: 2.4rem;
-  padding: 1rem;
+  padding: 1.4rem;
 }
 
 .cardNavy {
@@ -101,7 +96,8 @@
 
 .cardImg {
   position: relative;
-  aspect-ratio: 4 / 3;
+  /* aspect-ratio: 4 / 3; */
+  min-height: 100%;
   align-self: start;
   border-radius: 4px;
   overflow: hidden;
@@ -136,6 +132,7 @@
   max-width: 460px;
   color: inherit;
   hyphens: none;
+  margin-bottom: 7rem;
 }
 
 .cardNavy .cardCopy {
@@ -149,17 +146,19 @@
 /* ── Tablet and phone: everything stacks ── */
 
 @media screen and (max-width: 1068px) {
-  .inner {
-    padding: 9rem 26px 8rem;
+  .section {
+    padding: 7rem 0rem;
   }
 
   .top {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 3rem;
   }
 
-  .topImg {
-    width: 100%;
+  .heading {
+    text-align: center;
   }
 
   .facts {
@@ -203,7 +202,15 @@
 }
 
 @media screen and (max-width: 568px) {
-  .inner {
-    padding: 7rem 16px 6rem;
+  .section {
+    padding: 5rem 0rem;
+  }
+
+  .topImg {
+    width: 100%;
+  }
+
+  .cardCopy {
+    margin-bottom: 5rem;
   }
 }

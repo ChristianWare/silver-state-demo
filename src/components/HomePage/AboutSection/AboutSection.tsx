@@ -4,6 +4,7 @@ import Image from "next/image";
 import PulseEyeBrow from "@/components/shared/PulseEyeBrow/PulseEyeBrow";
 import ArrowButton from "@/components/shared/ArrowButton/ArrowButton";
 import styles from "./AboutSection.module.css";
+import LayoutWrapper from "@/components/shared/LayoutWrapper";
 
 const FACTS = [
   "Flight tracking on every pickup",
@@ -14,7 +15,7 @@ const FACTS = [
 export default function AboutSection() {
   return (
     <section className={styles.section}>
-      <div className={styles.inner}>
+      <LayoutWrapper>
         <div className={styles.top}>
           <h2 className={styles.heading}>
             Driven by people <br />
@@ -22,7 +23,7 @@ export default function AboutSection() {
           </h2>
           <div className={styles.topImg}>
             <Image
-              src='/images/other/about-1.jpg'
+              src='/images/other/subNoBG.png'
               alt='Chauffeur holding the door of a black car in Las Vegas'
               fill
               sizes='(max-width: 1068px) 100vw, 240px'
@@ -43,7 +44,7 @@ export default function AboutSection() {
           <article className={`${styles.card} ${styles.cardGold}`}>
             <div className={styles.cardImg}>
               <Image
-                src='/images/other/about-2.jpg'
+                src='/images/other/vegasAirport.jpg'
                 alt='Chauffeur meeting a traveler at Harry Reid International Airport'
                 fill
                 sizes='(max-width: 1068px) 100vw, 320px'
@@ -84,7 +85,7 @@ export default function AboutSection() {
             </div>
           </article>
         </div>
-      </div>
+      </LayoutWrapper>
     </section>
   );
 }
