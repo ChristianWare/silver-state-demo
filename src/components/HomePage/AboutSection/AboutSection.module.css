@@ -1,6 +1,9 @@
 .section {
   background-color: var(--white);
-  padding: 5rem 0rem;
+  padding: 9rem 0rem 5rem;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── Heading + small image ── */
@@ -73,12 +76,13 @@
 }
 
 .card {
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
 .cardGold {
-  background-color: var(--champagne);
+  background-color: var(--ivory);
+  border: 1px solid var(--champagne);
   color: var(--midnight);
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
@@ -99,7 +103,7 @@
   /* aspect-ratio: 4 / 3; */
   min-height: 100%;
   align-self: start;
-  border-radius: 4px;
+  border-radius: 7px;
   overflow: hidden;
   background-color: var(--bronze);
 }

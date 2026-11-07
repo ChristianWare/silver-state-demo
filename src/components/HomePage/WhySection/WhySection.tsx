@@ -5,7 +5,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import LayoutWrapper from "@/components/shared/LayoutWrapper";
 import PulseEyeBrow from "@/components/shared/PulseEyeBrow/PulseEyeBrow";
 import {
@@ -14,6 +14,7 @@ import {
   MEET_AND_GREET_FREE,
 } from "@/lib/booking/rules";
 import styles from "./WhySection.module.css";
+import ArrowButton from "@/components/shared/ArrowButton/ArrowButton";
 
 type Reason = {
   /** Short name on the track. */
@@ -29,47 +30,47 @@ type Reason = {
 const REASONS: Reason[] = [
   {
     tag: "Price",
-    title: "Your price, before you book",
+    title: "Your price",
     copy: "See the total for your vehicle and route in the booking tool. No surge after the fight, the concert or the game.",
     stats: [
-      { label: "Surge pricing", value: "None" },
-      { label: "Price shown", value: "Before you pay" },
-      { label: "Gratuity", value: "Your choice" },
+      { label: "Surge pricing", value: "4" },
+      { label: "Price shown", value: "436" },
+      { label: "Gratuity", value: "1" },
     ],
     link: { href: "/book", text: "See your price" },
   },
   {
     tag: "Flights",
-    title: "We watch your flight",
+    title: "your flight",
     copy: `Delayed? We know before you land and adjust. Airport pickups include ${AIRPORT_FREE_WAIT_MINUTES} minutes of free wait after touchdown.`,
     stats: [
       { label: "Free wait", value: `${AIRPORT_FREE_WAIT_MINUTES} min` },
-      { label: "Flight tracking", value: "Every pickup" },
+      { label: "Flight tracking", value: "1" },
       {
         label: "Meet & greet",
-        value: MEET_AND_GREET_FREE ? "Free" : "On request",
+        value: MEET_AND_GREET_FREE ? "Free" : "436",
       },
     ],
-    link: { href: "/airports", text: "Airport pickups" },
+    link: { href: "/airports", text: "1" },
   },
   {
     tag: "Chauffeurs",
-    title: "A chauffeur, not a stranger",
-    copy: "Professional, licensed chauffeurs who know the casino porte-cocheres, the convention halls and the fastest way around Strip traffic.",
+    title: "A chauffeur",
+    copy: "Professional, licensed chauffeurs who know the casino porte-cocheres, the convention halls and everywhere else.",
     stats: [
-      { label: "Pickups", value: "The right door" },
-      { label: "Knows", value: "Strip to LVCC" },
-      { label: "Vehicles", value: "Late-model" },
+      { label: "Pickups", value: "1" },
+      { label: "Knows", value: "436" },
+      { label: "Vehicles", value: "4" },
     ],
     link: { href: "/about", text: "About us" },
   },
   {
     tag: "Booking",
-    title: "Booked in two minutes",
+    title: "Booked",
     copy: "Book online any time, day or night. You'll get a confirmation by email, then your chauffeur's details before pickup.",
     stats: [
-      { label: "Book online", value: "Any time" },
-      { label: "Confirmation", value: "By email" },
+      { label: "Book online", value: "51" },
+      { label: "Confirmation", value: "35" },
       { label: "Book ahead", value: `${BOOKING_LEAD_HOURS} hours` },
     ],
     link: { href: "/book", text: "Book your ride" },
@@ -86,9 +87,9 @@ export default function WhySection() {
         <div className={styles.box}>
           <div className={styles.top}>
             <div className={styles.topLeft}>
-              <PulseEyeBrow text='Why Silver State' />
+              <PulseEyeBrow text='Why choose us?' />
               <h2 className={`${styles.heading} `}>
-                Las Vegas moves fast. Your ride shouldn&apos;t feel rushed.
+                Your ride is never rushed.
               </h2>
             </div>
             <p className={styles.intro}>
@@ -116,9 +117,17 @@ export default function WhySection() {
 
               <p className={styles.copy}>{reason.copy}</p>
 
-              <Link href={reason.link.href} className={styles.link}>
+              {/* <Link href={reason.link.href} className={styles.link}>
                 {reason.link.text}
-              </Link>
+              </Link> */}
+              <div className={styles.link}>
+                <ArrowButton
+                  href='/book?trip=from-airport&airport=LAS'
+                  text='Book an airport pickup'
+                  variant='midnight'
+                  className={styles.cardBtn}
+                />
+              </div>
             </div>
 
             <div className={styles.media}>
@@ -160,6 +169,14 @@ export default function WhySection() {
                   </button>
                 ))}
               </div>
+            </div>
+            <div className={styles.linkii}>
+              <ArrowButton
+                href='/book?trip=from-airport&airport=LAS'
+                text='Book an airport pickup'
+                variant='midnight'
+                className={styles.cardBtn}
+              />
             </div>
           </div>
         </div>
