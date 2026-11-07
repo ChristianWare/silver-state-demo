@@ -17,6 +17,12 @@ const SofiaSansExtraCondensedBold = localFont({
   display: "swap",
 });
 
+const SofiaSansExtraCondensedExtraBold = localFont({
+  src: "../../public/fonts/SofiaSansExtraCondensed-ExtraBold.ttf",
+  variable: "--SofiaSansExtraCondensedExtraBold",
+  display: "swap",
+});
+
 const SofiaSansRegular = localFont({
   src: "../../public/fonts/SofiaSans-Regular.ttf",
   variable: "--SofiaSansRegular",
@@ -95,7 +101,7 @@ export default async function RootLayout({
         <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
       </head>
       <body
-        className={`${SofiaSansExtraCondensedBold.variable} ${SofiaSansRegular.variable} ${SofiaSansLight.variable} ${SofiaSansBold.variable} `}
+        className={`${SofiaSansExtraCondensedBold.variable} ${SofiaSansRegular.variable} ${SofiaSansLight.variable} ${SofiaSansBold.variable} ${SofiaSansExtraCondensedExtraBold.variable}`}
       >
         <script
           type='application/ld+json'

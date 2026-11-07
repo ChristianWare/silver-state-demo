@@ -93,7 +93,7 @@ h4,
 h5,
 h6 {
   color: var(--black);
-  font-family: var(--SofiaSansExtraCondensedBold);
+  font-family: var(--SofiaSansExtraCondensedExtraBold);
   text-transform: uppercase;
   /* hyphens: auto; */
 }
