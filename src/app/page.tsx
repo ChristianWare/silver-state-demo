@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import PagePlaceholder from "@/components/shared/PagePlaceholder/PagePlaceholder";
-import { guides } from "@/lib/pageGuides";
 import { SITE } from "@/config/site";
+import SiteNav from "@/components/shared/SiteNav/SiteNav";
+import Hero from "@/components/HomePage/Hero/Hero";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -10,14 +10,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main>
-      <h1>Silver State <br /> Black Car</h1>
-
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos expedita
-        quis cum porro dignissimos harum, sed maxime, magni autem cupiditate
-        aperiam fugiat quidem neque ex, sequi eveniet explicabo omnis obcaecati?
-      </p>
-    </main>
+    <>
+      <SiteNav variant='overlay' heroId='hero' />
+      <main>
+        <Hero />
+      </main>
+    </>
   );
 }

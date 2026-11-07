@@ -1,0 +1,123 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  padding: 10px;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--navy);
+}
+
+.img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Darker at the top for the nav and at the bottom for the heading. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(11, 15, 26, 0.62) 0%,
+    rgba(11, 15, 26, 0.22) 40%,
+    rgba(11, 15, 26, 0.12) 70%,
+    rgba(11, 15, 26, 0.35) 100%
+  );
+}
+
+.content {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 0 3rem 3rem;
+}
+
+.copy {
+  min-width: 0;
+}
+
+.heading {
+  font-size: 46.4px;
+  line-height: 0.95em;
+  color: var(--ivory);
+}
+
+.subhead {
+  margin-top: 1.4rem;
+  font-size: 2rem;
+  line-height: 1.5em;
+  max-width: 500px;
+  color: var(--ivory);
+  hyphens: none;
+}
+
+@media screen and (max-width: 1268px) {
+  .heading {
+    font-size: 40.6px;
+  }
+}
+
+/* Tablet: the booking tool drops under the heading, full width. */
+@media screen and (max-width: 1068px) {
+  .content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2.4rem;
+  }
+}
+
+@media screen and (max-width: 968px) {
+  .heading {
+    font-size: 33.8px;
+  }
+}
+
+/* Phone: the photo becomes a card and the text sits below it. */
+@media screen and (max-width: 568px) {
+  .hero {
+    height: min-content;
+    min-height: unset;
+    padding: 8px;
+  }
+
+  .frame {
+    height: 72svh;
+    min-height: 420px;
+  }
+
+  .overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(11, 15, 26, 0.35) 0%,
+      rgba(11, 15, 26, 0) 30%
+    );
+  }
+
+  .content {
+    position: static;
+    padding: 2.4rem 0.4rem 0.4rem;
+    gap: 2rem;
+  }
+
+  .heading {
+    font-size: 34.4px;
+    color: var(--midnight);
+  }
+
+  .subhead {
+    color: var(--slate);
+  }
+}
