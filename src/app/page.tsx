@@ -4,6 +4,7 @@ import SiteNav from "@/components/shared/SiteNav/SiteNav";
 import Hero from "@/components/HomePage/Hero/Hero";
 import AboutSection from "@/components/HomePage/AboutSection/AboutSection";
 import WhySection from "@/components/HomePage/WhySection/WhySection";
+import ServicesSection from "@/components/HomePage/ServicesSection/ServicesSection";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -18,6 +19,7 @@ export default function Page() {
         <Hero />
         <AboutSection />
         <WhySection />
+        <ServicesSection />
       </main>
     </>
   );

@@ -10,8 +10,12 @@ export type ServiceEntry = {
 };
 
 export const servicesData: readonly ServiceEntry[] = [
-  { slug: "airport-transfers", title: "Airport Transfers", copy: "Flat-rate rides to and from the airport with flight tracking and meet-and-greet." },
-  { slug: "corporate-travel", title: "Corporate Travel", copy: "Executive transportation for teams, clients, and roadshows, billed monthly." },
-  { slug: "weddings-and-events", title: "Weddings & Events", copy: "Wedding party, guest shuttles, concerts, and game-day transportation." },
-  { slug: "hourly-chauffeur", title: "Hourly Chauffeur", copy: "A chauffeur and vehicle at your disposal by the hour, with a minimum." },
+  { slug: "airport-transfers", title: "Airport Transfers", copy: "Private rides to and from Harry Reid International, Henderson Executive and North Las Vegas, with flight tracking and meet & greet." },
+  { slug: "hourly-chauffeur", title: "Hourly Chauffeur", copy: "Keep your car and chauffeur for dinner, a show and the night out, billed by the hour with a minimum." },
+  { slug: "corporate-travel", title: "Corporate Travel", copy: "Conventions, client pickups and executive travel on one monthly invoice." },
+  { slug: "weddings", title: "Weddings", copy: "Chapel to reception, with time for photos on the way and shuttles for guests." },
+  { slug: "nightlife-events", title: "Nightlife & Events", copy: "Door drop-off and pickup at the stadiums, arenas, Sphere and the clubs." },
+  { slug: "group-transportation", title: "Group Transportation", copy: "Executive Sprinters for bachelor parties, golf trips and conference teams." },
+  { slug: "point-to-point", title: "Point-to-Point Rides", copy: "One private ride, door to door, anywhere in the Las Vegas Valley." },
+  { slug: "day-trips", title: "Day Trips", copy: "Hoover Dam, Grand Canyon West, Zion and Death Valley by private car." },
 ];

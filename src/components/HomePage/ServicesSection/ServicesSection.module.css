@@ -1,0 +1,392 @@
+.section {
+  background-color: var(--white);
+  padding: 4rem 0rem 10rem;
+}
+
+/* ── Heading + intro ── */
+
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topLeft > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  max-width: 720px;
+}
+
+.intro {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  max-width: 460px;
+  hyphens: none;
+}
+
+/* The pinned part while scrolling. useScrollSteps sets their height and
+   position; on their own they're plain wrappers. */
+.track,
+.sticky {
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 30fr) minmax(0, 70fr);
+  gap: 16px;
+  align-items: start;
+}
+
+/* ── The list ── */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--stroke);
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding: 1.8rem 1.4rem;
+  border-bottom: 1px solid var(--stroke);
+  transition: background-color 0.3s ease;
+}
+
+.item:hover {
+  background-color: var(--ivory);
+}
+
+.itemOpen,
+.itemOpen:hover {
+  background-color: var(--gold);
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.title {
+  color: var(--steel);
+  transition: color 0.3s ease;
+}
+
+.itemOpen .title {
+  color: var(--midnight);
+}
+
+/* The whole row is the button. */
+.tab {
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+}
+
+.tab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.tab:focus-visible {
+  outline: none;
+}
+
+.item:has(.tab:focus-visible) {
+  outline: 2px solid var(--midnight);
+  outline-offset: -2px;
+}
+
+.phrase {
+  font-family: var(--SofiaSansRegular);
+  font-size: 13px;
+  line-height: 1.2;
+  color: var(--steel);
+}
+
+.itemOpen .phrase {
+  color: var(--midnight);
+}
+
+.itemNum {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--steel);
+  flex-shrink: 0;
+}
+
+.itemOpen .itemNum {
+  color: var(--midnight);
+}
+
+.allLink {
+  display: inline-block;
+  margin-top: 2rem;
+  font-family: var(--SofiaSansRegular);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--midnight);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--midnight);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.allLink:hover {
+  color: var(--bronze);
+  border-color: var(--bronze);
+}
+
+/* ── The gold box ── */
+
+.box {
+  background-color: var(--gold);
+  color: var(--midnight);
+  border-radius: 5px;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Re-mount on every change, which replays the fade. */
+.boxHead,
+.rows,
+.note {
+  animation: fadeIn 0.45s ease both;
+}
+
+.boxHead {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.boxTitle {
+  color: inherit;
+}
+
+.desc {
+  font-size: 1.7rem;
+  line-height: 1.55em;
+  max-width: 560px;
+  color: var(--midnight);
+  hyphens: none;
+}
+
+.boxBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: stretch;
+}
+
+.rows {
+  margin: 0;
+  border-top: 1px solid rgba(11, 15, 26, 0.18);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(11, 15, 26, 0.18);
+}
+
+.rowLabel {
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(11, 15, 26, 0.72);
+}
+
+.rowValue {
+  margin: 0;
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--midnight);
+}
+
+.photo {
+  position: relative;
+  min-height: 260px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--bronze);
+}
+
+.img {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.imgActive {
+  opacity: 1;
+}
+
+.boxFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.note {
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--midnight);
+  max-width: 440px;
+  padding-left: 1.4rem;
+  border-left: 2px solid var(--midnight);
+  hyphens: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.8rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img,
+  .item,
+  .title {
+    transition: none;
+  }
+
+  .boxHead,
+  .rows,
+  .note {
+    animation: none;
+  }
+}
+
+/* ── 1068px: the list becomes a row of tabs above the box ── */
+
+@media screen and (max-width: 1068px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+    border-top: none;
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+    height: 100%;
+    padding: 1.4rem;
+    border: 1px solid var(--stroke);
+    border-radius: 4px;
+  }
+
+  .itemOpen {
+    border-color: var(--gold);
+  }
+
+  .title {
+    font-size: 2.6rem;
+  }
+
+  .itemNum {
+    font-size: 1.8rem;
+  }
+
+  .boxBody {
+    grid-template-columns: 1fr;
+  }
+
+  .photo {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ── 568px: one column, no pinning ── */
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding: 2rem 0rem 7rem;
+  }
+
+  .list {
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .box {
+    padding: 2.4rem 1.6rem;
+    gap: 2.4rem;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .boxFoot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .photo {
+    aspect-ratio: 4 / 3;
+  }
+}
