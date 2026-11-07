@@ -1,5 +1,4 @@
 :root {
-  /* ── Silver State palette ── */
   --midnight: #0b0f1a;
   --navy: #1c2333;
   --gold: #c9a24a;
@@ -10,24 +9,22 @@
   --bronze: #9c7a2f;
   --oxblood: #6b2633;
 
-  /* ── Tokens the whole platform uses, mapped to the palette ── */
-  --black: var(--midnight); /* headings, body text, dark buttons */
-  --black400: var(--slate); /* dark button hover, secondary dark text */
-  --black300: var(--steel); /* muted text, icons */
-  --white: #ffffff; /* cards, inputs */
-  --cream: var(--ivory); /* soft backgrounds: tabs, card titles */
+  --black: var(--midnight);
+  --black400: var(--slate);
+  --black300: var(--steel);
+  --white: #ffffff;
+  --cream: var(--ivory);
   --paragraph: var(--slate);
   --accent: var(--gold);
-  --accent600: var(--bronze); /* accent hover / text on light */
-  --accent100: var(--champagne); /* accent tint backgrounds */
-  --onAccent: var(--midnight); /* text and icons on a gold background */
+  --accent600: var(--bronze);
+  --accent100: var(--champagne);
+  --onAccent: var(--midnight);
   --lightGray: #ecebe6;
   --lightGrayii: #e4e2db;
-  --stroke: #dedbd2; /* borders and dividers */
-  --strokeii: var(--steel); /* stronger borders */
+  --stroke: #dedbd2;
+  --strokeii: var(--steel);
 
-  /* ── Status colors (admin badges, errors) — not brand colors ── */
-  --danger: #b42318; /* errors, overdue, destructive actions */
+  --danger: #b42318;
   --blue: #2563eb;
   --lighterBlue: linear-gradient(135deg, #3b82f614 0%, #2563eb1f 100%);
   --lightBlue: #2563eb33;
@@ -65,7 +62,7 @@
   */
   /* scroll-margin-top: 440px; */
   -webkit-tap-highlight-color: transparent;
-  font-family: var(--inter);
+  /* font-family: var(--inter); */
   /* overscroll-behavior: none; */
 }
 
@@ -94,43 +91,38 @@ h2,
 h3,
 h4,
 h5,
-h6,
-span {
+h6 {
   color: var(--black);
-  font-family: var(--inter);
+  font-family: var(--SofiaSansExtraCondensedBold);
+  text-transform: uppercase;
   /* hyphens: auto; */
 }
 
 h1,
 .h1 {
-  font-size: 5.4rem;
-  font-weight: 500;
-  line-height: 1.1em;
-  /* letter-spacing: -2.2px; */
+  font-size: 114px;
+  letter-spacing: -0.6px;
+  line-height: 0.84em;
 }
 
 h2,
 .h2 {
-  font-size: 4rem;
-  font-weight: 500;
-  line-height: 1.1em;
-  /* letter-spacing: -2.2px; */
+  font-size: 100px;
+  letter-spacing: -0.5px;
+  line-height: 0.86em;
 }
 
 h3,
 .h3 {
-  font-size: 3rem;
-  font-weight: 500;
-  line-height: 1.2em;
-  /* letter-spacing: -1.6px; */
+  font-size: 48px;
+  line-height: 0.9em;
 }
 
-h4,
+/* h4,
 .h4 {
   font-size: 2.4rem;
   font-weight: 500;
   line-height: 1.2em;
-  /* letter-spacing: -1.3px; */
 }
 
 h5,
@@ -138,7 +130,6 @@ h5,
   font-size: 2rem;
   font-weight: 500;
   line-height: 1.2;
-  /* letter-spacing: -1px; */
 }
 
 h6,
@@ -146,8 +137,7 @@ h6,
   font-size: 1.8rem;
   font-weight: 500;
   line-height: 1.2;
-  /* letter-spacing: -0.8px; */
-}
+} */
 
 button {
   border: none;
@@ -160,12 +150,12 @@ ul,
 input,
 textarea {
   hyphens: auto;
-  font-size: 1.6rem;
-  line-height: 1.5em;
-  font-weight: 500;
+  font-size: 1.7rem;
+  line-height: 1.7em;;
   /* letter-spacing: -0.8px; */
   hyphens: auto;
   color: var(--black);
+  font-family: var(--SofiaSansRegular);
 }
 
 textarea {
@@ -214,14 +204,37 @@ select:focus {
   color: var(--black);
 } */
 
-@media screen and (max-width: 1268px) {
+@media screen and (max-width: 1468px) {
   h1,
   .h1 {
-    font-size: 4.8rem;
+    font-size: 103.7px;
   }
+
   h2,
   .h2 {
-    font-size: 3.8rem;
+    font-size: 91.5px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 46.4px;
+  }
+}
+
+@media screen and (max-width: 1268px) {
+  .h1,
+  h1 {
+    font-size: 95.1px;
+  }
+
+  h2,
+  .h2 {
+    font-size: 84.5px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 43.8px;
   }
 }
 
@@ -230,46 +243,52 @@ select:focus {
     font-size: 55%;
   }
 
+  .h1,
+  h1 {
+    font-size: 72.7px;
+  }
+
+  h2,
+  .h2 {
+    font-size: 66.1px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 37px;
+  }
+
   p {
     font-size: 113.7%;
   }
 }
 
-@media screen and (max-width: 768px) {
-  h1,
-  .h1 {
-    font-size: 4.2rem;
-  }
-
+/* @media screen and (max-width: 768px) {
   h2,
   .h2 {
     font-size: 3.4rem;
   }
-}
+} */
 
 @media screen and (max-width: 568px) {
   html {
     font-size: 50%;
   }
 
-  /* h1,
+  h1,
   .h1 {
-    letter-spacing: -2px;
-    font-size: 42px;
+    font-size: 52.8px;
   }
 
   h2,
   .h2 {
-    letter-spacing: -2.2px;
-    font-size: 34px;
-    line-height: 1em;
+    font-size: 46.4px;
   }
 
   h3,
   .h3 {
-    font-size: 2.8rem;
-    letter-spacing: -1.5px;
-  } */
+    font-size: 32px;
+  }
 
   p {
     font-size: 16px;
@@ -277,33 +296,12 @@ select:focus {
 
   .stat {
     font-size: 7.5rem;
-    letter-spacing: -2px;
   }
 
   .badge {
     overflow: ellipsis;
   }
 }
-
-/* .toastFont {
-} */
-
-/* Only use in production */
-/* @media screen and (max-width: 480px) {
-  h1 {
-    letter-spacing: -2.5px;
-  }
-  h2 {
-    letter-spacing: -1.5px;
-    line-height: 120%;
-  }
-} */
-
-/* .toastFont {
-  font-family: var(--roboto);
-} */
-
-/* dashboard styles */
 
 .container {
   display: grid;
@@ -325,7 +323,6 @@ select:focus {
   border-bottom: 2px solid var(--stroke);
   width: 100%;
   padding-bottom: 1rem;
-  /* text-transform: capitalize; */
 }
 
 .tabs {
@@ -461,8 +458,6 @@ th {
   font-weight: 600;
   letter-spacing: normal;
 }
-
-/* Buttons and badges */
 
 .pill {
   font-size: 1.4rem;
@@ -908,14 +903,6 @@ th {
     font-size: 16px !important;
   }
 }
-
-/* @media screen and (max-width: 480px) {
-  h1,
-  .h1 {
-    letter-spacing: -1.5px;
-    font-size: 35px;
-  }
-} */
 
 /* While a page loads (see NavProgress), the admin content fades slightly. */
 [data-refresh-area] {
