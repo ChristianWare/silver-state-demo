@@ -23,8 +23,10 @@ export default function Hero() {
       <div className={styles.content}>
         <div className={styles.copy}>
           <h1 className={styles.heading}>
-            The quiet way <br />
-            through Las Vegas.
+            {/* The quiet way <br />
+            through Las Vegas. */}
+            Executive Black Car <br className={styles.br} />
+            Service in Las Vegas
           </h1>
           <p className={styles.subhead}>
             Black car service in Las Vegas, from Harry Reid International to the

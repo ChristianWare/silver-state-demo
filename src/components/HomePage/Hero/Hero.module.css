@@ -43,8 +43,8 @@
 }
 
 .heading {
-  font-size: 46.4px;
-  line-height: 0.95em;
+  /* font-size: 46.4px;
+  line-height: 0.95em; */
   color: var(--ivory);
 }
 
@@ -57,11 +57,11 @@
   hyphens: none;
 }
 
-@media screen and (max-width: 1268px) {
+/* @media screen and (max-width: 1268px) {
   .heading {
     font-size: 40.6px;
   }
-}
+} */
 
 /* Tablet: the booking tool drops under the heading, full width. */
 @media screen and (max-width: 1068px) {
@@ -72,15 +72,15 @@
   }
 }
 
-@media screen and (max-width: 968px) {
+/* @media screen and (max-width: 968px) {
   .heading {
     font-size: 33.8px;
   }
-}
+} */
 
 /* Phone: the photo becomes a card and the text sits below it. */
 @media screen and (max-width: 568px) {
-  .hero {
+  /* .hero {
     height: min-content;
     min-height: unset;
     padding: 8px;
@@ -89,22 +89,30 @@
   .frame {
     height: 72svh;
     min-height: 420px;
-  }
+  } */
 
 
-
+/* 
   .content {
     position: static;
     padding: 2.4rem 0.4rem 0.4rem;
     gap: 2rem;
-  }
+  } */
 
-  .heading {
+  /* .heading {
     font-size: 34.4px;
     color: var(--midnight);
+  } */
+
+  /* .subhead {
+    color: var(--slate);
+  } */
+
+  .br {
+    display: none;
   }
 
   .subhead {
-    color: var(--slate);
+    font-size: 1.7rem;
   }
 }
