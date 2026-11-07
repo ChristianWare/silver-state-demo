@@ -87,7 +87,7 @@ export default function WhySection() {
           <div className={styles.top}>
             <div className={styles.topLeft}>
               <PulseEyeBrow text='Why Silver State' />
-              <h2 className={styles.heading}>
+              <h2 className={`${styles.heading} `}>
                 Las Vegas moves fast. Your ride shouldn&apos;t feel rushed.
               </h2>
             </div>
@@ -123,7 +123,7 @@ export default function WhySection() {
 
             <div className={styles.media}>
               <Image
-                src='/images/other/heroiii.jpg'
+                src='/images/other/vegas.jpg'
                 alt='Black car on the road in Las Vegas'
                 fill
                 sizes='(max-width: 1068px) 100vw, 60vw'

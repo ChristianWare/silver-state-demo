@@ -1,10 +1,10 @@
 .section {
   background-color: var(--white);
-  padding: 4rem 0rem 10rem;
+  padding: 5rem 0rem;
 }
 
 .box {
-  background-color: #f3ecd8;
+  background-color: var(--ivory);
   border-radius: 5px;
   padding: 6rem 4rem 4rem;
 }
@@ -26,6 +26,11 @@
 
 .topLeft > :first-child {
   margin-left: -1.5rem;
+}
+
+.heading {
+  max-width: 800px;
+  /* letter-spacing: normal; */
 }
 
 .intro {
@@ -238,6 +243,10 @@
 /* ── Tablet and phone: one column ── */
 
 @media screen and (max-width: 1068px) {
+  .section {
+    padding: 4rem 0rem;
+  }
+
   .box {
     padding: 4rem 2.4rem 2.4rem;
   }
@@ -266,8 +275,9 @@
 
 @media screen and (max-width: 568px) {
   .section {
-    padding: 2rem 0rem 7rem;
-  }
+  .section {
+    padding: 3rem 0rem;
+  }  }
 
   .box {
     padding: 3.2rem 1.6rem 1.6rem;
@@ -278,7 +288,7 @@
   }
 
   .media {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
   }
 
   .track {

@@ -1,6 +1,6 @@
 .section {
   background-color: var(--white);
-  padding: 10rem 0rem;
+  padding: 5rem 0rem;
 }
 
 /* ── Heading + small image ── */
@@ -147,7 +147,7 @@
 
 @media screen and (max-width: 1068px) {
   .section {
-    padding: 7rem 0rem;
+    padding: 4rem 0rem;
   }
 
   .top {
@@ -203,7 +203,7 @@
 
 @media screen and (max-width: 568px) {
   .section {
-    padding: 5rem 0rem;
+    padding: 3rem 0rem;
   }
 
   .topImg {
