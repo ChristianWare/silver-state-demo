@@ -11,45 +11,28 @@ import { SITE } from "@/config/site";
 import { buildBusinessSchema } from "@/lib/schema";
 import { getCompanySettings } from "../../actions/admin/companySettings";
 
-// Inter, served from src/app/fonts so the build never depends on downloading
-// Google Fonts (a failed download breaks the Vercel build). To change the
-// font per client: drop the .woff2 files in src/app/fonts and update the
-// paths below, keeping the "--inter" variable name or updating globals.css.
-const inter = localFont({
-  variable: "--inter",
+const SofiaSansExtraCondensedBold = localFont({
+  src: "../../public/fonts/SofiaSansExtraCondensed-Bold.ttf",
+  variable: "--SofiaSansExtraCondensedBold",
   display: "swap",
-  src: [
-    {
-      path: "./fonts/inter-latin-300-normal.woff2",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "./fonts/inter-latin-400-normal.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./fonts/inter-latin-500-normal.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "./fonts/inter-latin-600-normal.woff2",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "./fonts/inter-latin-800-normal.woff2",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "./fonts/inter-latin-900-normal.woff2",
-      weight: "900",
-      style: "normal",
-    },
-  ],
+});
+
+const SofiaSansRegular = localFont({
+  src: "../../public/fonts/SofiaSans-Regular.ttf",
+  variable: "--SofiaSansRegular",
+  display: "swap",
+});
+
+const SofiaSansLight = localFont({
+  src: "../../public/fonts/SofiaSans-Light.ttf",
+  variable: "--SofiaSansLight",
+  display: "swap",
+});
+
+const SofiaSansBold = localFont({
+  src: "../../public/fonts/SofiaSans-Bold.ttf",
+  variable: "--SofiaSansBold",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -111,7 +94,9 @@ export default async function RootLayout({
         <meta name='apple-mobile-web-app-title' content={SITE.name} />
         <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
       </head>
-      <body className={`${inter.variable} `}>
+      <body
+        className={`${SofiaSansExtraCondensedBold.variable} ${SofiaSansRegular.variable} ${SofiaSansLight.variable} ${SofiaSansBold.variable} `}
+      >
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{

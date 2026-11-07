@@ -1,17 +1,33 @@
 :root {
-  --black: #000000;
-  --black400: #666666;
-  --black300: #b2b2b2;
-  --white: #ffffff;
-  --cream: #eae9e6;
-  --paragraph: #676767;
-  --accent: #d0311e;
-  --accent600: #b21a15;
-  --accent100: #f9d8d5;
-  --lightGray: #e0e0e0;
-  --lightGrayii: #eae7e7;
-  --stroke: #d8d6d2;
-  --strokeii: #a7a6a2;
+  /* ── Silver State palette ── */
+  --midnight: #0b0f1a;
+  --navy: #1c2333;
+  --gold: #c9a24a;
+  --champagne: #e8d9b0;
+  --ivory: #f7f5f0;
+  --slate: #3a4560;
+  --steel: #8a93a6;
+  --bronze: #9c7a2f;
+  --oxblood: #6b2633;
+
+  /* ── Tokens the whole platform uses, mapped to the palette ── */
+  --black: var(--midnight); /* headings, body text, dark buttons */
+  --black400: var(--slate); /* dark button hover, secondary dark text */
+  --black300: var(--steel); /* muted text, icons */
+  --white: #ffffff; /* cards, inputs */
+  --cream: var(--ivory); /* soft backgrounds: tabs, card titles */
+  --paragraph: var(--slate);
+  --accent: var(--gold);
+  --accent600: var(--bronze); /* accent hover / text on light */
+  --accent100: var(--champagne); /* accent tint backgrounds */
+  --onAccent: var(--midnight); /* text and icons on a gold background */
+  --lightGray: #ecebe6;
+  --lightGrayii: #e4e2db;
+  --stroke: #dedbd2; /* borders and dividers */
+  --strokeii: var(--steel); /* stronger borders */
+
+  /* ── Status colors (admin badges, errors) — not brand colors ── */
+  --danger: #b42318; /* errors, overdue, destructive actions */
   --blue: #2563eb;
   --lighterBlue: linear-gradient(135deg, #3b82f614 0%, #2563eb1f 100%);
   --lightBlue: #2563eb33;
@@ -22,12 +38,13 @@
   --darkGreen: #0b7547;
   --darkPurple: #6b0080;
   --red: #dc2626;
-  --darkRed: #8b1a1a;
+  --darkRed: var(--oxblood);
   --yellow: #ffca44;
   --warning: #f59e0b;
   --warning300: #ffedd5;
   --lightYellow: #fff8d9;
   --darkYellow: #745000;
+
   --stickyTop: 20vh;
   --cardGap: 1rem;
   --cardMinH: clamp(300px, 20vh, 480px);
@@ -167,9 +184,10 @@ select:focus {
   letter-spacing: -3px;
 }
 
-/* .toastFont {
-  font-family: var(--ABCSocialLight);
-} */
+::selection {
+  background: var(--champagne);
+  color: var(--midnight);
+}
 
 /* ::-webkit-scrollbar-thumb {
   border-radius: 20px;
@@ -469,8 +487,8 @@ th {
 }
 
 .pillBad {
-  background: rgba(255, 9, 9, 0.25);
-  color: var(--accent);
+  background: rgba(180, 35, 24, 0.12);
+  color: var(--danger);
 }
 
 .badge {
@@ -599,7 +617,7 @@ th {
 }
 
 .dangerBtn:hover {
-  background: var(--accent600);
+  background: var(--danger);
 }
 
 .goodBtn {
@@ -632,7 +650,7 @@ th {
 }
 
 .redBorder {
-  border: 1px solid var(--accent);
+  border: 1px solid var(--danger);
 }
 
 .yellowBorder {
@@ -755,7 +773,7 @@ th {
 }
 
 .colorRed {
-  color: var(--accent600);
+  color: var(--danger);
 }
 
 .fw700 {
