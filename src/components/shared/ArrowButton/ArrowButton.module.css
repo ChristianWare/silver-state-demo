@@ -1,0 +1,63 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  height: 52px;
+  padding: 0px 6px 0px 20px;
+  border-radius: 4px;
+  font-family: var(--SofiaSansRegular);
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+  width: fit-content;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.box {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.arrow {
+  width: 15px;
+  height: 15px;
+  transform: rotate(90deg);
+}
+
+/* Gold button, midnight box, gold arrow. */
+.gold {
+  background-color: var(--gold);
+  color: var(--midnight);
+}
+
+.gold .box {
+  background-color: var(--midnight);
+  color: var(--gold);
+}
+
+.gold:hover {
+  background-color: var(--champagne);
+}
+
+/* Midnight button, gold box, midnight arrow. */
+.midnight {
+  background-color: var(--midnight);
+  color: var(--ivory);
+}
+
+.midnight .box {
+  background-color: var(--gold);
+  color: var(--midnight);
+}
+
+.midnight:hover {
+  background-color: var(--navy);
+}

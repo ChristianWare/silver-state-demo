@@ -1,0 +1,209 @@
+.section {
+  background-color: var(--white);
+}
+
+.inner {
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 12rem 26px 10rem;
+}
+
+/* ── Heading + small image ── */
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.topImg {
+  position: relative;
+  width: 240px;
+  aspect-ratio: 16 / 10;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: var(--lightGray);
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* ── Three facts on a line ── */
+
+.facts {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 48px 0px;
+}
+
+.facts::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background-color: var(--stroke);
+}
+
+.fact {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0px 20px;
+  background-color: var(--white);
+  border: 1px solid var(--stroke);
+  border-radius: 4px;
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--midnight);
+  white-space: nowrap;
+}
+
+/* ── Two cards ── */
+
+.cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+  gap: 1.2rem;
+}
+
+.card {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.cardGold {
+  background-color: var(--gold);
+  color: var(--midnight);
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 2.4rem;
+  padding: 1rem;
+}
+
+.cardNavy {
+  background-color: var(--navy);
+  color: var(--ivory);
+  display: flex;
+  padding: 1rem;
+}
+
+.cardImg {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  align-self: start;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--bronze);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+  padding: 2rem 2rem 1.4rem 0;
+  min-width: 0;
+}
+
+.cardNavy .cardBody {
+  padding: 2rem 2rem 1.4rem 2rem;
+  width: 100%;
+}
+
+.cardBody > :first-child {
+  margin-left: -1.5rem;
+}
+
+.cardHeading {
+  color: inherit;
+}
+
+.cardCopy {
+  font-size: 17px;
+  line-height: 1.6em;
+  max-width: 460px;
+  color: inherit;
+  hyphens: none;
+}
+
+.cardNavy .cardCopy {
+  color: rgba(247, 245, 240, 0.82);
+}
+
+.cardBtn {
+  margin-top: auto;
+}
+
+/* ── Tablet and phone: everything stacks ── */
+
+@media screen and (max-width: 1068px) {
+  .inner {
+    padding: 9rem 26px 8rem;
+  }
+
+  .top {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .topImg {
+    width: 100%;
+  }
+
+  .facts {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+    padding: 2.4rem 0px 4rem;
+  }
+
+  .facts::before {
+    display: none;
+  }
+
+  .fact {
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .cardGold {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .cardImg {
+    aspect-ratio: 16 / 9;
+  }
+
+  .cardBody,
+  .cardNavy .cardBody {
+    padding: 2rem 1.4rem 1.4rem;
+  }
+
+  .cardBtn {
+    margin-top: 0.4rem;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .inner {
+    padding: 7rem 16px 6rem;
+  }
+}
