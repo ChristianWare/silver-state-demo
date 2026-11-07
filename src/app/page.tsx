@@ -3,6 +3,7 @@ import { SITE } from "@/config/site";
 import SiteNav from "@/components/shared/SiteNav/SiteNav";
 import Hero from "@/components/HomePage/Hero/Hero";
 import AboutSection from "@/components/HomePage/AboutSection/AboutSection";
+import WhySection from "@/components/HomePage/WhySection/WhySection";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -16,6 +17,7 @@ export default function Page() {
       <main>
         <Hero />
         <AboutSection />
+        <WhySection />
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia
         quisquam incidunt enim facere molestiae, id esse corrupti perspiciatis
         dolor animi itaque repellendus harum debitis magni explicabo ipsa
