@@ -19,17 +19,10 @@
   object-position: center;
 }
 
-/* Darker at the top for the nav and at the bottom for the heading. */
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(11, 15, 26, 0.62) 0%,
-    rgba(11, 15, 26, 0.22) 40%,
-    rgba(11, 15, 26, 0.12) 70%,
-    rgba(11, 15, 26, 0.35) 100%
-  );
+  background-color: rgba(11, 15, 26, 0.70);
 }
 
 .content {
@@ -59,7 +52,7 @@
   margin-top: 1.4rem;
   font-size: 2rem;
   line-height: 1.5em;
-  max-width: 500px;
+  max-width: 600px;
   color: var(--ivory);
   hyphens: none;
 }
@@ -98,13 +91,7 @@
     min-height: 420px;
   }
 
-  .overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(11, 15, 26, 0.35) 0%,
-      rgba(11, 15, 26, 0) 30%
-    );
-  }
+
 
   .content {
     position: static;
