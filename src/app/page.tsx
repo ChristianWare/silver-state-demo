@@ -8,6 +8,7 @@ import ServicesSection from "@/components/HomePage/ServicesSection/ServicesSecti
 import HowItWorks from "@/components/HomePage/HowItWorks/HowItWorks";
 import FleetSection from "@/components/HomePage/FleetSection/FleetSection";
 import AirportsSection from "@/components/HomePage/AirportsSection/AirportsSection";
+import VideoSection from "@/components/HomePage/VideoSection/VideoSection";
 import ServiceAreasSection from "@/components/HomePage/ServiceAreasSection/ServiceAreasSection";
 import ReviewsSection from "@/components/HomePage/ReviewsSection/ReviewsSection";
 import FaqSection from "@/components/HomePage/FaqSection/FaqSection";
@@ -30,6 +31,7 @@ export default function Page() {
         <HowItWorks />
         <FleetSection />
         <AirportsSection />
+        <VideoSection />
         <ServiceAreasSection />
         <ReviewsSection />
         <FaqSection />
