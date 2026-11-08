@@ -5,6 +5,7 @@ import Hero from "@/components/HomePage/Hero/Hero";
 import AboutSection from "@/components/HomePage/AboutSection/AboutSection";
 import WhySection from "@/components/HomePage/WhySection/WhySection";
 import ServicesSection from "@/components/HomePage/ServicesSection/ServicesSection";
+import HowItWorks from "@/components/HomePage/HowItWorks/HowItWorks";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -20,6 +21,7 @@ export default function Page() {
         <AboutSection />
         <WhySection />
         <ServicesSection />
+        <HowItWorks />
       </main>
     </>
   );

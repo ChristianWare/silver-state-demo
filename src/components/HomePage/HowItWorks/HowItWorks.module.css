@@ -1,0 +1,218 @@
+.section {
+  background-color: var(--white);
+  padding: 4rem 0rem 10rem;
+}
+
+/* ── Heading + intro ── */
+
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topLeft > :first-child {
+  margin-left: -1.5rem;
+}
+
+.intro {
+  font-size: 1.7rem;
+  line-height: 1.6em;
+  color: var(--slate);
+  max-width: 380px;
+  hyphens: none;
+}
+
+/* ── Photo + card ── */
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 4rem;
+  align-items: stretch;
+}
+
+.photo {
+  position: relative;
+  min-height: 420px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--lightGray);
+}
+
+.img {
+  object-fit: cover;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 2px solid var(--midnight);
+}
+
+.cardMeta {
+  font-family: var(--SofiaSansRegular);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--steel);
+  white-space: nowrap;
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.step {
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.stepLine {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.stepTitle {
+  font-family: var(--SofiaSansBold);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--midnight);
+  white-space: nowrap;
+}
+
+/* The dotted line between the step and its number, like a menu. */
+.leader {
+  flex: 1;
+  min-width: 2rem;
+  border-bottom: 1px dotted var(--strokeii);
+  transform: translateY(-0.4rem);
+}
+
+.stepNum {
+  font-family: var(--SofiaSansBold);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--midnight);
+  white-space: nowrap;
+}
+
+.stepCopy {
+  margin-top: 0.4rem;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--slate);
+  max-width: 420px;
+  hyphens: none;
+}
+
+.after {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  margin: 2.4rem 0 0;
+}
+
+.afterItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.afterLabel {
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.afterValue {
+  margin: 0;
+  font-family: var(--SofiaSansRegular);
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--midnight);
+}
+
+.link {
+  align-self: flex-start;
+  margin-top: 2.4rem;
+  font-family: var(--SofiaSansRegular);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--midnight);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--midnight);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--bronze);
+  border-color: var(--bronze);
+}
+
+/* ── 1068px and down: one column ── */
+
+@media screen and (max-width: 1068px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .intro {
+    max-width: 520px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .photo {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .stepCopy {
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding: 2rem 0rem 7rem;
+  }
+
+  .photo {
+    aspect-ratio: 4 / 3;
+  }
+
+  .after {
+    gap: 1.6rem;
+  }
+}
