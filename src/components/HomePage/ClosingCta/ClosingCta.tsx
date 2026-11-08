@@ -29,7 +29,7 @@ export default async function ClosingCta() {
           <div className={styles.shade} aria-hidden='true' />
 
           <div className={styles.content}>
-            <h2 className={styles.heading}>Your ride in Las Vegas, handled.</h2>
+            <h2 className={styles.heading}>Your go to ride in Las Vegas</h2>
             <p className={styles.copy}>
               Book online in two minutes, or call us any time.
             </p>

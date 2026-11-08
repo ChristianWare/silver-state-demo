@@ -1,5 +1,6 @@
 .section {
-  background-color: var(--white);
+  background-color: var(--ivory);
+  padding: 10rem 0rem;
 }
 
 /* ── Heading + intro ── */
@@ -21,6 +22,10 @@
 
 .topLeft > :first-child {
   margin-left: -1.5rem;
+}
+
+.heading {
+  max-width: 500px;
 }
 
 .intro {
@@ -178,6 +183,10 @@
 /* ── Tablet and phone ── */
 
 @media screen and (max-width: 1068px) {
+  .section {
+    padding: 7rem 0rem;
+  }
+
   .top {
     flex-direction: column;
     gap: 2rem;
@@ -191,5 +200,17 @@
 
   .cards {
     grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 6rem 0rem;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding: 5rem 0rem;
   }
 }

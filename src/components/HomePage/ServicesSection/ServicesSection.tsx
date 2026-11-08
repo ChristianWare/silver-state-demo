@@ -249,20 +249,26 @@ export default function ServicesSection() {
               </div>
 
               <div id='svc-panel' aria-live='polite' className={styles.box}>
-                <div className={styles.boxHead} key={current.slug}>
+                {/* <div className={styles.boxHead} key={current.slug}>
                   <h3 className={styles.boxTitle}>{current.title}</h3>
                   <p className={styles.desc}>{current.desc}</p>
-                </div>
+                </div> */}
 
                 <div className={styles.boxBody}>
-                  <dl className={styles.rows} key={current.slug}>
-                    {current.rows.map((r) => (
-                      <div key={r.label} className={styles.row}>
-                        <dt className={styles.rowLabel}>{r.label}</dt>
-                        <dd className={styles.rowValue}>{r.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
+                  <div className={styles.boxBodyLeft}>
+                    <div className={styles.boxHead} key={current.slug}>
+                      <h3 className={styles.boxTitle}>{current.title}</h3>
+                      <p className={styles.desc}>{current.desc}</p>
+                    </div>
+                    <dl className={styles.rows} key={current.slug}>
+                      {current.rows.map((r) => (
+                        <div key={r.label} className={styles.row}>
+                          <dt className={styles.rowLabel}>{r.label}</dt>
+                          <dd className={styles.rowValue}>{r.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
 
                   {/* All six photos are stacked; the open one fades in. */}
                   <div className={styles.photo}>

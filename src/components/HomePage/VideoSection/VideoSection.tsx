@@ -91,7 +91,7 @@ export default function VideoSection() {
           <div className={styles.content}>
             <PulseEyeBrow text='Beyond the Strip' color='white' />
             <h2 id='video-heading' className={styles.heading}>
-              The desert starts where the city ends.
+              The desert starts where the city ends
             </h2>
             <p className={styles.copy}>
               Red rock, open road and a sky that goes on forever, all within an

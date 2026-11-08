@@ -98,7 +98,7 @@ export default function FleetSection() {
         <div className={styles.top}>
           <div className={styles.topLeft}>
             <PulseEyeBrow text='The fleet' />
-            <h2 className={styles.heading}>The right car for the trip.</h2>
+            <h2 className={styles.heading}>The right car for the trip</h2>
           </div>
           <div className={styles.topRight}>
             <p className={styles.intro}>

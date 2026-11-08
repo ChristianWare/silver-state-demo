@@ -79,7 +79,7 @@ export default function ServiceAreasSection() {
           <div className={styles.topLeft}>
             <PulseEyeBrow text='Where we drive' />
             <h2 className={styles.heading}>
-              All of the Las Vegas Valley, and the road trips beyond it.
+              All of the Las Vegas Valley → and the road trips beyond it
             </h2>
           </div>
           <p className={styles.intro}>
