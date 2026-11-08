@@ -23,6 +23,10 @@
   margin-left: -1.5rem;
 }
 
+.heading {
+  max-width: 500px;
+}
+
 .topRight {
   display: flex;
   flex-direction: column;
@@ -61,27 +65,27 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
 }
 
 /* Photo left, card right… */
 .row {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: 1.6rem;
   align-items: stretch;
 }
 
 /* …then card left, photo right. */
-.flip {
+/* .flip {
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-}
+} */
 
-.flip .media {
+/* .flip .media {
   order: 2;
-}
+} */
 
 /* ── Photo ── */
 
@@ -101,14 +105,17 @@
 /* The second vehicle (SUV) */
 .row:nth-child(2) .img {
   padding: 8rem;
+  transform: rotateY(180deg);
 }
 
 .row:nth-child(3) .img {
   transform: rotateY(180deg);
+  padding: 5rem;
 }
 
 .row:nth-child(4) .img {
   padding: 6rem;
+  transform: rotateY(180deg);
 }
 
 .cutout {
@@ -232,6 +239,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 1.6rem;
+  height: 100%;
 }
 
 .number {
@@ -316,7 +324,13 @@
   margin-top: auto;
 }
 
-/* ── Tablet and phone: photo on top, card below, no alternating ── */
+
+@media screen and (max-width: 1668px) {
+  .rows {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 
 @media screen and (max-width: 1068px) {
   .section {
@@ -369,6 +383,13 @@
     margin-top: 0.8rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .rows {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 
 @media screen and (max-width: 568px) {
   .section {
