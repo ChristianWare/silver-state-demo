@@ -7,6 +7,11 @@ import WhySection from "@/components/HomePage/WhySection/WhySection";
 import ServicesSection from "@/components/HomePage/ServicesSection/ServicesSection";
 import HowItWorks from "@/components/HomePage/HowItWorks/HowItWorks";
 import FleetSection from "@/components/HomePage/FleetSection/FleetSection";
+import AirportsSection from "@/components/HomePage/AirportsSection/AirportsSection";
+import ServiceAreasSection from "@/components/HomePage/ServiceAreasSection/ServiceAreasSection";
+import ReviewsSection from "@/components/HomePage/ReviewsSection/ReviewsSection";
+import FaqSection from "@/components/HomePage/FaqSection/FaqSection";
+import ClosingCta from "@/components/HomePage/ClosingCta/ClosingCta";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -24,6 +29,11 @@ export default function Page() {
         <ServicesSection />
         <HowItWorks />
         <FleetSection />
+        <AirportsSection />
+        <ServiceAreasSection />
+        <ReviewsSection />
+        <FaqSection />
+        <ClosingCta />
       </main>
     </>
   );

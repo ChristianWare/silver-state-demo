@@ -1,0 +1,195 @@
+.section {
+  background-color: var(--white);
+}
+
+/* ── Heading + intro ── */
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topLeft > :first-child {
+  margin-left: -1.5rem;
+}
+
+.intro {
+  font-size: 1.7rem;
+  line-height: 1.6em;
+  color: var(--slate);
+  max-width: 400px;
+  padding-top: 4rem;
+  hyphens: none;
+}
+
+/* ── Cards ── */
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.8rem 1.8rem 1.6rem;
+  border: 1px solid var(--stroke);
+  border-radius: 5px;
+  background-color: var(--white);
+}
+
+/* The first card leads, like a picked option. */
+.card:first-child {
+  background-color: rgba(232, 217, 176, 0.45);
+  border-color: var(--gold);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 0.2rem;
+}
+
+.starOn {
+  color: var(--gold);
+}
+
+.starOff {
+  color: var(--stroke);
+}
+
+.source {
+  font-family: var(--SofiaSansRegular);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--steel);
+}
+
+.quote {
+  margin: 0;
+  flex: 1;
+}
+
+.quote p {
+  font-size: 17px;
+  line-height: 1.6em;
+  color: var(--midnight);
+  hyphens: none;
+}
+
+.cardBottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--stroke);
+}
+
+.card:first-child .cardBottom {
+  border-top-color: var(--champagne);
+}
+
+.score {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--midnight);
+  white-space: nowrap;
+}
+
+.scoreOf {
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--steel);
+  margin-left: 0.4rem;
+}
+
+.meta {
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  text-align: right;
+}
+
+.metaLabel {
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 0.6rem;
+}
+
+.metaValue {
+  margin: 0;
+  font-family: var(--SofiaSansBold);
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--midnight);
+}
+
+/* Outlined button, like a quiet secondary action. */
+.googleLink {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 1.8rem;
+  margin-top: 3rem;
+  border: 1px solid var(--stroke);
+  border-radius: 4px;
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--midnight);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.googleLink:hover {
+  border-color: var(--midnight);
+  background-color: var(--ivory);
+}
+
+/* ── Tablet and phone ── */
+
+@media screen and (max-width: 1068px) {
+  .top {
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .intro {
+    padding-top: 0;
+    max-width: 560px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}

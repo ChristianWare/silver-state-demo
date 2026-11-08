@@ -1,0 +1,260 @@
+.section {
+  background-color: var(--white);
+}
+
+/* ── Heading + intro ── */
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topLeft > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  max-width: 760px;
+}
+
+.intro {
+  font-size: 1.7rem;
+  line-height: 1.6em;
+  color: var(--slate);
+  max-width: 400px;
+  padding-top: 4rem;
+  hyphens: none;
+}
+
+/* ── The areas ── */
+
+.areas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--stroke);
+}
+
+.area {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) 11rem 11rem;
+  grid-template-areas: "name copy las strip";
+  align-items: center;
+  gap: 2.4rem;
+  padding: 2rem 1.6rem;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.areaFeatured {
+  background-color: rgba(232, 217, 176, 0.45);
+  border-bottom-color: var(--champagne);
+}
+
+.tag {
+  position: absolute;
+  top: -0.9rem;
+  left: 1.6rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 3px;
+  background-color: var(--midnight);
+  color: var(--gold);
+  font-family: var(--SofiaSansBold);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.name {
+  grid-area: name;
+  margin: 0;
+}
+
+.copy {
+  grid-area: copy;
+  font-size: 15px;
+  line-height: 1.5em;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.fig {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.figLas {
+  grid-area: las;
+}
+
+.figStrip {
+  grid-area: strip;
+}
+
+.figLabel {
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.figValue {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2.6rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--midnight);
+  white-space: nowrap;
+}
+
+.figStrip .figValue {
+  color: var(--slate);
+}
+
+.note {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--steel);
+  padding-top: 1.2rem;
+  text-align: right;
+}
+
+/* ── The road out of town ── */
+
+.road {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin: 6rem 0 3rem;
+}
+
+.roadLabel {
+  font-family: var(--SofiaSansBold);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--slate);
+  white-space: nowrap;
+}
+
+.roadLine {
+  flex: 1;
+  height: 0;
+  border-top: 2px dashed var(--stroke);
+}
+
+.roadIcon {
+  width: 3.4rem;
+  height: 3.4rem;
+  color: var(--bronze);
+  flex-shrink: 0;
+}
+
+.trips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.trip {
+  border-top: 2px solid var(--midnight);
+  padding-top: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.tripName {
+  font-family: var(--SofiaSansBold);
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--midnight);
+}
+
+.tripCopy {
+  font-size: 14px;
+  line-height: 1.4em;
+  color: var(--slate);
+}
+
+.btn {
+  margin-top: 4rem;
+}
+
+/* ── Tablet and phone ── */
+
+@media screen and (max-width: 1068px) {
+  .top {
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .intro {
+    padding-top: 0;
+    max-width: 560px;
+  }
+
+  /* Name and "From LAS" on top, copy under, "From the Strip" inline. */
+  .area {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name las"
+      "copy copy"
+      "strip strip";
+    row-gap: 1rem;
+    padding: 2rem 1.4rem;
+  }
+
+  .tag {
+    left: 1.4rem;
+  }
+
+  .figStrip {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 0.8rem;
+  }
+
+  .figStrip .figValue {
+    font-family: var(--SofiaSansBold);
+    font-size: 12px;
+    text-transform: none;
+  }
+
+  .note {
+    text-align: left;
+  }
+
+  .road {
+    margin: 4rem 0 2.4rem;
+  }
+
+  .trips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.4rem;
+  }
+}

@@ -1,0 +1,272 @@
+.section {
+  background-color: var(--white);
+}
+
+/* ── Note from the owner + heading ── */
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.letter {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
+  max-width: 520px;
+}
+
+.photo {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--ivory);
+}
+
+.img {
+  object-fit: cover;
+}
+
+.letterBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.letterCopy {
+  font-size: 15px;
+  line-height: 1.6em;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.letterCopy a {
+  color: var(--midnight);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.signOff {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--steel);
+  margin-top: 1.6rem;
+}
+
+.signName {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--midnight);
+  margin-top: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--stroke);
+  min-width: 160px;
+}
+
+.signTitle {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--steel);
+  margin-top: 0.6rem;
+}
+
+.headingWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+  text-align: right;
+}
+
+/* ── Cards: two staggered columns ── */
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.column:nth-child(2) {
+  margin-top: 4rem;
+}
+
+.item {
+  border: 1px solid var(--stroke);
+  border-radius: 5px;
+  background-color: var(--white);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.itemOpen {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+.itemHead {
+  position: relative;
+  padding: 1.6rem 1.6rem 1.6rem;
+}
+
+.dear {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--steel);
+}
+
+.question {
+  font-family: var(--SofiaSansRegular);
+  font-size: 17px;
+  line-height: 1.5em;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--midnight);
+  margin-top: 1rem;
+  hyphens: none;
+}
+
+.itemFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  margin-top: 1.6rem;
+}
+
+.topic {
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--bronze);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0;
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--midnight);
+  cursor: pointer;
+}
+
+/* The whole top of the card opens it. */
+.toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.toggleBox {
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  background-color: var(--ivory);
+  color: var(--midnight);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.toggle:hover .toggleBox {
+  background-color: var(--champagne);
+}
+
+.itemOpen .toggleBox,
+.itemOpen .toggle:hover .toggleBox {
+  background-color: var(--midnight);
+  color: var(--gold);
+}
+
+.toggle:focus-visible {
+  outline: none;
+}
+
+.toggle:focus-visible .toggleBox {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Folds open by growing from 0fr to 1fr. */
+.answerWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.itemOpen .answerWrap {
+  grid-template-rows: 1fr;
+}
+
+.answerInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.answer {
+  margin: 0 0.8rem 0.8rem;
+  padding: 1.6rem;
+  border-radius: 4px;
+  background-color: rgba(232, 217, 176, 0.45);
+  font-size: 15px;
+  line-height: 1.6em;
+  color: var(--midnight);
+  hyphens: none;
+}
+
+/* ── Tablet and phone: heading first, one column ── */
+
+@media screen and (max-width: 1068px) {
+  .top {
+    flex-direction: column-reverse;
+    gap: 3rem;
+    padding-bottom: 4rem;
+  }
+
+  .headingWrap {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .headingWrap > :first-child {
+    margin-left: -1.5rem;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The columns step aside so the cards line up 1 to 5. */
+  .column {
+    display: contents;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .letter {
+    flex-direction: column;
+  }
+}

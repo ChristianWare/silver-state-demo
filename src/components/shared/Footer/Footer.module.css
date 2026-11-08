@@ -1,57 +1,283 @@
+/* Sits in the same 10px frame as the hero. */
 .footer {
-  border-top: 1px solid #e5e5e5;
-  background: #fff;
-  color: #111;
-  font-size: 15px;
-  line-height: 1.55;
+  padding: 0 10px 10px;
+  background-color: var(--white);
 }
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: var(--midnight);
+  color: var(--ivory);
+}
+
 .inner {
-  max-width: 1200px;
+  max-width: 1344px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 7rem 4rem 0;
+}
+
+.grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 32px;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr) minmax(
+      0,
+      1.5fr
+    );
+  gap: 4rem;
+  align-items: start;
 }
-.col p {
-  margin: 0 0 6px;
+
+/* ── Brand + contact ── */
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
 }
-.col a {
-  color: #111;
-  text-decoration: none;
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--ivory);
 }
-.col a:hover {
-  text-decoration: underline;
+
+.logoIcon {
+  width: 3.4rem;
+  height: 3.4rem;
+  flex-shrink: 0;
+  color: var(--gold);
 }
-.brand {
-  font-weight: 600;
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.logoName {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2.5rem;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.logoSub {
+  font-family: var(--SofiaSansRegular);
+  font-size: 10.56px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.address {
+  font-size: 14px;
+  line-height: 1.6em;
+  color: var(--steel);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact a {
+  font-family: var(--SofiaSansRegular);
   font-size: 16px;
+  line-height: 1.2;
+  color: var(--ivory);
+  width: fit-content;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
 }
-.muted {
-  color: #666;
+
+.contact a:hover {
+  border-bottom-color: var(--gold);
 }
-.heading {
-  font-weight: 600;
-  margin: 0 0 8px;
+
+/* ── Link columns ── */
+
+.label {
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 2rem;
 }
+
 .list {
   list-style: none;
-  margin: 0 0 20px;
+  margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
-.list li {
-  margin: 0 0 6px;
+
+.list a {
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--ivory);
+  transition: color 0.2s ease;
 }
+
+.list a:hover {
+  color: var(--gold);
+}
+
+/* ── Dispatch box ── */
+
+.dispatch {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 2rem;
+  border: 1px solid var(--slate);
+  border-radius: 5px;
+  background-color: var(--navy);
+}
+
+.dispatchLabel {
+  font-family: var(--SofiaSansBold);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ivory);
+}
+
+.dispatchPhone {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--gold);
+  transition: color 0.2s ease;
+}
+
+.dispatchPhone:hover {
+  color: var(--champagne);
+}
+
+.dispatchCopy {
+  font-size: 12px;
+  line-height: 1.5em;
+  color: var(--steel);
+  hyphens: none;
+}
+
+/* ── Bottom bar ── */
+
 .bottom {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px 20px 32px;
-  border-top: 1px solid #eee;
-  color: #666;
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 6rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--slate);
 }
-@media (max-width: 720px) {
+
+.copyright {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--steel);
+}
+
+.legal {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2.4rem;
+}
+
+.legal a {
+  font-family: var(--SofiaSansRegular);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--steel);
+  transition: color 0.2s ease;
+}
+
+.legal a:hover {
+  color: var(--ivory);
+}
+
+/* ── Wordmark: full width, bottom edge cut off by the panel ── */
+
+.wordmark {
+  font-family: var(--SofiaSansExtraCondensedExtraBold);
+  /* Sized so the name spans the panel (viewport minus the 10px frame and
+     the side padding). */
+  font-size: calc((100vw - 20px - 6rem) * 0.224);
+  line-height: 0.78;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--gold);
+  margin: 0 3rem -0.1em;
+  hyphens: none;
+  user-select: none;
+}
+
+/* ── Tablet ── */
+
+@media screen and (max-width: 1068px) {
   .inner {
-    grid-template-columns: 1fr;
+    padding: 5rem 2.4rem 0;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 4rem;
+  }
+
+  .brandCol,
+  .dispatch {
+    grid-column: 1 / -1;
+  }
+
+  .bottom {
+    margin-top: 4rem;
+  }
+
+  .wordmark {
+    margin: 0 2.4rem -0.1em;
+    font-size: calc((100vw - 20px - 4.8rem) * 0.224);
+  }
+}
+
+/* ── Phone ── */
+
+@media screen and (max-width: 568px) {
+  .footer {
+    padding: 0 8px 8px;
+  }
+
+  .inner {
+    padding: 4rem 1.6rem 0;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
+  }
+
+  .legal {
+    gap: 2rem;
+  }
+
+  .wordmark {
+    margin: 0 1.6rem -0.1em;
+    font-size: calc((100vw - 16px - 3.2rem) * 0.224);
   }
 }
