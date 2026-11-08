@@ -202,7 +202,7 @@
 .desc {
   font-size: 1.7rem;
   line-height: 1.55em;
-  max-width: 560px;
+  max-width: 450px;
   color: var(--midnight);
   hyphens: none;
 }
@@ -416,7 +416,6 @@
   }
 
   .photo {
-  .photo {
     height: 275px;
-  }  }
+  }
 }

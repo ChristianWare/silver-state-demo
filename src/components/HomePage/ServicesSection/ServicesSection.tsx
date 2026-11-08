@@ -1,7 +1,7 @@
 "use client";
 
 // Home page: what we do. Six services down the left; the open one's details,
-// photo and link fill the gold box on the right.
+// photo and link fill the box on the right.
 //
 // On wider screens the block pins in place as you scroll, and each service
 // opens in turn (useScrollSteps). It's a plain click-to-open list at 568px
@@ -119,7 +119,7 @@ const SERVICES: Service[] = [
     slug: "weddings",
     title: "Weddings",
     phrase: "Chapel to reception",
-    desc: "Chapel to reception, with time for photos on the way.",
+    desc: "Chapel to reception, with time for photos on the way. Chapel to reception, with time for photos on the way.",
     rows: [
       {
         label: "Vehicles",
@@ -249,18 +249,15 @@ export default function ServicesSection() {
               </div>
 
               <div id='svc-panel' aria-live='polite' className={styles.box}>
-                {/* <div className={styles.boxHead} key={current.slug}>
-                  <h3 className={styles.boxTitle}>{current.title}</h3>
-                  <p className={styles.desc}>{current.desc}</p>
-                </div> */}
-
                 <div className={styles.boxBody}>
-                  <div className={styles.boxBodyLeft}>
-                    <div className={styles.boxHead} key={current.slug}>
+                  {/* One key for the whole block: when the service changes,
+                      React swaps it out in one go (and replays the fade). */}
+                  <div className={styles.boxBodyLeft} key={current.slug}>
+                    <div className={styles.boxHead}>
                       <h3 className={styles.boxTitle}>{current.title}</h3>
                       <p className={styles.desc}>{current.desc}</p>
                     </div>
-                    <dl className={styles.rows} key={current.slug}>
+                    <dl className={styles.rows}>
                       {current.rows.map((r) => (
                         <div key={r.label} className={styles.row}>
                           <dt className={styles.rowLabel}>{r.label}</dt>

@@ -12,6 +12,10 @@
   padding-bottom: 5rem;
 }
 
+.heading {
+  max-width: 350px;
+}
+
 .letter {
   display: flex;
   align-items: flex-start;
