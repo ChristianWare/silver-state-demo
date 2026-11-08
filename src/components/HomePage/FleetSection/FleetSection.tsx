@@ -1,6 +1,7 @@
 // Home page: the fleet. One row per vehicle, photo and navy spec card side
 // by side, alternating sides down the page. Capacity comes from fleetData
-// (src/lib/data.ts) so the home page and /fleet/[slug] always agree.
+// (src/lib/data.ts) so the home page and /fleet/[slug] always agree. A
+// vehicle only shows here if its slug is also in fleetData.
 
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +20,7 @@ type Vehicle = {
   /** Third stat box (passengers and bags come from fleetData). */
   extra: { label: string; value: string };
   image: { src: string; alt: string };
-  /** "cover" for photos, "contain" for cut-outs on a black background. */
+  /** "cover" for photos, "contain" for cut-outs on a plain background. */
   fit: "cover" | "contain";
 };
 
@@ -43,18 +44,7 @@ const VEHICLES: Vehicle[] = [
     extra: { label: "Rows", value: "3" },
     image: {
       src: "/vehicles/escalade.png",
-      alt: "Black Chevrolet Suburban parked on an airport apron",
-    },
-    fit: "cover",
-  },
-  {
-    slug: "executive-sprinter",
-    tag: "Sprinter",
-    copy: "Keep up to 14 people together, with stand-up headroom, captain's chairs and room for everyone's bags.",
-    extra: { label: "Headroom", value: "Stand-up" },
-    image: {
-      src: "/vehicles/sprint.png",
-      alt: "Black Mercedes-Benz Sprinter beside a private jet",
+      alt: "Black Cadillac Escalade luxury SUV",
     },
     fit: "cover",
   },
@@ -65,7 +55,29 @@ const VEHICLES: Vehicle[] = [
     extra: { label: "Privacy", value: "Partition" },
     image: {
       src: "/vehicles/limoii.png",
-      alt: "Black stretch Cadillac Escalade limousine",
+      alt: "Black stretch limousine",
+    },
+    fit: "contain",
+  },
+  {
+    slug: "executive-sprinter",
+    tag: "Sprinter",
+    copy: "Keep up to 14 people together, with stand-up headroom, captain's chairs and room for everyone's bags.",
+    extra: { label: "Headroom", value: "Stand-up" },
+    image: {
+      src: "/vehicles/sprint.png",
+      alt: "Black Mercedes-Benz Sprinter executive van",
+    },
+    fit: "cover",
+  },
+  {
+    slug: "motor-coach-bus",
+    tag: "coach",
+    copy: "Move the whole group at once. Reclining seats, an onboard restroom and a full luggage bay underneath.",
+    extra: { label: "Restroom", value: "Onboard" },
+    image: {
+      src: "/vehicles/bus.png",
+      alt: "Black full-size motor coach",
     },
     fit: "contain",
   },
@@ -90,8 +102,8 @@ export default function FleetSection() {
           </div>
           <div className={styles.topRight}>
             <p className={styles.intro}>
-              From a quiet sedan for one to a Sprinter for 14, every vehicle is
-              late-model, clean and climate-controlled for the desert.
+              From a quiet sedan for one to a motor coach for 56, every vehicle
+              is late-model, clean and climate-controlled for the desert.
             </p>
             <Link href='/fleet' className={styles.textLink}>
               Explore the fleet

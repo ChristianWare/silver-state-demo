@@ -61,31 +61,26 @@
 
 /* ── Vehicle rows ── */
 
+/* Photo row, card row, photo row, card row… Every card row is 1fr, and
+   with no fixed height on the list, 1fr means "as tall as the tallest
+   card", so all the navy boxes match, even across lines. */
 .rows {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: auto 1fr;
+  column-gap: 3rem;
+  row-gap: 1.6rem;
 }
 
-/* Photo left, card right… */
+/* Each vehicle takes one photo row and one card row from the list. */
 .row {
+  grid-row: span 2;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.6rem;
-  align-items: stretch;
+  grid-template-rows: subgrid;
 }
-
-/* …then card left, photo right. */
-/* .flip {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-} */
-
-/* .flip .media {
-  order: 2;
-} */
 
 /* ── Photo ── */
 
@@ -230,16 +225,18 @@
 
 /* ── Navy card ── */
 
+/* Fills its card row (all rows match), with 1.4rem under it so the next
+   line of vehicles starts 3rem below (1.6rem gap + 1.4rem). */
 .card {
   background-color: var(--navy);
   color: var(--ivory);
   border-radius: 10px;
   padding: 3.2rem 3.2rem 3.2rem;
+  margin-bottom: 1.4rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1.6rem;
-  height: 100%;
 }
 
 .number {
@@ -320,17 +317,16 @@
   color: var(--steel);
 }
 
+/* Pinned to the bottom, so the buttons line up across the cards. */
 .cardBtn {
   margin-top: auto;
 }
 
-
 @media screen and (max-width: 1668px) {
   .rows {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-
 
 @media screen and (max-width: 1068px) {
   .section {
@@ -346,16 +342,6 @@
 
   .topRight {
     max-width: 560px;
-  }
-
-  .row,
-  .flip {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .flip .media {
-    order: 0;
   }
 
   .fromLeft {
@@ -378,26 +364,23 @@
   .card {
     padding: 2.8rem 2.4rem;
   }
-
-  .cardBtn {
-    margin-top: 0.8rem;
-  }
 }
 
 @media screen and (max-width: 768px) {
   .rows {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
 }
-
 
 @media screen and (max-width: 568px) {
   .section {
     padding: 3rem 0rem;
   }
 
+  /* Tight gap between each photo and its card; the space between
+     vehicles comes from the card's bottom margin. */
   .rows {
-    gap: 7rem;
+    row-gap: 1rem;
   }
 
   .media {
@@ -421,6 +404,7 @@
 
   .card {
     padding: 2.4rem 1.6rem;
+    margin-bottom: 6rem;
   }
 
   .stat {

@@ -41,7 +41,15 @@ export const fleetData: readonly FleetEntry[] = [
     luggage: 4,
     bestFor: "Weddings, milestone birthdays, prom, a night on the Strip",
   },
+  {
+    slug: "motor-coach-bus",
+    name: "Motor Coach",
+    passengers: 56,
+    luggage: 56,
+    bestFor: "Conventions, wedding blocks, team travel, large group day trips",
+  },
 ];
+
 export const homeQuestions = [
   {
     id: 1,
