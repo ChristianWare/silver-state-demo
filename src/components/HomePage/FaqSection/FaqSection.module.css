@@ -15,16 +15,16 @@
 .letter {
   display: flex;
   align-items: flex-start;
-  gap: 1.6rem;
+  gap: 2.5rem;
   max-width: 520px;
 }
 
 .photo {
   position: relative;
-  width: 84px;
-  height: 84px;
+  width: 112px;
+  height: 112px;
   flex-shrink: 0;
-  border-radius: 4px;
+  border-radius: 7px;
   overflow: hidden;
   background-color: var(--ivory);
 }
@@ -40,7 +40,7 @@
 }
 
 .letterCopy {
-  font-size: 15px;
+  font-size: 1.7rem;
   line-height: 1.6em;
   color: var(--slate);
   hyphens: none;
@@ -54,15 +54,15 @@
 }
 
 .signOff {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1;
   color: var(--steel);
-  margin-top: 1.6rem;
+  margin-top: 2rem;
 }
 
 .signName {
   font-family: var(--SofiaSansExtraCondensedBold);
-  font-size: 2rem;
+  font-size: 2.6rem;
   line-height: 1;
   text-transform: uppercase;
   color: var(--midnight);
@@ -73,7 +73,7 @@
 }
 
 .signTitle {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1;
   color: var(--steel);
   margin-top: 0.6rem;
@@ -126,14 +126,14 @@
 }
 
 .dear {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1;
   color: var(--steel);
 }
 
 .question {
   font-family: var(--SofiaSansRegular);
-  font-size: 17px;
+  font-size: 1.9rem;
   line-height: 1.5em;
   letter-spacing: normal;
   text-transform: none;
@@ -152,7 +152,7 @@
 
 .topic {
   font-family: var(--SofiaSansBold);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1;
   color: var(--bronze);
 }
@@ -163,7 +163,7 @@
   gap: 1rem;
   padding: 0;
   font-family: var(--SofiaSansBold);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1;
   color: var(--midnight);
   cursor: pointer;
@@ -177,8 +177,8 @@
 }
 
 .toggleBox {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   border-radius: 3px;
   background-color: var(--ivory);
   color: var(--midnight);

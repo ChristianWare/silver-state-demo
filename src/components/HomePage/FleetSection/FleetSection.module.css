@@ -104,7 +104,7 @@
 
 /* The second vehicle (SUV) */
 .row:nth-child(2) .img {
-  padding: 8rem;
+  padding: 6rem;
   transform: rotateY(180deg);
 }
 

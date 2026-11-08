@@ -46,7 +46,7 @@ export default function FaqList({ items }: { items: FaqItem[] }) {
                     >
                       {isOpen ? "Fold it away" : "Read the answer"}
                       <span className={styles.toggleBox} aria-hidden='true'>
-                        <svg viewBox='0 0 24 24' width='14' height='14'>
+                        <svg viewBox='0 0 24 24' width='20' height='20'>
                           <path
                             d={isOpen ? "M6 12h12" : "M12 6v12M6 12h12"}
                             stroke='currentColor'
