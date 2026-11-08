@@ -1,6 +1,8 @@
 .section {
   background-color: var(--white);
   padding: 6rem 0rem;
+  /* The photos start off to the side; keep that from widening the page. */
+  overflow-x: clip;
 }
 
 /* ── Heading + intro ── */
@@ -64,7 +66,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 10rem;
 }
 
 /* Photo left, card right… */
@@ -116,6 +118,36 @@
   position: absolute;
   inset: 0;
   background-color: rgba(11, 15, 26, 0.25);
+}
+
+/* ── Scroll reveal: hidden off to its side until the row is in view ── */
+
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fromLeft {
+  transform: translateX(-8rem);
+}
+
+.fromRight {
+  transform: translateX(8rem);
+}
+
+.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* ── Capacity track: every vehicle by passengers, this one in gold ── */
@@ -299,10 +331,6 @@
     max-width: 560px;
   }
 
-  .rows {
-    gap: 4rem;
-  }
-
   .row,
   .flip {
     grid-template-columns: 1fr;
@@ -311,6 +339,18 @@
 
   .flip .media {
     order: 0;
+  }
+
+  .fromLeft {
+    transform: translateX(-4rem);
+  }
+
+  .fromRight {
+    transform: translateX(4rem);
+  }
+
+  .revealed {
+    transform: none;
   }
 
   .media {
@@ -330,6 +370,10 @@
 @media screen and (max-width: 568px) {
   .section {
     padding: 3rem 0rem;
+  }
+
+  .rows {
+    gap: 7rem;
   }
 
   .media {

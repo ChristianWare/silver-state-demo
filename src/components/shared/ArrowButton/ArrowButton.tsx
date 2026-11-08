@@ -8,14 +8,16 @@ interface Props {
   /**
    * "gold": gold button, midnight box, gold arrow (the hero's Book now).
    * "midnight": midnight button, gold box, midnight arrow.
+   * "white": white button, navy box, gold arrow.
    */
-  variant?: "gold" | "midnight";
+  variant?: "gold" | "midnight" | "white";
   className?: string;
 }
 
 /**
  * <ArrowButton href='/book' text='Book now' />
  * <ArrowButton href='/book' text='Book now' variant='midnight' />
+ * <ArrowButton href='/book' text='Book now' variant='white' />
  */
 export default function ArrowButton({
   href,

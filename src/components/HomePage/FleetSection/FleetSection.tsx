@@ -8,6 +8,7 @@ import LayoutWrapper from "@/components/shared/LayoutWrapper";
 import PulseEyeBrow from "@/components/shared/PulseEyeBrow/PulseEyeBrow";
 import ArrowButton from "@/components/shared/ArrowButton/ArrowButton";
 import { fleetData } from "@/lib/data";
+import RevealMedia from "./RevealMedia";
 import styles from "./FleetSection.module.css";
 
 type Vehicle = {
@@ -105,7 +106,8 @@ export default function FleetSection() {
               id={`fleet-${v.slug}`}
               className={`${styles.row} ${i % 2 === 1 ? styles.flip : ""}`}
             >
-              <div
+              <RevealMedia
+                from={i % 2 === 0 ? "left" : "right"}
                 className={`${styles.media} ${v.fit === "contain" ? styles.cutout : ""}`}
               >
                 <Image
@@ -132,7 +134,7 @@ export default function FleetSection() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </RevealMedia>
 
               <div className={styles.card}>
                 <div className={styles.number}>
@@ -164,6 +166,7 @@ export default function FleetSection() {
                 <ArrowButton
                   href={`/fleet/${v.slug}`}
                   text={`See the ${v.tag}`}
+                  variant='white'
                   className={styles.cardBtn}
                 />
               </div>

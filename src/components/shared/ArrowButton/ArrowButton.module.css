@@ -61,3 +61,18 @@
 .midnight:hover {
   background-color: var(--navy);
 }
+
+/* White button, navy box, gold arrow. */
+.white {
+  background-color: var(--white);
+  color: var(--midnight);
+}
+
+.white .box {
+  background-color: var(--navy);
+  color: var(--gold);
+}
+
+.white:hover {
+  background-color: var(--ivory);
+}
