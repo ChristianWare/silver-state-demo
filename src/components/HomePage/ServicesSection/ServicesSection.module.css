@@ -76,7 +76,9 @@
 
 .itemOpen,
 .itemOpen:hover {
-  background-color: var(--gold);
+    background-color: var(--ivory);
+  border: 1px solid var(--champagne);
+  color: var(--midnight);
 }
 
 .itemText {
@@ -165,7 +167,9 @@
 /* ── The gold box ── */
 
 .box {
-  background-color: var(--gold);
+    background-color: var(--ivory);
+  border: 1px solid var(--champagne);
+  color: var(--midnight);
   color: var(--midnight);
   border-radius: 5px;
   padding: 4rem;

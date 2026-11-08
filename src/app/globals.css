@@ -124,6 +124,12 @@ h4,
   line-height: 0.95em;
 }
 
+h4,
+.h4 {
+  font-size: 2.5rem;
+  line-height: 0.95em;
+}
+
 /* h4,
 .h4 {
   font-size: 2.4rem;
@@ -244,9 +250,9 @@ select:focus {
   }
 
   h4,
-.h4 {
-  font-size: 2.16rem;
-}
+  .h4 {
+    font-size: 2.16rem;
+  }
 }
 
 @media screen and (max-width: 968px) {
