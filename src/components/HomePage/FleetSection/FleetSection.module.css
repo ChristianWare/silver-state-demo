@@ -1,11 +1,8 @@
 .section {
   background-color: var(--white);
   padding: 6rem 0rem;
-  /* The photos start off to the side; keep that from widening the page. */
   overflow-x: clip;
 }
-
-/* ── Heading + intro ── */
 
 .top {
   display: flex;
@@ -91,16 +88,29 @@
 .media {
   position: relative;
   min-height: 480px;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
-  background-color: var(--navy);
 }
 
 .img {
-  object-fit: cover;
+  border: 1px solid var(--champagne);
+  object-fit: contain;
+  background-color: var(--ivory);
 }
 
-/* Cut-out shots on black: show the whole car, leave room for the track. */
+/* The second vehicle (SUV) */
+.row:nth-child(2) .img {
+  padding: 8rem;
+}
+
+.row:nth-child(3) .img {
+  transform: rotateY(180deg);
+}
+
+.row:nth-child(4) .img {
+  padding: 6rem;
+}
+
 .cutout {
   background-color: #000;
 }
@@ -113,14 +123,6 @@
 .cutout .shade {
   display: none;
 }
-
-.shade {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(11, 15, 26, 0.25);
-}
-
-/* ── Scroll reveal: hidden off to its side until the row is in view ── */
 
 .reveal {
   opacity: 0;
@@ -168,7 +170,7 @@
   right: 5px;
   bottom: 5px;
   height: 1px;
-  background-color: rgba(247, 245, 240, 0.8);
+  background-color: var(--steel);
 }
 
 .stop {
@@ -195,6 +197,7 @@
   text-transform: uppercase;
   padding: 0.6rem 0.8rem;
   border-radius: 3px;
+  border: 1px solid var(--gold);
   background-color: var(--white);
   color: var(--midnight);
   white-space: nowrap;
@@ -205,7 +208,7 @@
   height: 11px;
   border-radius: 50%;
   background-color: var(--ivory);
-  border: 2px solid var(--ivory);
+  border: 2px solid var(--gold);
 }
 
 .stopActive .stopTag {
@@ -223,7 +226,7 @@
 .card {
   background-color: var(--navy);
   color: var(--ivory);
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 3.2rem 3.2rem 3.2rem;
   display: flex;
   flex-direction: column;

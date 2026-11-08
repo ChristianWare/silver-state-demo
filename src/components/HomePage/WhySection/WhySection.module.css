@@ -127,7 +127,7 @@
   position: relative;
   /* min-height: 460px; */
   /* aspect-ratio: 2 / 1; */
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
   background-color: var(--navy);
 }

@@ -31,7 +31,7 @@ const VEHICLES: Vehicle[] = [
     copy: "The quiet, professional choice for one to three passengers. Leather seats, a smooth ride and room for three suitcases.",
     extra: { label: "Seats", value: "Leather" },
     image: {
-      src: "/vehicles/mercedesSedan.png",
+      src: "/vehicles/mercedesSedanii.png",
       alt: "Black Mercedes-Benz executive sedan",
     },
     fit: "contain",
@@ -42,7 +42,7 @@ const VEHICLES: Vehicle[] = [
     copy: "Room for six and their luggage, with a higher seat and a calmer ride on long desert drives.",
     extra: { label: "Rows", value: "3" },
     image: {
-      src: "/vehicles/heroiii.jpg",
+      src: "/vehicles/escalade.png",
       alt: "Black Chevrolet Suburban parked on an airport apron",
     },
     fit: "cover",
@@ -53,7 +53,7 @@ const VEHICLES: Vehicle[] = [
     copy: "Keep up to 14 people together, with stand-up headroom, captain's chairs and room for everyone's bags.",
     extra: { label: "Headroom", value: "Stand-up" },
     image: {
-      src: "/vehicles/sprinteriii.jpg",
+      src: "/vehicles/sprint.png",
       alt: "Black Mercedes-Benz Sprinter beside a private jet",
     },
     fit: "cover",
@@ -64,7 +64,7 @@ const VEHICLES: Vehicle[] = [
     copy: "The classic Las Vegas arrival. Wraparound seating for up to 10, mood lighting and a partition for privacy.",
     extra: { label: "Privacy", value: "Partition" },
     image: {
-      src: "/vehicles/limo.png",
+      src: "/vehicles/limoii.png",
       alt: "Black stretch Cadillac Escalade limousine",
     },
     fit: "contain",

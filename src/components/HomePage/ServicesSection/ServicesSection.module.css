@@ -76,9 +76,13 @@
 
 .itemOpen,
 .itemOpen:hover {
-    background-color: var(--ivory);
+  background-color: var(--ivory);
   border: 1px solid var(--champagne);
+  border-top: none;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
   color: var(--midnight);
+  /* margin-top: 0.5rem; */
 }
 
 .itemText {
@@ -167,11 +171,11 @@
 /* ── The gold box ── */
 
 .box {
-    background-color: var(--ivory);
+  background-color: var(--ivory);
   border: 1px solid var(--champagne);
   color: var(--midnight);
   color: var(--midnight);
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 4rem;
   display: flex;
   flex-direction: column;
