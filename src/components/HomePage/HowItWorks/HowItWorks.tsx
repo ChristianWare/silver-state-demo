@@ -1,10 +1,10 @@
 // Home page: how booking works, laid out like a menu card beside a photo.
 
 import Image from "next/image";
-import Link from "next/link";
 import LayoutWrapper from "@/components/shared/LayoutWrapper";
 import PulseEyeBrow from "@/components/shared/PulseEyeBrow/PulseEyeBrow";
 import styles from "./HowItWorks.module.css";
+import ArrowButton from "@/components/shared/ArrowButton/ArrowButton";
 
 const STEPS = [
   {
@@ -33,7 +33,7 @@ export default function HowItWorks() {
         <div className={styles.top}>
           <div className={styles.topLeft}>
             <PulseEyeBrow text='How it works' />
-            <h2 className={styles.heading}>Booked in three steps.</h2>
+            <h2 className={styles.heading}>Booked in three steps</h2>
           </div>
           <p className={styles.intro}>
             No phone tag and no waiting for a quote. Book online any time, day
@@ -82,9 +82,13 @@ export default function HowItWorks() {
               ))}
             </dl>
 
-            <Link href='/book' className={styles.link}>
-              Book your ride
-            </Link>
+            <div className={styles.link}>
+              <ArrowButton
+                href='book'
+                text='Book your ride'
+                variant='midnight'
+              />
+            </div>
           </div>
         </div>
       </LayoutWrapper>

@@ -1,6 +1,6 @@
 .section {
   background-color: var(--white);
-  padding: 4rem 0rem 10rem;
+  /* padding: 4rem 0rem 10rem; */
 }
 
 /* ── Heading + intro ── */
@@ -157,16 +157,7 @@
 
 .link {
   align-self: flex-start;
-  margin-top: 2.4rem;
-  font-family: var(--SofiaSansRegular);
-  font-size: 16px;
-  line-height: 1;
-  color: var(--midnight);
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid var(--midnight);
-  transition:
-    color 0.2s ease,
-    border-color 0.2s ease;
+  margin-top: 3rem;
 }
 
 .link:hover {

@@ -198,9 +198,9 @@ export default function ServicesSection() {
       <LayoutWrapper>
         <div className={styles.top}>
           <div className={styles.topLeft}>
-            <PulseEyeBrow text='What we do' />
+            <PulseEyeBrow text='Services' />
             <h2 className={styles.heading}>
-              One call for every ride in Las Vegas.
+              One call for every ride in Las Vegas
             </h2>
           </div>
           <p className={styles.intro}>

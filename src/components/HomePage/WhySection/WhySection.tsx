@@ -89,7 +89,7 @@ export default function WhySection() {
             <div className={styles.topLeft}>
               <PulseEyeBrow text='Why choose us?' />
               <h2 className={`${styles.heading} `}>
-                Your ride is never rushed.
+                Your ride is never rushed
               </h2>
             </div>
             <p className={styles.intro}>
