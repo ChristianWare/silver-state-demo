@@ -10,7 +10,7 @@ import styles from "./FaqSection.module.css";
 export type FaqItem = { topic: string; question: string; answer: string };
 
 export default function FaqList({ items }: { items: FaqItem[] }) {
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(1);
 
   // Even cards on the left, odd on the right; `order` puts them back in
   // sequence when the columns collapse into one.
