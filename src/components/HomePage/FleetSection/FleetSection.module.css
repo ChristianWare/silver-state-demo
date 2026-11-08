@@ -1,0 +1,361 @@
+.section {
+  background-color: var(--white);
+  padding: 6rem 0rem;
+}
+
+/* ── Heading + intro ── */
+
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topLeft > :first-child {
+  margin-left: -1.5rem;
+}
+
+.topRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+  max-width: 400px;
+}
+
+.intro {
+  font-size: 1.7rem;
+  line-height: 1.6em;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.textLink {
+  font-family: var(--SofiaSansBold);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--midnight);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--midnight);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.textLink:hover {
+  color: var(--bronze);
+  border-bottom-color: var(--bronze);
+}
+
+/* ── Vehicle rows ── */
+
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+/* Photo left, card right… */
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: stretch;
+}
+
+/* …then card left, photo right. */
+.flip {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+}
+
+.flip .media {
+  order: 2;
+}
+
+/* ── Photo ── */
+
+.media {
+  position: relative;
+  min-height: 480px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--navy);
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* Cut-out shots on black: show the whole car, leave room for the track. */
+.cutout {
+  background-color: #000;
+}
+
+.cutout .img {
+  object-fit: contain;
+  padding: 2rem 4rem 6rem;
+}
+
+.cutout .shade {
+  display: none;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(11, 15, 26, 0.25);
+}
+
+/* ── Capacity track: every vehicle by passengers, this one in gold ── */
+
+.track {
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.line {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  height: 1px;
+  background-color: rgba(247, 245, 240, 0.8);
+}
+
+.stop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stop:first-of-type {
+  align-items: flex-start;
+}
+
+.stop:last-of-type {
+  align-items: flex-end;
+}
+
+.stopTag {
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 0.8rem;
+  border-radius: 3px;
+  background-color: var(--white);
+  color: var(--midnight);
+  white-space: nowrap;
+}
+
+.stopDot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: var(--ivory);
+  border: 2px solid var(--ivory);
+}
+
+.stopActive .stopTag {
+  background-color: var(--gold);
+}
+
+.stopActive .stopDot {
+  background-color: var(--gold);
+  border-color: var(--gold);
+  transform: scale(1.25);
+}
+
+/* ── Navy card ── */
+
+.card {
+  background-color: var(--navy);
+  color: var(--ivory);
+  border-radius: 5px;
+  padding: 3.2rem 3.2rem 3.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+}
+
+.number {
+  font-family: var(--SofiaSansExtraCondensedExtraBold);
+  font-size: 8rem;
+  line-height: 0.85;
+  color: var(--ivory);
+}
+
+.title {
+  color: var(--ivory);
+  margin-bottom: 0.4rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  width: 100%;
+  margin: 0;
+}
+
+.stat {
+  background-color: rgba(247, 245, 240, 0.06);
+  border: 1px solid var(--slate);
+  border-radius: 4px;
+  padding: 1.2rem 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.statLabel {
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.statValue {
+  margin: 0;
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2.6rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--ivory);
+  overflow-wrap: anywhere;
+}
+
+.copy {
+  font-size: 17px;
+  line-height: 1.6em;
+  color: var(--ivory);
+  hyphens: none;
+}
+
+.bestFor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--slate);
+  width: 100%;
+  font-size: 15px;
+  line-height: 1.5em;
+  color: var(--champagne);
+  hyphens: none;
+}
+
+.bestForLabel {
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.cardBtn {
+  margin-top: auto;
+}
+
+/* ── Tablet and phone: photo on top, card below, no alternating ── */
+
+@media screen and (max-width: 1068px) {
+  .section {
+    padding: 4rem 0rem;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .topRight {
+    max-width: 560px;
+  }
+
+  .rows {
+    gap: 4rem;
+  }
+
+  .row,
+  .flip {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .flip .media {
+    order: 0;
+  }
+
+  .media {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .card {
+    padding: 2.8rem 2.4rem;
+  }
+
+  .cardBtn {
+    margin-top: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding: 3rem 0rem;
+  }
+
+  .media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .cutout .img {
+    padding: 1rem 1.6rem 5rem;
+  }
+
+  .track {
+    left: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.4rem;
+  }
+
+  /* Numbers only on the track; the card says which vehicle it is. */
+  .stopName {
+    display: none;
+  }
+
+  .card {
+    padding: 2.4rem 1.6rem;
+  }
+
+  .stat {
+    padding: 1rem 1rem 1.2rem;
+  }
+}
