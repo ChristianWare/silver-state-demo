@@ -36,6 +36,7 @@
   font-size: 2rem;
   line-height: 1.5em;
   color: var(--slate);
+  opacity: 0.8;
   hyphens: none;
 }
 
@@ -79,8 +80,8 @@
 .media {
   position: relative;
   width: 100%;
-  aspect-ratio: 2.45;
-  border-radius: 5px;
+  aspect-ratio: 3.05;
+  border-radius: 10px;
   overflow: hidden;
   background-color: var(--navy);
 }

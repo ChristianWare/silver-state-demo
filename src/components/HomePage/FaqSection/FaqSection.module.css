@@ -47,6 +47,7 @@
   font-size: 1.7rem;
   line-height: 1.6em;
   color: var(--slate);
+  opacity: 0.8;
   hyphens: none;
 }
 

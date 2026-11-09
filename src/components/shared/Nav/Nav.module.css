@@ -35,8 +35,8 @@
 }
 .active {
   color: #111 !important;
-  text-decoration: underline !important;
-  text-underline-offset: 4px;
+  /* text-decoration: underline !important;
+  text-underline-offset: 4px; */
 }
 .actions {
   margin-left: auto;

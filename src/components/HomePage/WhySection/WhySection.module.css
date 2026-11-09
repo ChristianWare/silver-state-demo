@@ -38,6 +38,7 @@
   font-size: 2rem;
   line-height: 1.5em;
   color: var(--slate);
+  opacity: 0.8;
   hyphens: none;
   padding-top: 5.4rem;
 }
