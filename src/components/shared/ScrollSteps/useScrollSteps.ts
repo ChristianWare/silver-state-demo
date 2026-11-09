@@ -5,8 +5,10 @@
 //   const { trackRef, stickyRef, active, setActive } = useScrollSteps(6);
 //   <div ref={trackRef}><div ref={stickyRef}>…</div></div>
 //
-// The track grows by one "step" of scroll per item, and the sticky block
-// stays put while you scroll through it; `active` follows the scroll.
+// The track grows by one "step" of scroll per item (the last one included,
+// so it stays on screen as long as the others before the block moves on),
+// and the sticky block stays put while you scroll through it; `active`
+// follows the scroll.
 // setActive() scrolls to that step. It turns itself off (a plain block with
 // click-to-change) at `disableBelow` px and narrower, and whenever the block
 // is too tall to fit on screen under the nav.
@@ -58,7 +60,7 @@ export function useScrollSteps(
       const top = Math.max(topOffset, Math.round((vh - h) / 2 + topOffset / 2));
       geom.current = { top, step };
       enabledRef.current = true;
-      track.style.height = `${h + step * (count - 1)}px`;
+      track.style.height = `${h + step * count}px`;
       sticky.style.position = "sticky";
       sticky.style.top = `${top}px`;
       onScroll();
@@ -86,28 +88,20 @@ export function useScrollSteps(
   }, [count, disableBelow, topOffset, stepVh]);
 
   /** Show step i. While pinned, scrolls the page to it. */
-  const setActive = useCallback(
-    (i: number) => {
-      const track = trackRef.current;
-      if (!enabledRef.current || !track) {
-        setActiveState(i);
-        return;
-      }
-      const { top, step } = geom.current;
-      const trackTop = track.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        // Middle of the step, or its start for the last one so the block is
-        // still pinned when the scroll stops.
-        top:
-          trackTop -
-          top +
-          i * step +
-          (i < count - 1 ? Math.round(step / 2) : 1),
-        behavior: "smooth",
-      });
-    },
-    [count],
-  );
+  const setActive = useCallback((i: number) => {
+    const track = trackRef.current;
+    if (!enabledRef.current || !track) {
+      setActiveState(i);
+      return;
+    }
+    const { top, step } = geom.current;
+    const trackTop = track.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      // The middle of the step.
+      top: trackTop - top + i * step + Math.round(step / 2),
+      behavior: "smooth",
+    });
+  }, []);
 
   return { trackRef, stickyRef, active, setActive };
 }
