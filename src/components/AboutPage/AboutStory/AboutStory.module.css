@@ -194,7 +194,7 @@
 
 .rowSub {
   font-family: var(--SofiaSansRegular);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.3;
   color: var(--steel);
 }
@@ -216,7 +216,7 @@
 
 .note {
   font-family: var(--SofiaSansRegular);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.5;
   color: var(--slate);
   padding-top: 1.6rem;
