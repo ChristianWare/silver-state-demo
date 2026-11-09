@@ -10,7 +10,7 @@ export default function Hero() {
     <section id='hero' className={styles.hero}>
       <div className={styles.frame}>
         <Image
-          src='/images/other/heroiii.jpg'
+          src='/images/other/herov.jpg'
           alt='Black car waiting for a rider in Las Vegas'
           fill
           priority
