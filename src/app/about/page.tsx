@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import PagePlaceholder from "@/components/shared/PagePlaceholder/PagePlaceholder";
-import { guides } from "@/lib/pageGuides";
 import { SITE } from "@/config/site";
+import SiteNav from "@/components/shared/SiteNav/SiteNav";
+import AboutHero from "@/components/AboutPage/AboutHero/AboutHero";
 
 export const metadata: Metadata = {
   title: "About",
@@ -10,6 +10,12 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <PagePlaceholder {...guides.about}></PagePlaceholder>
+    <>
+      {/* The white bar from the start: no hero to sit over on this page. */}
+      <SiteNav variant='solid' />
+      <main>
+        <AboutHero />
+      </main>
+    </>
   );
 }

@@ -1,0 +1,297 @@
+/* Clears the fixed 72px nav. */
+.section {
+  background-color: var(--white);
+  padding-top: 72px;
+}
+
+/* ── Heading left; eyebrow, copy and buttons right ── */
+
+/* The heading's column is exactly as wide as its longer line. */
+.top {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 8rem;
+  align-items: center;
+  padding: 4rem 0 5rem;
+}
+
+.heading {
+  white-space: nowrap;
+}
+
+.side {
+  max-width: 560px;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.side > :first-child {
+  margin-left: -1.5rem;
+}
+
+.copy {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+
+/* Outlined, the same height as the ArrowButton beside it. */
+.call {
+  display: inline-flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 2rem;
+  border: 1px solid var(--stroke);
+  border-radius: 4px;
+  font-family: var(--SofiaSansRegular);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--midnight);
+  white-space: nowrap;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.call:hover {
+  border-color: var(--midnight);
+  background-color: var(--ivory);
+}
+
+/* ── Photo ── */
+
+.figure {
+  margin: 0;
+}
+
+.media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2.45;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--navy);
+}
+
+.img {
+  object-fit: cover;
+  object-position: 50% 35%;
+}
+
+/* Key, top right. */
+.legend {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.8rem;
+  display: flex;
+  gap: 1.4rem;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--SofiaSansRegular);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--ivory);
+  text-shadow: 0 1px 2px rgba(11, 15, 26, 0.5);
+}
+
+.legendSquare {
+  width: 7px;
+  height: 7px;
+  background-color: var(--ivory);
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--gold);
+}
+
+/* Pickup to drop-off, along the bottom edge. */
+.track {
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  bottom: 1.8rem;
+  height: 4.4rem;
+}
+
+.line {
+  position: absolute;
+  left: 5px;
+  right: 9px;
+  bottom: 9px;
+  height: 1px;
+  background-color: var(--ivory);
+}
+
+.stop {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stopStart {
+  left: 0;
+  align-items: flex-start;
+}
+
+.stopMid {
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+.stopEnd {
+  right: 0;
+  align-items: flex-end;
+}
+
+.tag {
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.7rem;
+  border-radius: 3px;
+  background-color: var(--white);
+  color: var(--midnight);
+  white-space: nowrap;
+}
+
+.stopEnd .tag {
+  background-color: var(--gold);
+}
+
+/* Every marker sits in the same 18px row as the ring, so the tags line up. */
+.dot {
+  width: 10px;
+  height: 10px;
+  margin: 4px 0;
+  border-radius: 50%;
+  background-color: var(--ivory);
+}
+
+.tick {
+  width: 1px;
+  height: 10px;
+  margin: 4px 0;
+  background-color: var(--ivory);
+}
+
+.ring {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ivory);
+  background-color: rgba(201, 162, 74, 0.35);
+}
+
+/* ── Caption ── */
+
+.caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: 1.4rem;
+}
+
+.captionTitle {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--midnight);
+  white-space: nowrap;
+}
+
+.captionText {
+  font-family: var(--SofiaSansRegular);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--slate);
+  text-align: right;
+}
+
+@media screen and (max-width: 1268px) {
+  .top {
+    gap: 4rem;
+  }
+}
+
+/* ── 1068px: stacked, photo taller ── */
+
+@media screen and (max-width: 1068px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+    padding: 3rem 0 4rem;
+  }
+
+  .side {
+    justify-self: start;
+  }
+
+  .media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .caption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .captionText {
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .top {
+    padding: 2rem 0 3rem;
+  }
+
+  .media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .legend {
+    display: none;
+  }
+
+  .track {
+    left: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.2rem;
+  }
+
+  .captionTitle {
+    white-space: normal;
+  }
+
+  /* Very narrow phones: let a line wrap rather than run off the screen. */
+  .heading {
+    white-space: normal;
+  }
+}
