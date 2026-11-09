@@ -24,10 +24,7 @@ const LINKS = [
 ];
 
 // The full-screen menu also lists these.
-const MENU_EXTRA = [
-  { text: "Contact", href: "/contact" },
-  { text: "Log in", href: "/login" },
-];
+const MENU_EXTRA = [{ text: "Log in", href: "/login" }];
 
 const NAV_HEIGHT = 72;
 

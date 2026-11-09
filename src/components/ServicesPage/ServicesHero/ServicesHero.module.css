@@ -1,0 +1,208 @@
+/* Clears the fixed 72px nav. */
+.section {
+  background-color: var(--white);
+  padding-top: 72px;
+  overflow-x: clip;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 6rem;
+  align-items: center;
+}
+
+/* ── Left ── */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.4rem;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.head > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  white-space: nowrap;
+}
+
+.intro {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  opacity: 0.8;
+  max-width: 480px;
+  hyphens: none;
+}
+
+.call {
+  margin-top: -0.8rem;
+  font-family: var(--SofiaSansRegular);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.call a {
+  color: var(--midnight);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+/* ── Photo + tag ── */
+
+.mediaWrap {
+  position: relative;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--navy);
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* Hangs off the bottom-left corner, tilted. */
+.tag {
+  position: absolute;
+  left: -3.2rem;
+  bottom: -2.8rem;
+  width: 15rem;
+  min-height: 18rem;
+  padding: 1.6rem 1.4rem;
+  border-radius: 4px;
+  background-color: var(--navy);
+  color: var(--ivory);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+  transform: rotate(-6deg);
+  box-shadow: 0 1.2rem 2.4rem rgba(11, 15, 26, 0.25);
+}
+
+.tagHole {
+  align-self: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 2px solid var(--ivory);
+  background-color: var(--white);
+}
+
+.tagBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tagIcon {
+  width: 1.8rem;
+  height: 1.8rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.tagText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tagName {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 1.6rem;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.tagSub {
+  font-family: var(--SofiaSansRegular);
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.tagWord {
+  margin-top: auto;
+  font-family: var(--SofiaSansExtraCondensedExtraBold);
+  font-size: 3.2rem;
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── 1068px: copy on top, photo below ── */
+
+@media screen and (max-width: 1068px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+    max-width: 560px;
+  }
+
+  .media {
+    aspect-ratio: 16 / 11;
+  }
+
+  .tag {
+    left: -1.6rem;
+    bottom: -2rem;
+  }
+}
+
+/* ── 568px: the tag moves to the top-right corner ── */
+
+@media screen and (max-width: 568px) {
+  .heading {
+    white-space: normal;
+  }
+
+  .grid {
+    gap: 5rem;
+    padding-bottom: 0;
+  }
+
+  .media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .tag {
+    left: auto;
+    right: 1.2rem;
+    bottom: auto;
+    top: -3.2rem;
+    width: 12rem;
+    min-height: 14rem;
+    padding: 1.2rem 1rem;
+    transform: rotate(5deg);
+  }
+
+  .tagWord {
+    font-size: 2.6rem;
+  }
+}
