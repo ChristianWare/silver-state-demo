@@ -67,7 +67,7 @@ const TABS: Tab[] = [
     label: "Today",
     when: `Today, ${fleetData.length} kinds of vehicle`,
     paragraphs: [
-      `Word spread the way it does in Las Vegas: from a hotel concierge to a convention planner, from a bride to her sister, from one golf group to the next. ${SHORT} added SUVs for families and golf trips, Sprinters for groups and a stretch limousine for the nights that call for one. The company grew. The rules didn't change.`,
+      `Word spread the way it does in Las Vegas: from a hotel concierge to a convention planner, from a bride to her sister, from one golf group to the next. ${SHORT} added SUVs for families and golf trips, Sprinters for groups, a stretch limousine for the nights that call for one and a motor coach for the biggest groups. The company grew. The rules didn't change.`,
       `Today ${SHORT} is still owned and run by ${FOUNDER} from ${STORY.base}, with a team of chauffeurs who live in the valley and know it at every hour.`,
     ],
     rows: [
@@ -118,131 +118,139 @@ export default function AboutStory() {
   return (
     <section className={styles.section}>
       <LayoutWrapper>
-        <div className={styles.top}>
-          <div className={styles.topLeft}>
-            <PulseEyeBrow text='Our story' />
-            <h2 className={styles.heading}>
-              Started behind the wheel, not behind a desk.
-            </h2>
+        <div className={styles.inner}>
+          <div className={styles.top}>
+            <div className={styles.topLeft}>
+              <PulseEyeBrow text='Our story' />
+              {/* Always two lines, like the hero's h1: the break sets them
+                and they never wrap. Keep any new heading this short. */}
+              <h2 className={styles.heading}>
+                Behind the wheel,
+                <br />
+                not behind a desk.
+              </h2>
+            </div>
+            <p className={styles.intro}>
+              One black car, one set of rules and a phone that&apos;s always
+              answered. The company grew. The rules didn&apos;t change.
+            </p>
           </div>
-          <p className={styles.intro}>
-            One black car, one set of rules and a phone that&apos;s always
-            answered. The company grew. The rules didn&apos;t change.
-          </p>
-        </div>
 
-        <div className={styles.grid}>
-          <div className={styles.left}>
-            <div className={styles.card}>
-              <div className={styles.cardTop}>
+          <div className={styles.grid}>
+            <div className={styles.left}>
+              <div className={styles.card}>
+                <div className={styles.cardTop}>
+                  <div
+                    className={styles.tabs}
+                    role='tablist'
+                    aria-label='Our story'
+                  >
+                    {TABS.map((t) => (
+                      <button
+                        key={t.id}
+                        type='button'
+                        role='tab'
+                        id={`story-tab-${t.id}`}
+                        aria-selected={t.id === tab.id}
+                        aria-controls='story-panel'
+                        className={`${styles.tab} ${t.id === tab.id ? styles.tabActive : ""}`}
+                        onClick={() => setTabId(t.id)}
+                      >
+                        {t.label}
+                      </button>
+                    ))}
+                  </div>
+                  <p className={styles.when}>{tab.when}</p>
+                </div>
+
                 <div
-                  className={styles.tabs}
-                  role='tablist'
-                  aria-label='Our story'
+                  id='story-panel'
+                  role='tabpanel'
+                  aria-labelledby={`story-tab-${tab.id}`}
+                  className={styles.panel}
+                  key={tab.id}
                 >
-                  {TABS.map((t) => (
-                    <button
-                      key={t.id}
-                      type='button'
-                      role='tab'
-                      id={`story-tab-${t.id}`}
-                      aria-selected={t.id === tab.id}
-                      aria-controls='story-panel'
-                      className={`${styles.tab} ${t.id === tab.id ? styles.tabActive : ""}`}
-                      onClick={() => setTabId(t.id)}
-                    >
-                      {t.label}
-                    </button>
-                  ))}
+                  <div className={styles.story}>
+                    {tab.paragraphs.map((p) => (
+                      <p key={p.slice(0, 24)} className={styles.para}>
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+
+                  <dl className={styles.rows}>
+                    {tab.rows.map((r) => (
+                      <div key={r.label} className={styles.row}>
+                        <dt className={styles.rowText}>
+                          <span className={styles.rowLabel}>{r.label}</span>
+                          <span className={styles.rowSub}>{r.sub}</span>
+                        </dt>
+                        <dd className={`${styles.rowValue} h3`}>{r.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+
+                  <p className={styles.note}>{tab.note}</p>
                 </div>
-                <p className={styles.when}>{tab.when}</p>
               </div>
 
-              <div
-                id='story-panel'
-                role='tabpanel'
-                aria-labelledby={`story-tab-${tab.id}`}
-                className={styles.panel}
-                key={tab.id}
-              >
-                <div className={styles.story}>
-                  {tab.paragraphs.map((p) => (
-                    <p key={p.slice(0, 24)} className={styles.para}>
-                      {p}
+              <div className={styles.photo}>
+                <Image
+                  src='/img1.png'
+                  alt='Black SUV parked on the desert flats at sunset'
+                  fill
+                  sizes='(max-width: 1068px) 100vw, 60vw'
+                  className={styles.img}
+                />
+              </div>
+            </div>
+
+            <aside className={styles.box}>
+              <div className={styles.boxGroup}>
+                <h3 className={`${styles.boxTitle} h4`}>From the founder</h3>
+                <figure className={styles.quote}>
+                  <blockquote className={styles.quoteText}>
+                    <p>
+                      &ldquo;Most people only ride with us once or twice a year.
+                      That&apos;s two chances to get it exactly right, and we
+                      don&apos;t waste either of them.&rdquo;
                     </p>
-                  ))}
-                </div>
-
-                <dl className={styles.rows}>
-                  {tab.rows.map((r) => (
-                    <div key={r.label} className={styles.row}>
-                      <dt className={styles.rowText}>
-                        <span className={styles.rowLabel}>{r.label}</span>
-                        <span className={styles.rowSub}>{r.sub}</span>
-                      </dt>
-                      <dd className={`${styles.rowValue} h3`}>{r.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-
-                <p className={styles.note}>{tab.note}</p>
+                  </blockquote>
+                  <figcaption className={styles.quoteBy}>
+                    <span className={styles.quotePhoto}>
+                      <Image
+                        src={STORY.founderPhoto}
+                        alt={FOUNDER}
+                        fill
+                        sizes='56px'
+                        className={styles.img}
+                      />
+                    </span>
+                    <span className={styles.quoteName}>
+                      {FOUNDER}
+                      <span className={styles.quoteRole}>
+                        {SITE.owner.title}
+                      </span>
+                    </span>
+                  </figcaption>
+                </figure>
               </div>
-            </div>
 
-            <div className={styles.photo}>
-              <Image
-                src='/img1.png'
-                alt='Black SUV parked on the desert flats at sunset'
-                fill
-                sizes='(max-width: 1068px) 100vw, 60vw'
-                className={styles.img}
-              />
-            </div>
+              <div className={styles.boxGroup}>
+                <h3 className={`${styles.boxTitle} h4`}>
+                  The rules we started with
+                </h3>
+                <ul className={styles.rules}>
+                  {RULES.map((r) => (
+                    <li key={r.title} className={styles.rule}>
+                      <span className={styles.ruleTitle}>{r.title}</span>
+                      <span className={styles.ruleCopy}>{r.copy}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </aside>
           </div>
-
-          <aside className={styles.box}>
-            <div className={styles.boxGroup}>
-              <h3 className={`${styles.boxTitle} h4`}>From the founder</h3>
-              <figure className={styles.quote}>
-                <blockquote className={styles.quoteText}>
-                  <p>
-                    &ldquo;Most people only ride with us once or twice a year.
-                    That&apos;s two chances to get it exactly right, and we
-                    don&apos;t waste either of them.&rdquo;
-                  </p>
-                </blockquote>
-                <figcaption className={styles.quoteBy}>
-                  <span className={styles.quotePhoto}>
-                    <Image
-                      src={STORY.founderPhoto}
-                      alt={FOUNDER}
-                      fill
-                      sizes='56px'
-                      className={styles.img}
-                    />
-                  </span>
-                  <span className={styles.quoteName}>
-                    {FOUNDER}
-                    <span className={styles.quoteRole}>{SITE.owner.title}</span>
-                  </span>
-                </figcaption>
-              </figure>
-            </div>
-
-            <div className={styles.boxGroup}>
-              <h3 className={`${styles.boxTitle} h4`}>
-                The rules we started with
-              </h3>
-              <ul className={styles.rules}>
-                {RULES.map((r) => (
-                  <li key={r.title} className={styles.rule}>
-                    <span className={styles.ruleTitle}>{r.title}</span>
-                    <span className={styles.ruleCopy}>{r.copy}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </aside>
         </div>
       </LayoutWrapper>
     </section>

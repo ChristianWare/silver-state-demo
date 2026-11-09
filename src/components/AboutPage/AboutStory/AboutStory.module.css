@@ -2,6 +2,13 @@
   background-color: var(--white);
 }
 
+/* 80% of the page width and centered; full width from 1268px down. */
+.inner {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ── Heading + intro ── */
 
 .top {
@@ -24,7 +31,7 @@
 }
 
 .heading {
-  max-width: 640px;
+  white-space: nowrap;
 }
 
 .intro {
@@ -333,6 +340,12 @@
 
 /* ── 1068px: everything in one column ── */
 
+@media screen and (max-width: 1268px) {
+  .inner {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 1068px) {
   .top {
     flex-direction: column;
@@ -358,6 +371,11 @@
 }
 
 @media screen and (max-width: 568px) {
+  /* Very narrow phones: let a line wrap rather than run off the screen. */
+  .heading {
+    white-space: normal;
+  }
+
   .card {
     padding: 1.6rem 1.6rem 1.4rem;
   }
