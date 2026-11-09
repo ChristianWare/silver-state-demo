@@ -42,7 +42,7 @@
 }
 
 .intro {
-  font-size: 1.7rem;
+  font-size: 2rem;
   line-height: 1.6em;
   color: var(--ivory);
   opacity: 0.8;
@@ -78,7 +78,7 @@
 .factValue {
   margin: 0;
   font-family: var(--SofiaSansBold);
-  font-size: 15px;
+  font-size: 1.7rem;
   line-height: 1.3;
   color: var(--white);
 }
@@ -136,7 +136,7 @@
 
 .when {
   font-family: var(--SofiaSansBold);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1;
   color: var(--gold);
 }
@@ -188,6 +188,10 @@
   .top {
     grid-template-columns: 1fr;
     gap: 3.2rem;
+  }
+
+  .intro {
+    font-size: 1.7rem;
   }
 
   .photo {

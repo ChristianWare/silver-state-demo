@@ -47,7 +47,7 @@ export default function AboutBeliefs() {
               <div className={styles.head}>
                 <PulseEyeBrow text='What we believe' color='white' />
                 <h2 className={styles.heading}>
-                  Three promises we keep on every ride.
+                  Three promises we keep
                 </h2>
               </div>
               <p className={styles.intro}>
