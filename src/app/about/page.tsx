@@ -11,6 +11,7 @@ import AboutTeam from "@/components/AboutPage/AboutTeam/AboutTeam";
 import VideoSection from "@/components/HomePage/VideoSection/VideoSection";
 import ReviewsSection from "@/components/HomePage/ReviewsSection/ReviewsSection";
 import ClosingCta from "@/components/HomePage/ClosingCta/ClosingCta";
+import FaqSection from "@/components/HomePage/FaqSection/FaqSection";
 
 export const metadata: Metadata = {
   title: "About",
@@ -32,6 +33,7 @@ export default function Page() {
         <AboutTeam />
         <VideoSection />
         <ReviewsSection />
+        <FaqSection />
         <ClosingCta />
       </main>
     </>

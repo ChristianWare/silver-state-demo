@@ -1,5 +1,6 @@
 .section {
   background-color: var(--white);
+  padding: 10rem 0rem;
 }
 
 .grid {
@@ -234,7 +235,17 @@
 
 /* ── 1068px: heading on top, list underneath ── */
 
+@media screen and (max-width: 1268px) {
+  .section {
+    padding: 7rem 0rem;
+  }
+}
+
 @media screen and (max-width: 1068px) {
+  .section {
+    padding: 6rem 0rem;
+  }
+
   .grid {
     grid-template-columns: 1fr;
     gap: 5rem;
@@ -255,6 +266,10 @@
 }
 
 @media screen and (max-width: 568px) {
+  .section {
+    padding: 5rem 0rem;
+  }
+
   .heading {
     white-space: normal;
   }
