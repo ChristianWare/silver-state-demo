@@ -15,11 +15,12 @@ import Arrow from "@/components/shared/icons/Arrow/Arrow";
 import styles from "./SiteNav.module.css";
 
 const LINKS = [
+  { text: "Home", href: "/" },
   { text: "Services", href: "/services" },
   { text: "Fleet", href: "/fleet" },
   { text: "Airports", href: "/airports" },
-  { text: "Service Areas", href: "/locations" },
   { text: "About", href: "/about" },
+  { text: "Contact", href: "/contact" },
 ];
 
 // The full-screen menu also lists these.
