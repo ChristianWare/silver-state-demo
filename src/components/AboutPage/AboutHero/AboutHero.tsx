@@ -28,7 +28,7 @@ export default async function AboutHero() {
           <h1 className={styles.heading}>
             Driven by people
             <br />
-            who live here.
+            who live here
           </h1>
 
           <div className={styles.side}>
@@ -55,13 +55,14 @@ export default async function AboutHero() {
         <figure className={styles.figure}>
           <div className={styles.media}>
             <Image
-              src='/images/other/aboutHero.jpg'
+              src='/images/other/aboutHeroii.jpg'
               alt='Silver State chauffeur stepping out of a black SUV'
               fill
               priority
               sizes='(max-width: 1344px) 100vw, 1344px'
               className={styles.img}
             />
+            <div className={styles.overlay} aria-hidden='true' />
 
             <div className={styles.legend} aria-hidden='true'>
               <span className={styles.legendItem}>

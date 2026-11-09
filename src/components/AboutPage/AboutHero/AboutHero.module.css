@@ -86,6 +86,12 @@
   background-color: var(--navy);
 }
 
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(11, 15, 26, 0.60);
+}
+
 .img {
   object-fit: cover;
   object-position: 50% 35%;
