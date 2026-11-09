@@ -122,7 +122,7 @@ export default function ServicesList() {
               </div>
 
               <div className={styles.body}>
-                <h3 className={`${styles.title} h4`}>{s.title}</h3>
+                <h3 className={styles.title}>{s.title}</h3>
                 <p className={styles.sub}>{s.sub}</p>
                 <p className={styles.copy}>
                   {s.copy} {s.more}

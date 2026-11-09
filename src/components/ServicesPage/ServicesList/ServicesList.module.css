@@ -1,5 +1,8 @@
 .section {
   background-color: var(--white);
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Two to a row, a line above the list. */
@@ -25,7 +28,7 @@
 .photo {
   position: relative;
   aspect-ratio: 4 / 5;
-  border-radius: 4px;
+  border-radius: 7px;
   overflow: hidden;
   background-color: var(--navy);
 }
@@ -45,6 +48,7 @@
 .title {
   margin: 0;
   color: var(--midnight);
+  font-size: 4.2rem;
 }
 
 .sub {
@@ -58,7 +62,7 @@
 .copy {
   margin-top: 1.4rem;
   font-size: 1.6rem;
-  line-height: 1.65em;
+  line-height: 1.6;
   color: var(--slate);
   hyphens: none;
 }
@@ -141,12 +145,20 @@
   white-space: nowrap;
 }
 
-/* ── 1068px: one service per row ── */
+@media screen and (max-width: 1268px) {
+.section {
+  width: 100%;
+}
+}
 
 @media screen and (max-width: 1068px) {
   .list {
     grid-template-columns: 1fr;
     row-gap: 4rem;
+  }
+
+  .title {
+    font-size: 3.45rem;
   }
 
   .item {
@@ -168,5 +180,11 @@
 
   .photo {
     aspect-ratio: 16 / 10;
+  }
+
+  .copy {
+    font-size: 16px;
+    line-height: 1.3;
+    opacity: 0.8;
   }
 }
