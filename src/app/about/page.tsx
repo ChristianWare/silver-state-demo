@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SITE } from "@/config/site";
 import SiteNav from "@/components/shared/SiteNav/SiteNav";
 import AboutHero from "@/components/AboutPage/AboutHero/AboutHero";
+import AboutStory from "@/components/AboutPage/AboutStory/AboutStory";
 
 export const metadata: Metadata = {
   title: "About",
@@ -15,6 +16,7 @@ export default function Page() {
       <SiteNav variant='solid' />
       <main>
         <AboutHero />
+        <AboutStory />
       </main>
     </>
   );

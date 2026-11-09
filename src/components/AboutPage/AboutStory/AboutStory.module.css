@@ -1,0 +1,382 @@
+.section {
+  background-color: var(--white);
+}
+
+/* ── Heading + intro ── */
+
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topLeft > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  max-width: 640px;
+}
+
+.intro {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  max-width: 440px;
+  hyphens: none;
+}
+
+/* ── Card + photo on the left, navy box on the right ── */
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  min-width: 0;
+}
+
+/* ── The card ── */
+
+.card {
+  border: 1px solid var(--stroke);
+  border-radius: 5px;
+  background-color: var(--white);
+  padding: 2.4rem 2.4rem 2rem;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 2.4rem;
+}
+
+/* Two-way switch, like a segmented control. */
+.tabs {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: var(--ivory);
+}
+
+.tab {
+  height: 38px;
+  padding: 0 1.6rem;
+  border-radius: 3px;
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--slate);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.tab:hover {
+  color: var(--midnight);
+}
+
+.tabActive,
+.tabActive:hover {
+  background-color: var(--navy);
+  color: var(--ivory);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.when {
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1.3;
+  color: var(--midnight);
+  text-align: right;
+}
+
+/* Replays the fade when the tab changes. */
+.panel {
+  animation: fadeIn 0.4s ease both;
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding-bottom: 2.4rem;
+}
+
+.para {
+  font-size: 15px;
+  line-height: 1.65em;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.rows {
+  margin: 0;
+  border-top: 1px solid var(--stroke);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.rowText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.rowLabel {
+  font-family: var(--SofiaSansBold);
+  font-size: 1.7rem;
+  line-height: 1.3;
+  color: var(--midnight);
+}
+
+.rowSub {
+  font-family: var(--SofiaSansRegular);
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--steel);
+}
+
+/* Global .h3 sets the size; the font and case come with the h3 element,
+   not the class, so they're set here. */
+.rowValue {
+  margin: 0;
+  font-family: var(--SofiaSansExtraCondensedExtraBold);
+  text-transform: uppercase;
+  color: var(--midnight);
+  white-space: nowrap;
+  text-align: right;
+}
+
+.row:last-child .rowValue {
+  color: var(--slate);
+}
+
+.note {
+  font-family: var(--SofiaSansRegular);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--slate);
+  padding-top: 1.6rem;
+}
+
+/* ── Photo under the card ── */
+
+.photo {
+  position: relative;
+  flex: 1;
+  min-height: 300px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--navy);
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* ── Navy box ── */
+
+.box {
+  background-color: var(--navy);
+  color: var(--white);
+  border-radius: 5px;
+  padding: 3.2rem 3.2rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.boxGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.boxTitle {
+  color: var(--white);
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.quote {
+  margin: 0;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.quoteText {
+  margin: 0;
+}
+
+.quoteText p {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--white);
+  hyphens: none;
+}
+
+.quoteBy {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.quotePhoto {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--slate);
+}
+
+.quoteName {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-family: var(--SofiaSansBold);
+  font-size: 1.7rem;
+  line-height: 1.2;
+  color: var(--white);
+}
+
+.quoteRole {
+  font-family: var(--SofiaSansRegular);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--steel);
+}
+
+.rules {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rule {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.ruleTitle {
+  font-family: var(--SofiaSansBold);
+  font-size: 1.7rem;
+  line-height: 1.3;
+  color: var(--white);
+}
+
+.ruleCopy {
+  font-family: var(--SofiaSansRegular);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  hyphens: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.6rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+
+  .tab {
+    transition: none;
+  }
+}
+
+/* ── 1068px: everything in one column ── */
+
+@media screen and (max-width: 1068px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+    max-width: 560px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo {
+    flex: none;
+    min-height: 0;
+    aspect-ratio: 7 / 2;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .card {
+    padding: 1.6rem 1.6rem 1.4rem;
+  }
+
+  .cardTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  .when {
+    text-align: left;
+  }
+
+  .photo {
+    aspect-ratio: 16 / 9;
+  }
+
+  .box {
+    padding: 2.4rem 1.6rem 1.6rem;
+  }
+}
