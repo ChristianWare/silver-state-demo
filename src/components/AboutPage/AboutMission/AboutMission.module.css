@@ -1,0 +1,180 @@
+.section {
+  background-color: var(--white);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-bottom: 5rem;
+}
+
+.head > :first-child {
+  margin-left: -1.5rem;
+}
+
+/* ── Photo left, words right ── */
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 520px);
+  gap: 5.4rem;
+  align-items: center;
+}
+
+.photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--navy);
+}
+
+.img {
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Global h3 sets the size and font. */
+.title {
+  color: var(--midnight);
+}
+
+.sub {
+  margin-top: 1rem;
+  font-family: var(--SofiaSansBold);
+  font-size: 15px;
+  line-height: 1.3;
+  color: var(--bronze);
+}
+
+.copy {
+  margin-top: 2rem;
+  font-size: 1.7rem;
+  line-height: 1.6em;
+  color: var(--slate);
+  hyphens: none;
+}
+
+/* The vision, pulled out like a quote with a gold rule. */
+.vision {
+  margin: 2.4rem 0 0;
+  padding-left: 1.6rem;
+  border-left: 2px solid var(--gold);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.quote {
+  margin: 0;
+}
+
+.quote p {
+  font-family: var(--SofiaSansBold);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--midnight);
+  hyphens: none;
+}
+
+.small {
+  margin-top: 1.6rem;
+  font-size: 15px;
+  line-height: 1.6em;
+  color: var(--slate);
+  opacity: 0.8;
+  hyphens: none;
+}
+
+.label {
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.foot {
+  width: 100%;
+  margin-top: 2.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--stroke);
+  display: flex;
+  justify-content: space-between;
+  gap: 2.4rem;
+}
+
+.footItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.footRight {
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.footText {
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--midnight);
+  max-width: 380px;
+  hyphens: none;
+}
+
+.footValue {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--midnight);
+}
+
+.link {
+  margin-top: 2.4rem;
+  font-family: var(--SofiaSansBold);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--midnight);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--midnight);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--bronze);
+  border-bottom-color: var(--bronze);
+}
+
+/* ── 1068px: photo on top ── */
+
+@media screen and (max-width: 1068px) {
+  .head {
+    padding-bottom: 4rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+  }
+
+  .photo {
+    aspect-ratio: 4 / 3;
+  }
+
+  .content {
+    max-width: 640px;
+  }
+}
