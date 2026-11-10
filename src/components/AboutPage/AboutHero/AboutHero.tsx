@@ -1,8 +1,3 @@
-// About page: the hero. Heading on the left, eyebrow, copy and buttons on
-// the right, then a wide photo with a pickup-to-drop-off track along the
-// bottom and a caption underneath. The phone number comes from Admin →
-// Company Settings (falls back to src/config/site.ts).
-
 import Image from "next/image";
 import LayoutWrapper from "@/components/shared/LayoutWrapper";
 import PulseEyeBrow from "@/components/shared/PulseEyeBrow/PulseEyeBrow";

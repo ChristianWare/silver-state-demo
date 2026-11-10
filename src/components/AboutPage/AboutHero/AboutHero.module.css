@@ -4,9 +4,6 @@
   padding-top: 72px;
 }
 
-/* ── Heading left; eyebrow, copy and buttons right ── */
-
-/* The heading's column is exactly as wide as its longer line. */
 .top {
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr);
@@ -89,7 +86,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(11, 15, 26, 0.30);
+  background-color: rgba(11, 15, 26, 0.3);
 }
 
 .img {
