@@ -179,9 +179,10 @@
   padding: 1.2rem 1.6rem;
   border-top: 1px solid var(--champagne);
   background-color: var(--white);
-  font-size: 13px;
+  font-size: 1.4rem;
   line-height: 1.45;
   color: var(--midnight);
+  font-family: var(--SofiaSansBold);
 }
 
 .scale {
