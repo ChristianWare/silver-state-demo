@@ -1,6 +1,6 @@
 .section {
   background-color: var(--white);
-  width: 80%;
+  /* width: 80%; */
   margin-left: auto;
   margin-right: auto;
   padding: 10rem 0rem;
@@ -63,7 +63,7 @@
 .copy {
   margin-top: 1.4rem;
   font-size: 1.6rem;
-  line-height: 1.6;
+  line-height: 1.4;
   color: var(--slate);
   hyphens: none;
 }
