@@ -163,9 +163,9 @@ export default function AboutStory() {
               {/* Always two lines, like the hero's h1: the break sets them
                   and they never wrap. Keep any new heading this short. */}
               <h2 className={styles.heading}>
-                Behind the wheel,
+                Behind the wheel →
                 <br />
-                not behind a desk.
+                not behind a desk
               </h2>
             </div>
             <p className={styles.intro}>
