@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import { auth } from "../../../auth";
 import BookingWizard from "@/components/BookingPage/BookWizard/BookWizard";
 import BookingPageIntro from "@/components/BookingPage/BookingPageIntro/BookingPageIntro";
-import Nav from "@/components/shared/Nav/Nav";
+import SiteNav from "@/components/shared/SiteNav/SiteNav";
 import { getCompanySettings } from "../../../actions/admin/companySettings";
 import DirtyFormProvider from "@/components/shared/DirtyFormProvider/DirtyFormProvider";
 import type { Metadata } from "next";
@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: `Book Your Ride | ${SITE.name}`,
   description:
-    "Book your black car, SUV, or Sprinter online in minutes — flat rates, flight tracking, available 24/7 across Phoenix, Scottsdale, and the Valley.",
+    "Book your black car, SUV or Sprinter online in minutes. Flat rates, flight tracking and a chauffeur who waits, anywhere in Las Vegas.",
   alternates: { canonical: `${SITE.url}/book` },
 };
 
@@ -153,8 +153,15 @@ export default async function BookPage({
   return (
     <DirtyFormProvider>
       <main>
-        <Nav background='white' />
-        <BookingPageIntro />
+        <SiteNav variant='solid' />
+        <BookingPageIntro
+          phone={companySettings.dispatchPhone || SITE.phone.display}
+          phoneTel={
+            companySettings.dispatchPhoneRaw
+              ? `+1${companySettings.dispatchPhoneRaw}`
+              : SITE.phone.tel
+          }
+        />
         <BookingWizard
           serviceTypes={serviceTypes as any}
           vehicles={vehicles as any}
