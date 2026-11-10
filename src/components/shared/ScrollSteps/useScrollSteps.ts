@@ -14,6 +14,7 @@
 // is too tall to fit on screen under the nav.
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useLenis } from "lenis/react";
 
 type Options = {
   /** Off at this viewport width and below (px). */
@@ -28,6 +29,7 @@ export function useScrollSteps(
   count: number,
   { disableBelow = 568, topOffset = 96, stepVh = 0.45 }: Options = {},
 ) {
+  const lenis = useLenis();
   const trackRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const [active, setActiveState] = useState(0);
@@ -88,20 +90,23 @@ export function useScrollSteps(
   }, [count, disableBelow, topOffset, stepVh]);
 
   /** Show step i. While pinned, scrolls the page to it. */
-  const setActive = useCallback((i: number) => {
-    const track = trackRef.current;
-    if (!enabledRef.current || !track) {
-      setActiveState(i);
-      return;
-    }
-    const { top, step } = geom.current;
-    const trackTop = track.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
+  const setActive = useCallback(
+    (i: number) => {
+      const track = trackRef.current;
+      if (!enabledRef.current || !track) {
+        setActiveState(i);
+        return;
+      }
+      const { top, step } = geom.current;
+      const trackTop = track.getBoundingClientRect().top + window.scrollY;
       // The middle of the step.
-      top: trackTop - top + i * step + Math.round(step / 2),
-      behavior: "smooth",
-    });
-  }, []);
+      const y = trackTop - top + i * step + Math.round(step / 2);
+      // Through Lenis when smooth scrolling is on, so the two don't fight.
+      if (lenis) lenis.scrollTo(y);
+      else window.scrollTo({ top: y, behavior: "smooth" });
+    },
+    [lenis],
+  );
 
   return { trackRef, stickyRef, active, setActive };
 }

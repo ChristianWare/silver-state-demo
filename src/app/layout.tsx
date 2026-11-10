@@ -5,6 +5,7 @@ import "./globals.css";
 import Footer from "@/components/shared/Footer/Footer";
 import SessionProviderWrap from "@/components/Providers/SessionProvider";
 import ToastsProvider from "@/components/Providers/ToastsProvider";
+import SmoothScroll from "@/components/shared/SmoothScroll/SmoothScroll";
 import ScrollToTop from "@/components/shared/ScrollToTop/ScrollToTop";
 import PlausibleProvider from "next-plausible";
 import { SITE } from "@/config/site";
@@ -109,7 +110,6 @@ export default async function RootLayout({
             __html: JSON.stringify(businessSchema),
           }}
         />
-        <ScrollToTop />
         <PlausibleProvider
           domain={SITE.domain}
           trackLocalhost={false}
@@ -117,8 +117,11 @@ export default async function RootLayout({
         >
           <SessionProviderWrap>
             <ToastsProvider />
-            {children}
-            <Footer />
+            <SmoothScroll>
+              <ScrollToTop />
+              {children}
+              <Footer />
+            </SmoothScroll>
           </SessionProviderWrap>
         </PlausibleProvider>
       </body>

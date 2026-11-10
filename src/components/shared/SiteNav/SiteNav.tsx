@@ -10,6 +10,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLenis } from "lenis/react";
 import MountainIcon from "@/components/shared/icons/MountainIcon/MountainIcon";
 import Arrow from "@/components/shared/icons/Arrow/Arrow";
 import styles from "./SiteNav.module.css";
@@ -41,6 +42,7 @@ export default function SiteNav({
   // The menu remembers the page it was opened on, so it closes by itself
   // when a link takes you somewhere else.
   const [menuOpenOn, setMenuOpenOn] = useState<string | null>(null);
+  const lenis = useLenis();
   const menuOpen = menuOpenOn === pathname;
   const setMenuOpen = (open: boolean) => setMenuOpenOn(open ? pathname : null);
 
@@ -68,15 +70,17 @@ export default function SiteNav({
     if (!menuOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    lenis?.stop();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMenuOpenOn(null);
     };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prev;
+      lenis?.start();
       window.removeEventListener("keydown", onKey);
     };
-  }, [menuOpen]);
+  }, [menuOpen, lenis]);
 
   const solid = variant === "solid" || pastHero;
   const isActive = (href: string) =>
