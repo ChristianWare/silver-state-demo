@@ -376,34 +376,18 @@
   background-color: var(--navy);
 }
 
-/* More services */
-.others {
+/* More services: three service cards, stacked, a line between each. */
+.more {
   list-style: none;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  flex-direction: column;
 }
 
-.other {
-  display: inline-flex;
-  align-items: center;
-  height: 40px;
-  padding: 0 1.4rem;
-  border: 1px solid var(--stroke);
-  border-radius: 4px;
-  font-family: var(--SofiaSansRegular);
-  font-size: 15px;
-  line-height: 1;
-  color: var(--midnight);
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
-}
-
-.other:hover {
-  border-color: var(--midnight);
-  background-color: var(--ivory);
+.more > li + li {
+  margin-top: 3.2rem;
+  padding-top: 3.2rem;
+  border-top: 1px solid var(--stroke);
 }
 
 /* ── 1268px ── */

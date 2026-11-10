@@ -1,7 +1,8 @@
 // /services/[slug]: one service in full. A hero (heading, intro, button and
 // a wide photo), then a sticky navy summary card beside the details:
 // overview, our approach with four steps, what's included, who it's for,
-// questions, a two-photo gallery and links to the other services.
+// questions, a two-photo gallery and three other services (the same
+// cards as the services page), stacked.
 //
 // Content lives in src/lib/serviceDetails.ts. The questions also go out as
 // FAQPage schema, and the page as a Service from the business.
@@ -13,10 +14,10 @@ import PulseEyeBrow from "@/components/shared/PulseEyeBrow/PulseEyeBrow";
 import ArrowButton from "@/components/shared/ArrowButton/ArrowButton";
 import { SITE } from "@/config/site";
 import { BUSINESS_REF } from "@/lib/schema";
-import {
-  SERVICE_DETAILS,
-  type ServiceDetail as Data,
-} from "@/lib/serviceDetails";
+import type { ServiceDetail as Data } from "@/lib/serviceDetails";
+import ServiceCard from "@/components/ServicesPage/ServicesList/ServiceCard";
+import { otherServiceCards } from "@/components/ServicesPage/ServicesList/serviceCards";
+import cardStyles from "@/components/ServicesPage/ServicesList/ServicesList.module.css";
 import { getCompanySettings } from "../../../actions/admin/companySettings";
 import styles from "./ServiceDetail.module.css";
 
@@ -27,7 +28,8 @@ export default async function ServiceDetail({ data }: { data: Data }) {
     ? `+1${s.dispatchPhoneRaw}`
     : SITE.phone.tel;
 
-  const others = SERVICE_DETAILS.filter((o) => o.slug !== data.slug);
+  // Three other services, mixed differently on each page.
+  const others = otherServiceCards(data.slug, 3);
 
   const schema = [
     {
@@ -237,15 +239,10 @@ export default async function ServiceDetail({ data }: { data: Data }) {
 
               <div className={`${styles.row} ${styles.rowLast}`}>
                 <h2 className={`${styles.rowTitle} h4`}>More services</h2>
-                <ul className={`${styles.rowBody} ${styles.others}`}>
+                <ul className={`${styles.rowBody} ${styles.more}`}>
                   {others.map((o) => (
-                    <li key={o.slug}>
-                      <Link
-                        href={`/services/${o.slug}`}
-                        className={styles.other}
-                      >
-                        {o.title}
-                      </Link>
+                    <li key={o.slug} className={cardStyles.item}>
+                      <ServiceCard s={o} />
                     </li>
                   ))}
                 </ul>
