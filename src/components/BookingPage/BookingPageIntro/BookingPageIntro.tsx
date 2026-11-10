@@ -37,9 +37,7 @@ export default function BookingPageIntro({
             <PulseEyeBrow text='Book online' />
             {/* Two lines, set by the break; they never wrap. */}
             <h1 className={styles.heading}>
-              Book a
-              <br />
-              ride.
+              Book your  ride
             </h1>
             <p className={styles.intro}>
               Tell us where and when, choose a vehicle and see your estimate.

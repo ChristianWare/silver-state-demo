@@ -3,7 +3,7 @@
 
 .container {
   height: fit-content;
-  padding: 2.8rem;
+  padding: 2rem;
   border: 1px solid var(--champagne);
   border-radius: 10px;
   background-color: var(--ivory);
