@@ -15,6 +15,7 @@ import ArrowButton from "@/components/shared/ArrowButton/ArrowButton";
 import { SITE } from "@/config/site";
 import { BUSINESS_REF } from "@/lib/schema";
 import type { ServiceDetail as Data } from "@/lib/serviceDetails";
+import FaqList from "@/components/HomePage/FaqSection/FaqList";
 import ServiceCard from "@/components/ServicesPage/ServicesList/ServiceCard";
 import { otherServiceCards } from "@/components/ServicesPage/ServicesList/serviceCards";
 import cardStyles from "@/components/ServicesPage/ServicesList/ServicesList.module.css";
@@ -211,16 +212,16 @@ export default async function ServiceDetail({ data }: { data: Data }) {
                 </div>
               </div>
 
-              <div className={styles.row}>
+              {/* The home page's FAQ cards, full width under the title. */}
+              <div className={`${styles.row} ${styles.rowWide}`}>
                 <h2 className={`${styles.rowTitle} h4`}>Questions</h2>
-                <dl className={`${styles.rowBody} ${styles.faqs}`}>
-                  {data.faqs.map((f) => (
-                    <div key={f.q} className={styles.faq}>
-                      <dt className={styles.faqQ}>{f.q}</dt>
-                      <dd className={styles.faqA}>{f.a}</dd>
-                    </div>
-                  ))}
-                </dl>
+                <FaqList
+                  items={data.faqs.map((f) => ({
+                    topic: data.title,
+                    question: f.q,
+                    answer: f.a,
+                  }))}
+                />
               </div>
 
               <div className={styles.gallery}>

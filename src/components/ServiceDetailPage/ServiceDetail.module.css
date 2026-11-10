@@ -334,30 +334,10 @@
   color: var(--bronze);
 }
 
-/* Questions */
-.faq {
-  padding: 1.4rem 0;
-  border-bottom: 1px solid var(--stroke);
-}
-
-.faq:first-child {
-  padding-top: 0;
-}
-
-.faqQ {
-  font-family: var(--SofiaSansBold);
-  font-size: 1.7rem;
-  line-height: 1.4;
-  color: var(--midnight);
-}
-
-.faqA {
-  margin: 0.6rem 0 0;
-  font-family: var(--SofiaSansRegular);
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--slate);
-  hyphens: none;
+/* Questions: title on top, the FAQ cards across the full width. */
+.rowWide {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.4rem;
 }
 
 /* Gallery */

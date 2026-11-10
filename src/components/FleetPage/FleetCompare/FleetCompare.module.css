@@ -1,0 +1,281 @@
+.section {
+  background-color: var(--white);
+  padding: 10rem 0rem;
+}
+
+/* ── Heading + intro ── */
+
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topLeft > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  white-space: nowrap;
+}
+
+.intro {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  opacity: 0.8;
+  max-width: 440px;
+  hyphens: none;
+}
+
+/* ── The table: an ivory card like the home page's airport card ── */
+
+.card {
+  background-color: var(--ivory);
+  border: 1px solid var(--champagne);
+  border-radius: 10px;
+  padding: 1.6rem 2.4rem 0.4rem;
+}
+
+.head,
+.row {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 2.2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2fr)
+    minmax(0, 1fr);
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.head {
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--champagne);
+  font-family: var(--SofiaSansBold);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--champagne);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.right {
+  text-align: right;
+  justify-self: end;
+}
+
+.vehicle {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  min-width: 0;
+}
+
+.thumb {
+  position: relative;
+  width: 9.6rem;
+  height: 6.4rem;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background-color: var(--white);
+  border: 1px solid var(--champagne);
+}
+
+.thumbImg {
+  object-fit: contain;
+  padding: 0.6rem;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.nameLink {
+  font-family: var(--SofiaSansBold);
+  font-size: 1.7rem;
+  line-height: 1.3;
+  color: var(--midnight);
+}
+
+.nameLink:hover {
+  color: var(--bronze);
+}
+
+.cls {
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--steel);
+}
+
+.fig {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.fig.right {
+  align-items: flex-end;
+}
+
+/* Labels show only when the columns stack. */
+.figLabel {
+  display: none;
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.figValue {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2.6rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--midnight);
+  white-space: nowrap;
+}
+
+.best {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.4rem;
+  margin-top: 2.4rem;
+}
+
+.note {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--slate);
+  hyphens: none;
+}
+
+/* ── 1068px: each vehicle a small block ── */
+
+@media screen and (max-width: 1068px) {
+  .section {
+    padding: 7rem 0rem;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+    max-width: 560px;
+  }
+
+  .head {
+    display: none;
+  }
+
+  .row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "vehicle vehicle vehicle"
+      "pass bags price"
+      "best best best";
+    row-gap: 1.6rem;
+    padding: 2rem 0;
+  }
+
+  .vehicle {
+    grid-area: vehicle;
+  }
+
+  .row > :nth-child(2) {
+    grid-area: pass;
+  }
+
+  .row > :nth-child(3) {
+    grid-area: bags;
+  }
+
+  .row > :nth-child(4) {
+    grid-area: best;
+  }
+
+  .row > :nth-child(5) {
+    grid-area: price;
+  }
+
+  .figLabel {
+    display: block;
+  }
+
+  .best {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 6rem 0rem;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding: 5rem 0rem;
+  }
+
+  .heading {
+    white-space: normal;
+  }
+
+  .card {
+    padding: 0.8rem 1.4rem 0;
+  }
+
+  .figValue {
+    font-size: 2.2rem;
+  }
+}

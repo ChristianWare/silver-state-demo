@@ -1,0 +1,201 @@
+/* Clears the fixed 72px nav. */
+.section {
+  background-color: var(--white);
+  padding-top: 72px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 8rem;
+  align-items: center;
+  padding: 4rem 0 5rem;
+}
+
+/* Two lines, set by the break; they never wrap. */
+.heading {
+  white-space: nowrap;
+}
+
+.side {
+  max-width: 560px;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.side > :first-child {
+  margin-left: -1.5rem;
+}
+
+.copy {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  opacity: 0.8;
+  hyphens: none;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.4rem;
+  margin-top: 0.4rem;
+}
+
+.textLink {
+  font-family: var(--SofiaSansBold);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--midnight);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--midnight);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.textLink:hover {
+  color: var(--bronze);
+  border-bottom-color: var(--bronze);
+}
+
+/* ── Photo ── */
+
+.media {
+  position: relative;
+  aspect-ratio: 2.45;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--navy);
+}
+
+.img {
+  object-fit: cover;
+  object-position: 50% 60%;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(11, 15, 26, 0.2);
+}
+
+/* ── Capacity track ── */
+
+.track {
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.line {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  height: 1px;
+  background-color: var(--ivory);
+}
+
+.stop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stop:first-of-type {
+  align-items: flex-start;
+}
+
+.stop:last-of-type {
+  align-items: flex-end;
+}
+
+.stopTag {
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 0.8rem;
+  border-radius: 3px;
+  border: 1px solid var(--gold);
+  background-color: var(--white);
+  color: var(--midnight);
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.stop:hover .stopTag,
+.stop:focus-visible .stopTag {
+  background-color: var(--gold);
+}
+
+.stop:focus-visible {
+  outline: none;
+}
+
+.stopDot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: var(--ivory);
+  border: 2px solid var(--gold);
+}
+
+/* ── 1068px: stacked ── */
+
+@media screen and (max-width: 1068px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+    padding: 3rem 0 4rem;
+  }
+
+  .side {
+    justify-self: start;
+  }
+
+  .copy {
+    font-size: 1.8rem;
+  }
+
+  .media {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .heading {
+    white-space: normal;
+  }
+
+  .top {
+    padding: 2rem 0 3rem;
+  }
+
+  .media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .track {
+    left: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.4rem;
+  }
+
+  /* Numbers only on the track. */
+  .stopName {
+    display: none;
+  }
+}
