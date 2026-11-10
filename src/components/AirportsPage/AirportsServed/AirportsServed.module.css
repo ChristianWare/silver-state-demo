@@ -143,19 +143,19 @@
 }
 
 .copy {
+  flex: 1 0 auto;
   margin-top: 1.6rem;
+  margin-bottom: 2.4rem;
   font-size: 15px;
   line-height: 1.55;
   color: var(--slate);
   hyphens: none;
 }
 
-.btn {
+/* Full width, at the bottom of the card (the copy above grows to fill). */
+.card .btn {
+  width: 100%;
   margin-top: auto;
-}
-
-.copy + .btn {
-  margin-top: 2.4rem;
 }
 
 @media screen and (max-width: 1268px) {

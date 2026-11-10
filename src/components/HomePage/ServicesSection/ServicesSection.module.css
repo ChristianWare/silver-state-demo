@@ -183,6 +183,33 @@
   gap: 3rem;
 }
 
+/* Every service's text in one grid cell: the cell takes the tallest, so
+   the box keeps one height while the open service changes. */
+.stack {
+  display: grid;
+  min-width: 0;
+}
+
+.stack > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.ghost {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ghost,
+.ghost * {
+  animation: none !important;
+}
+
+.btnStack {
+  justify-items: end;
+  flex-shrink: 0;
+}
+
 /* Re-mount on every change, which replays the fade. */
 .boxHead,
 .rows,
@@ -414,6 +441,10 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 2rem;
+  }
+
+  .btnStack {
+    justify-items: start;
   }
 
   .photo {

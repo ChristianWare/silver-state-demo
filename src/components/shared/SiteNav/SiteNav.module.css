@@ -119,6 +119,13 @@
   /* border-bottom-color: currentColor; */
 }
 
+/* Over the home hero the links are light; on the champagne pill they go
+   dark so they stay readable. */
+.overlay .link:hover,
+.overlay .active {
+  color: var(--midnight);
+}
+
 /* ── Book button ── */
 
 .bookBtn,

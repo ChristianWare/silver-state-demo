@@ -250,21 +250,24 @@ export default function ServicesSection() {
 
               <div id='svc-panel' aria-live='polite' className={styles.box}>
                 <div className={styles.boxBody}>
-                  {/* One key for the whole block: when the service changes,
-                      React swaps it out in one go (and replays the fade). */}
-                  <div className={styles.boxBodyLeft} key={current.slug}>
-                    <div className={styles.boxHead}>
-                      <h3 className={styles.boxTitle}>{current.title}</h3>
-                      <p className={styles.desc}>{current.desc}</p>
-                    </div>
-                    <dl className={styles.rows}>
-                      {current.rows.map((r) => (
-                        <div key={r.label} className={styles.row}>
-                          <dt className={styles.rowLabel}>{r.label}</dt>
-                          <dd className={styles.rowValue}>{r.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
+                  {/* Every service's text sits in the same spot, hidden, so
+                      the box is always as tall as the longest one and never
+                      changes size between services. The open one sits on
+                      top; its key replays the fade when it changes. */}
+                  <div className={styles.stack}>
+                    {SERVICES.map((s) =>
+                      s.slug === current.slug ? null : (
+                        <ServiceText
+                          key={`ghost-${s.slug}`}
+                          service={s}
+                          ghost
+                        />
+                      ),
+                    )}
+                    <ServiceText
+                      key={`live-${current.slug}`}
+                      service={current}
+                    />
                   </div>
 
                   {/* All six photos are stacked; the open one fades in. */}
@@ -284,14 +287,39 @@ export default function ServicesSection() {
                 </div>
 
                 <div className={styles.boxFoot}>
-                  <p className={styles.note} key={current.slug}>
-                    {current.note}
-                  </p>
-                  <ArrowButton
-                    href={`/services/${current.slug}`}
-                    text={`More on ${current.title.toLowerCase()}`}
-                    variant='midnight'
-                  />
+                  {/* Same trick for the note and the button. */}
+                  <div className={styles.stack}>
+                    {SERVICES.map((s) => {
+                      const open = s.slug === current.slug;
+                      return (
+                        <p
+                          key={open ? `live-${s.slug}` : `ghost-${s.slug}`}
+                          aria-hidden={!open}
+                          className={`${styles.note} ${open ? "" : styles.ghost}`}
+                        >
+                          {s.note}
+                        </p>
+                      );
+                    })}
+                  </div>
+                  <div className={`${styles.stack} ${styles.btnStack}`}>
+                    {SERVICES.map((s) => {
+                      const open = s.slug === current.slug;
+                      return (
+                        <div
+                          key={s.slug}
+                          aria-hidden={!open}
+                          className={open ? undefined : styles.ghost}
+                        >
+                          <ArrowButton
+                            href={`/services/${s.slug}`}
+                            text={`More on ${s.title.toLowerCase()}`}
+                            variant='midnight'
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
@@ -299,5 +327,35 @@ export default function ServicesSection() {
         </div>
       </LayoutWrapper>
     </section>
+  );
+}
+
+/** A service's heading, description and detail rows. `ghost` renders it
+ *  invisibly, only to hold the box at its tallest. */
+function ServiceText({
+  service,
+  ghost = false,
+}: {
+  service: Service;
+  ghost?: boolean;
+}) {
+  return (
+    <div
+      className={`${styles.boxBodyLeft} ${ghost ? styles.ghost : ""}`}
+      aria-hidden={ghost || undefined}
+    >
+      <div className={styles.boxHead}>
+        <h3 className={styles.boxTitle}>{service.title}</h3>
+        <p className={styles.desc}>{service.desc}</p>
+      </div>
+      <dl className={styles.rows}>
+        {service.rows.map((r) => (
+          <div key={r.label} className={styles.row}>
+            <dt className={styles.rowLabel}>{r.label}</dt>
+            <dd className={styles.rowValue}>{r.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
   );
 }
