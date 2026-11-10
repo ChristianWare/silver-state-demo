@@ -89,12 +89,12 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(11, 15, 26, 0.60);
+  background-color: rgba(11, 15, 26, 0.30);
 }
 
 .img {
   object-fit: cover;
-  object-position: 50% 35%;
+  object-position: 50% 65%;
 }
 
 /* Key, top right. */

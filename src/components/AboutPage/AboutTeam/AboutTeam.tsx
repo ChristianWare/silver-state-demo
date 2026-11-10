@@ -66,7 +66,7 @@ export default function AboutTeam() {
           <div className={styles.topLeft}>
             <PulseEyeBrow text='The people' />
             <h2 className={styles.heading}>
-              The faces behind the wheel and the phone.
+              The faces behind the wheel 
             </h2>
           </div>
           <div className={styles.topRight}>

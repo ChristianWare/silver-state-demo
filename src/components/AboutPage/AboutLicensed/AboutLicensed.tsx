@@ -72,7 +72,7 @@ export default async function AboutLicensed() {
           <div className={styles.topLeft}>
             <PulseEyeBrow text='Peace of mind' />
             <h2 className={styles.heading}>
-              Licensed by the state. Insured for every ride.
+              Licensed by the state → Insured for every ride
             </h2>
           </div>
           <p className={styles.intro}>

@@ -111,7 +111,7 @@ export default function AboutTimeline() {
               <h2 className={styles.heading}>
                 From one car
                 <br />
-                to a fleet.
+                to a fleet
               </h2>
             </div>
             <p className={styles.intro}>

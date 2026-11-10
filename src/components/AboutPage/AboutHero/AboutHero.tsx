@@ -55,7 +55,7 @@ export default async function AboutHero() {
         <figure className={styles.figure}>
           <div className={styles.media}>
             <Image
-              src='/images/other/aboutHeroii.jpg'
+              src='/images/other/aboutHeroiii.png'
               alt='Silver State chauffeur stepping out of a black SUV'
               fill
               priority
