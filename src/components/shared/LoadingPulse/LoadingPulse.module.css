@@ -10,7 +10,7 @@
   height: 150px;
   width: 150px;
   animation: pulse 1.5s ease-in-out infinite;
-  color: var(--black);
+  color: var(--midnight);
 }
 
 .headingContainer {
