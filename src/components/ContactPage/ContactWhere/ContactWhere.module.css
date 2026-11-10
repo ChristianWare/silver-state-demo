@@ -1,0 +1,354 @@
+.section {
+  background-color: var(--white);
+  padding: 10rem 0rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 5rem;
+  align-items: start;
+}
+
+/* ── Map + tabs ── */
+
+.mapCol {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.map {
+  margin: 0;
+  border: 1px solid var(--champagne);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--ivory);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.grounds {
+  fill: var(--champagne);
+  opacity: 0.55;
+}
+
+.runway {
+  stroke: var(--steel);
+  stroke-width: 6;
+  stroke-linecap: round;
+  opacity: 0.55;
+  fill: none;
+}
+
+.freeway {
+  stroke: var(--slate);
+  stroke-width: 7;
+  fill: none;
+  opacity: 0.65;
+}
+
+.strip {
+  stroke: var(--midnight);
+  stroke-width: 4;
+  fill: none;
+}
+
+.road {
+  stroke: var(--white);
+  stroke-width: 6;
+  fill: none;
+  filter: drop-shadow(0 0 1px rgba(58, 69, 96, 0.5));
+}
+
+.route {
+  stroke: var(--gold);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: draw 0.9s ease forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.pin {
+  fill: var(--white);
+  stroke: var(--midnight);
+  stroke-width: 2;
+}
+
+.pinOn {
+  fill: var(--gold);
+  stroke: var(--midnight);
+  stroke-width: 2.5;
+}
+
+.labelBox,
+.labelBoxOn,
+.officeBox,
+.stripBox {
+  stroke: none;
+}
+
+.labelBox {
+  fill: var(--white);
+  stroke: var(--champagne);
+  stroke-width: 1;
+}
+
+.labelBoxOn,
+.officeBox,
+.stripBox {
+  fill: var(--midnight);
+}
+
+.labelText,
+.labelTextOn,
+.officeText,
+.stripText,
+.groundsText,
+.northText {
+  font-family: var(--SofiaSansBold);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-anchor: middle;
+}
+
+.labelText {
+  fill: var(--midnight);
+}
+
+.labelTextOn,
+.officeText,
+.stripText {
+  fill: var(--ivory);
+}
+
+.office {
+  fill: var(--midnight);
+  stroke: var(--gold);
+  stroke-width: 3;
+}
+
+.groundsText {
+  fill: var(--slate);
+  letter-spacing: 0.12em;
+}
+
+.roadText,
+.roadTextEnd {
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  fill: var(--slate);
+}
+
+.roadText {
+  text-anchor: start;
+}
+
+.roadTextEnd {
+  text-anchor: end;
+}
+
+.north {
+  fill: var(--midnight);
+}
+
+.northText {
+  fill: var(--midnight);
+}
+
+.caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding: 1.2rem 1.6rem;
+  border-top: 1px solid var(--champagne);
+  background-color: var(--white);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--midnight);
+}
+
+.scale {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--steel);
+}
+
+/* Segmented tabs under the map */
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 4px;
+  border-radius: 6px;
+  background-color: var(--ivory);
+}
+
+.tab {
+  height: 42px;
+  padding: 0 1.2rem;
+  border-radius: 4px;
+  font-family: var(--SofiaSansRegular);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--slate);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.tab:hover {
+  color: var(--midnight);
+}
+
+.tabOn,
+.tabOn:hover {
+  background-color: var(--navy);
+  color: var(--ivory);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── Copy ── */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.head > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  white-space: nowrap;
+}
+
+.intro {
+  margin-top: 2rem;
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  opacity: 0.8;
+  max-width: 440px;
+  hyphens: none;
+}
+
+.blocks {
+  list-style: none;
+  width: 100%;
+  margin: 3.2rem 0 0;
+  padding: 0;
+  border-top: 2px solid var(--midnight);
+}
+
+.block {
+  padding: 2.4rem 0;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.blockTitle {
+  margin: 0;
+  color: var(--midnight);
+}
+
+.blockCopy {
+  margin-top: 1rem;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--midnight);
+  hyphens: none;
+}
+
+.blockSmall {
+  margin-top: 0.8rem;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--slate);
+  hyphens: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ── 1068px: copy first, then the map ── */
+
+@media screen and (max-width: 1068px) {
+  .section {
+    padding: 7rem 0rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .content {
+    order: -1;
+  }
+
+  .mapCol {
+    position: static;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+    max-width: 560px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 6rem 0rem;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding: 5rem 0rem;
+  }
+
+  .heading {
+    white-space: normal;
+  }
+
+  .tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .caption {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}

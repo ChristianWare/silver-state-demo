@@ -1,0 +1,321 @@
+.section {
+  background-color: var(--white);
+  padding: 0 0 10rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 6rem;
+  align-items: start;
+}
+
+/* ── Left ── */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-top: 2rem;
+}
+
+.content > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  white-space: nowrap;
+}
+
+.intro {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  opacity: 0.8;
+  max-width: 440px;
+  hyphens: none;
+}
+
+.intro a {
+  color: var(--midnight);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  white-space: nowrap;
+}
+
+.shortcuts {
+  list-style: none;
+  width: 100%;
+  max-width: 440px;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--stroke);
+}
+
+.shortcut {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.shortcutLabel {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+.shortcutLink {
+  flex-shrink: 0;
+  font-family: var(--SofiaSansBold);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--midnight);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--midnight);
+}
+
+.shortcutLink:hover {
+  color: var(--bronze);
+  border-bottom-color: var(--bronze);
+}
+
+/* ── The form panel ── */
+
+.panel {
+  padding: 3.2rem;
+  border: 1px solid var(--champagne);
+  border-radius: 10px;
+  background-color: var(--ivory);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.label {
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--midnight);
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 1.2rem;
+  border: 1px solid var(--champagne);
+  border-radius: 4px;
+  background-color: var(--white);
+  font-family: var(--SofiaSansRegular);
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--midnight);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.25);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.textarea {
+  height: auto;
+  min-height: 150px;
+  padding: 1.2rem;
+  resize: vertical;
+}
+
+.selectWrap {
+  position: relative;
+  display: block;
+}
+
+.selectWrap select {
+  appearance: none;
+  padding-right: 3.6rem;
+  cursor: pointer;
+}
+
+.chevron {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--steel);
+  pointer-events: none;
+}
+
+.submitRow {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 0.4rem;
+}
+
+/* Midnight button, gold box, midnight arrow, like the ArrowButton. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.6rem;
+  flex-shrink: 0;
+  height: 52px;
+  padding: 0 6px 0 20px;
+  border-radius: 4px;
+  background-color: var(--midnight);
+  color: var(--ivory);
+  font-family: var(--SofiaSansRegular);
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--navy);
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.btnBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  background-color: var(--gold);
+  color: var(--midnight);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnArrow {
+  width: 15px;
+  height: 15px;
+  transform: rotate(90deg);
+}
+
+.privacy {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--slate);
+}
+
+.privacy a {
+  color: var(--midnight);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.error {
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--danger);
+}
+
+.sent {
+  padding: 1.2rem 1.4rem;
+  border-radius: 4px;
+  background-color: var(--white);
+  border-left: 3px solid var(--gold);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--midnight);
+}
+
+/* ── 1068px ── */
+
+@media screen and (max-width: 1068px) {
+  .section {
+    padding-bottom: 7rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+    max-width: 560px;
+  }
+
+  .shortcuts {
+    max-width: 560px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    padding-bottom: 6rem;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding-bottom: 5rem;
+  }
+
+  .heading {
+    white-space: normal;
+  }
+
+  .panel {
+    padding: 2.4rem 1.6rem;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .submitRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .shortcut {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}

@@ -9,7 +9,6 @@ const RIDE = [
   { text: "Services", href: "/services" },
   { text: "Fleet", href: "/fleet" },
   { text: "Airports", href: "/airports" },
-  { text: "Service areas", href: "/locations" },
   { text: "Routes", href: "/routes" },
 ];
 const COMPANY = [

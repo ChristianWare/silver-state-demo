@@ -1,0 +1,203 @@
+.section {
+  background-color: var(--white);
+  padding: 10rem 0rem;
+}
+
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topLeft > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  white-space: nowrap;
+}
+
+.intro {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  opacity: 0.8;
+  max-width: 420px;
+  hyphens: none;
+}
+
+/* Four across, two at 1068px, one at 568px. */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem 2rem 2.4rem;
+  border: 1px solid var(--champagne);
+  border-radius: 10px;
+  background-color: var(--ivory);
+}
+
+.cardTop {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding-bottom: 2.4rem;
+}
+
+.logo {
+  position: relative;
+  width: 7.2rem;
+  height: 7.2rem;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--white);
+  border: 1px solid var(--champagne);
+}
+
+.logoImg {
+  object-fit: contain;
+  padding: 0.8rem;
+}
+
+/* Until a real logo is added. */
+.logoTile {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background-color: var(--navy);
+  color: var(--ivory);
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.logoIcon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--gold);
+}
+
+.code {
+  padding: 0.5rem 0.7rem;
+  border-radius: 3px;
+  background-color: var(--gold);
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--midnight);
+}
+
+.name {
+  margin: 0;
+  color: var(--midnight);
+}
+
+.full {
+  margin-top: 0.6rem;
+  font-family: var(--SofiaSansBold);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--bronze);
+}
+
+.meta {
+  list-style: none;
+  width: 100%;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--champagne);
+}
+
+.metaItem {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--champagne);
+  font-size: 15px;
+  line-height: 1.3;
+  color: var(--midnight);
+}
+
+.copy {
+  margin-top: 1.6rem;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.btn {
+  margin-top: auto;
+}
+
+.copy + .btn {
+  margin-top: 2.4rem;
+}
+
+@media screen and (max-width: 1268px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 1068px) {
+  .section {
+    padding: 7rem 0rem;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+    max-width: 560px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 6rem 0rem;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding: 5rem 0rem;
+  }
+
+  .heading {
+    white-space: normal;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

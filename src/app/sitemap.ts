@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 import { servicesData } from "@/lib/services";
 import { serviceAreaCities } from "@/lib/cities";
 import { routesData } from "@/lib/routes";
-import { airportsData } from "@/lib/airports";
 import { fleetData } from "@/lib/data";
 import { getAllPosts } from "@/lib/blog";
 import { SITE } from "@/config/site";
@@ -15,7 +14,6 @@ const STATIC = [
   "/services",
   "/fleet",
   "/airports",
-  "/airports/private-aviation",
   "/locations",
   "/routes",
   "/corporate-accounts",
@@ -28,7 +26,11 @@ const STATIC = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const page = (path: string, priority: number, changeFrequency: Entry["changeFrequency"] = "monthly"): Entry => ({
+  const page = (
+    path: string,
+    priority: number,
+    changeFrequency: Entry["changeFrequency"] = "monthly",
+  ): Entry => ({
     url: `${SITE.url}${path}`,
     lastModified: now,
     changeFrequency,
@@ -39,7 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...STATIC.map((p) => page(p, p === "" ? 1 : 0.7)),
     ...servicesData.map((s) => page(`/services/${s.slug}`, 0.8)),
     ...fleetData.map((v) => page(`/fleet/${v.slug}`, 0.6)),
-    ...airportsData.map((a) => page(`/airports/${a.slug}`, 0.8)),
     ...serviceAreaCities.map((c) => page(`/locations/${c.slug}`, 0.7)),
     ...routesData.map((r) => page(`/routes/${r.slug}`, 0.7)),
     ...getAllPosts().map((p) => ({

@@ -1,27 +1,28 @@
 import type { Metadata } from "next";
-import PagePlaceholder from "@/components/shared/PagePlaceholder/PagePlaceholder";
-import { guides } from "@/lib/pageGuides";
 import { SITE } from "@/config/site";
-import ContactForm from "@/components/shared/SimpleForms/ContactForm";
+import SiteNav from "@/components/shared/SiteNav/SiteNav";
+import ContactHero from "@/components/ContactPage/ContactHero/ContactHero";
+import ContactDesks from "@/components/ContactPage/ContactDesks/ContactDesks";
+import ContactWhere from "@/components/ContactPage/ContactWhere/ContactWhere";
+import ContactWrite from "@/components/ContactPage/ContactWrite/ContactWrite";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${SITE.name} by phone, email, or the form.`,
+  description: `Contact ${SITE.name}: dispatch answers any time, plus reservations, corporate accounts and weddings. Phone, email and how pickups work at Harry Reid.`,
+  alternates: { canonical: "/contact" },
 };
 
 export default function Page() {
   return (
-    <PagePlaceholder {...guides.contact}>
-      <h2>Contact details (from src/config/site.ts)</h2>
-      <p>
-        <a href={`tel:${SITE.phone.tel}`}>{SITE.phone.display}</a>
-        <br />
-        <a href={`mailto:${SITE.email.info}`}>{SITE.email.info}</a>
-        <br />
-        {SITE.address.street}, {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
-      </p>
-      <h2>Send a message</h2>
-      <ContactForm />
-    </PagePlaceholder>
+    <>
+      {/* The white bar from the start: no hero to sit over on this page. */}
+      <SiteNav variant='solid' />
+      <main>
+        <ContactHero />
+        <ContactDesks />
+        <ContactWhere />
+        <ContactWrite />
+      </main>
+    </>
   );
 }

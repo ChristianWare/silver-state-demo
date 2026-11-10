@@ -1,0 +1,279 @@
+.section {
+  background-color: var(--white);
+  padding: 10rem 0rem;
+}
+
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4rem;
+  padding-bottom: 5rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topLeft > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  white-space: nowrap;
+}
+
+.intro {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  opacity: 0.8;
+  max-width: 440px;
+  hyphens: none;
+}
+
+/* ── One group: title and blurb, then the table ── */
+
+.group + .group {
+  margin-top: 6rem;
+}
+
+.groupHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 4rem;
+  align-items: start;
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+  border-top: 1px solid var(--stroke);
+}
+
+.groupTitle {
+  margin: 0;
+  color: var(--midnight);
+}
+
+.groupBlurb {
+  font-size: 1.7rem;
+  line-height: 1.6em;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.card {
+  background-color: var(--ivory);
+  border: 1px solid var(--champagne);
+  border-radius: 10px;
+  padding: 0.4rem 2.4rem;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 1.6rem 1.2rem 1.2rem;
+  border-bottom: 1px solid var(--champagne);
+  font-family: var(--SofiaSansBold);
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--slate);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 1.6rem 1.2rem;
+  border-bottom: 1px solid var(--champagne);
+  vertical-align: top;
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 0;
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: 0;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.num {
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.code {
+  display: inline-block;
+  padding: 0.5rem 0.7rem;
+  border-radius: 3px;
+  background-color: var(--navy);
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--ivory);
+}
+
+.airport {
+  min-width: 260px;
+}
+
+.name {
+  display: block;
+  font-family: var(--SofiaSansBold);
+  font-size: 1.7rem;
+  line-height: 1.3;
+  color: var(--midnight);
+}
+
+.note {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--slate);
+}
+
+.codes {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--steel);
+}
+
+.fig {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2rem;
+  line-height: 1.1;
+  color: var(--midnight);
+}
+
+.source {
+  margin-top: 2rem;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--steel);
+}
+
+/* ── 1068px ── */
+
+@media screen and (max-width: 1068px) {
+  .section {
+    padding: 7rem 0rem;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+    max-width: 560px;
+  }
+
+  .groupHead {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 6rem 0rem;
+  }
+
+  /* Each airport becomes a small block of labelled lines. */
+  .card {
+    padding: 0.4rem 1.6rem;
+    overflow-x: visible;
+  }
+
+  .table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+  }
+
+  .table tr {
+    padding: 1.6rem 0;
+    border-bottom: 1px solid var(--champagne);
+  }
+
+  .table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .table td {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.6rem;
+    padding: 0.5rem 0 !important;
+    border-bottom: none;
+    text-align: right !important;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    flex-shrink: 0;
+    font-family: var(--SofiaSansRegular);
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    text-align: left;
+  }
+
+  /* The airport name runs full width. */
+  .table td.airport {
+    display: block;
+    min-width: 0;
+    text-align: left !important;
+    padding: 0.8rem 0 0.6rem !important;
+  }
+
+  .table td.airport::before {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding: 5rem 0rem;
+  }
+
+  .heading {
+    white-space: normal;
+  }
+}
