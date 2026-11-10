@@ -1,0 +1,493 @@
+/* ── Hero ── */
+
+/* Clears the fixed 72px nav. */
+.hero {
+  background-color: var(--white);
+  padding-top: 72px;
+}
+
+.heroTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 6rem;
+  align-items: end;
+  padding: 2rem 0 5rem;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.head > :first-child {
+  margin-left: -1.5rem;
+}
+
+.heading {
+  max-width: 720px;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.4rem;
+  max-width: 520px;
+  justify-self: end;
+}
+
+.intro {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  opacity: 0.8;
+  hyphens: none;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.textLink {
+  font-family: var(--SofiaSansBold);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--midnight);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--midnight);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.textLink:hover {
+  color: var(--bronze);
+  border-bottom-color: var(--bronze);
+}
+
+.heroFigure {
+  margin: 0;
+}
+
+/* Wide photo, the same shape as the About hero's. */
+.heroImage {
+  position: relative;
+  aspect-ratio: 2.45;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--navy);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.heroTag {
+  position: absolute;
+  left: 1.6rem;
+  bottom: 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 1rem;
+  border-radius: 3px;
+  background-color: var(--ivory);
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--midnight);
+}
+
+.heroDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--gold);
+}
+
+/* ── Details: sticky card left, rows right ── */
+
+.details {
+  background-color: var(--white);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+  gap: 6rem;
+  align-items: start;
+}
+
+.aside {
+  align-self: stretch;
+}
+
+.summary {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  padding: 2.8rem;
+  border-radius: 5px;
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+.summaryLabel {
+  display: block;
+  font-family: var(--SofiaSansRegular);
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+}
+
+.chip {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(247, 245, 240, 0.25);
+  border-radius: 3px;
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ivory);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--slate);
+}
+
+.statValue {
+  margin: 0;
+  font-family: var(--SofiaSansExtraCondensedExtraBold);
+  font-size: 8rem;
+  line-height: 0.85;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.summaryFoot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.4rem;
+}
+
+.summaryCall {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--steel);
+}
+
+.summaryCall a {
+  color: var(--ivory);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+/* ── Content rows ── */
+
+.content {
+  min-width: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 4fr);
+  gap: 2.4rem;
+  padding: 2.4rem 0 4.4rem;
+  border-top: 1px solid var(--stroke);
+}
+
+.rowLast {
+  padding-bottom: 0;
+}
+
+.rowTitle {
+  margin: 0;
+  color: var(--midnight);
+}
+
+.rowBody {
+  min-width: 0;
+  margin: 0;
+}
+
+.text {
+  font-size: 1.7rem;
+  line-height: 1.65em;
+  color: var(--slate);
+  hyphens: none;
+}
+
+.text + .text {
+  margin-top: 1.6rem;
+}
+
+/* Four steps, 2 × 2 */
+.steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 3.2rem 0 0;
+  padding: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 240px;
+  padding: 2.4rem 2rem 2.4rem 0;
+  border: 1px solid var(--champagne);
+  border-radius: 5px;
+  background-color: var(--ivory);
+}
+
+.stepTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
+}
+
+/* Gold bar on the card's left edge */
+.stepBar {
+  flex-shrink: 0;
+  width: 4px;
+  height: 5.2rem;
+  background-color: var(--gold);
+}
+
+.stepTitle {
+  flex: 1;
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--midnight);
+}
+
+.stepNum {
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--bronze);
+}
+
+.stepBody {
+  padding-left: 2rem;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--slate);
+  hyphens: none;
+}
+
+/* What's included */
+.included {
+  list-style: none;
+  padding: 0;
+}
+
+.includedItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--stroke);
+  font-size: 1.7rem;
+  line-height: 1.5;
+  color: var(--midnight);
+  hyphens: none;
+}
+
+.includedItem:first-child {
+  padding-top: 0;
+}
+
+.check {
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+  color: var(--bronze);
+}
+
+/* Questions */
+.faq {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.faq:first-child {
+  padding-top: 0;
+}
+
+.faqQ {
+  font-family: var(--SofiaSansBold);
+  font-size: 1.7rem;
+  line-height: 1.4;
+  color: var(--midnight);
+}
+
+.faqA {
+  margin: 0.6rem 0 0;
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--slate);
+  hyphens: none;
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 4.4rem;
+}
+
+.galleryImage {
+  position: relative;
+  aspect-ratio: 370 / 345;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--navy);
+}
+
+/* More services */
+.others {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.other {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 1.4rem;
+  border: 1px solid var(--stroke);
+  border-radius: 4px;
+  font-family: var(--SofiaSansRegular);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--midnight);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.other:hover {
+  border-color: var(--midnight);
+  background-color: var(--ivory);
+}
+
+/* ── 1268px ── */
+
+@media screen and (max-width: 1268px) {
+  .layout {
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: 4rem;
+  }
+
+  .step {
+    min-height: 200px;
+  }
+}
+
+/* ── 1068px: card on top, not sticky ── */
+
+@media screen and (max-width: 1068px) {
+  .heroTop {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+    padding: 2rem 0 4rem;
+  }
+
+  .side {
+    justify-self: start;
+    max-width: 560px;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+  }
+
+  .heroImage {
+    aspect-ratio: 16 / 10;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+  }
+
+  .summary {
+    position: static;
+    gap: 2.4rem;
+  }
+
+  .step {
+    min-height: 180px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+}
+
+/* ── 568px ── */
+
+@media screen and (max-width: 568px) {
+  .heroImage {
+    aspect-ratio: 4 / 3;
+  }
+
+  .summary {
+    padding: 2.4rem 1.6rem;
+  }
+
+  .statValue {
+    font-size: 6.4rem;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    min-height: 0;
+    padding: 1.8rem 1.4rem 1.8rem 0;
+  }
+
+  .stepBody {
+    padding-left: 1.8rem;
+  }
+}
