@@ -61,7 +61,7 @@
 
 /* The first card leads, like a picked option. */
 .card:first-child {
-  background-color: rgba(232, 217, 176, 0.45);
+  background-color: #fbdb93;
   border-color: var(--gold);
 }
 

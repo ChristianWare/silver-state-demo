@@ -114,7 +114,7 @@
 
 .link:hover,
 .active {
-  background-color: var(--champagne);
+  background-color: var(--gold);
   border-radius: 4px;
   /* border-bottom-color: currentColor; */
 }
@@ -156,8 +156,8 @@
   width: 34px;
   height: 34px;
   border-radius: 3px;
-  background-color: var(--midnight);
-  color: var(--gold);
+  background-color: var(--gold);
+  color: var(--midnight);
   display: inline-flex;
   align-items: center;
   justify-content: center;

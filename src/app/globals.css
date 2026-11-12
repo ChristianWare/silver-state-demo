@@ -1,12 +1,12 @@
 :root {
   --midnight: #0b0f1a;
   --navy: #1c2333;
-  --gold: #c9a24a;
+  --gold: #FF9F00;
   --champagne: #e8d9b0;
   --ivory: #f7f5f0;
   --slate: #3a4560;
   --steel: #8a93a6;
-  --bronze: #9c7a2f;
+  --bronze: #FF9F00;
   --oxblood: #6b2633;
 
   --black: var(--midnight);
