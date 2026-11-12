@@ -13,6 +13,8 @@ import ServiceAreasSection from "@/components/HomePage/ServiceAreasSection/Servi
 import ReviewsSection from "@/components/HomePage/ReviewsSection/ReviewsSection";
 import FaqSection from "@/components/HomePage/FaqSection/FaqSection";
 import ClosingCta from "@/components/HomePage/ClosingCta/ClosingCta";
+import AboutBeliefs from "@/components/AboutPage/AboutBeliefs/AboutBeliefs";
+import AirportsServed from "@/components/AirportsPage/AirportsServed/AirportsServed";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -28,6 +30,8 @@ export default function Page() {
         <AboutSection />
         <WhySection />
         <ServicesSection />
+        <AboutBeliefs />
+        <AirportsServed />
         <HowItWorks />
         <FleetSection />
         <AirportsSection />
