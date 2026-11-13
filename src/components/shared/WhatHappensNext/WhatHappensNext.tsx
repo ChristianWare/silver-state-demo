@@ -1,8 +1,10 @@
-// src/components/shared/WhatHappensNext/WhatHappensNext.tsx
+// After a ride request: the four steps from request to confirmed ride, in
+// the same panel as the booking page's "How booking works". The first step
+// is done, the second is where the request is now.
+
 import styles from "./WhatHappensNext.module.css";
 
 type Step = {
-  number: string;
   title: string;
   description: string;
   status: "complete" | "current" | "upcoming";
@@ -10,56 +12,80 @@ type Step = {
 
 const STEPS: Step[] = [
   {
-    number: "✓",
-    title: "Request Received",
-    description: "We've got your booking request",
+    title: "Request received",
+    description: "Your trip is in. You'll find it in your confirmation email.",
     status: "complete",
   },
   {
-    number: "2",
-    title: "Review",
-    description: "Our team reviews within 24 hours",
+    title: "Dispatch reviews",
+    description: "We check the route, the timing and the car, within 24 hours.",
     status: "current",
   },
   {
-    number: "3",
-    title: "Payment Link",
-    description: "Once approved, we'll email you a secure payment link",
+    title: "Payment link",
+    description: "Once it's approved, we email you a secure link to pay.",
     status: "upcoming",
   },
   {
-    number: "4",
-    title: "Confirmed!",
-    description: "After payment, your ride is confirmed",
+    title: "Ride confirmed",
+    description: "After payment, your chauffeur and car are booked.",
     status: "upcoming",
   },
 ];
 
+const STATUS_LABEL: Record<Step["status"], string> = {
+  complete: "Done",
+  current: "Now",
+  upcoming: "",
+};
+
 export default function WhatHappensNext() {
   return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>What Happens Next?</h3>
-      <div className={styles.steps}>
-        {STEPS.map((step, index) => (
-          <div key={index} className={styles.step}>
-            <div className={`${styles.stepNumber} ${styles[step.status]}`}>
-              {step.number}
-            </div>
-            <div className={styles.stepContent}>
-              <div className={styles.stepTitle}>{step.title}</div>
-              <div className={styles.stepDescription}>{step.description}</div>
-            </div>
-            {index < STEPS.length - 1 && <div className={styles.connector} />}
-          </div>
+    <div className={styles.panel}>
+      <p className={styles.title}>What happens next</p>
+      <ol className={styles.steps}>
+        {STEPS.map((step, i) => (
+          <li
+            key={step.title}
+            className={`${styles.step} ${styles[step.status]}`}
+            aria-current={step.status === "current" ? "step" : undefined}
+          >
+            <span className={styles.num}>
+              {step.status === "complete" ? (
+                <svg
+                  className={styles.check}
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth={2.5}
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  aria-hidden='true'
+                >
+                  <path d='M4 12.5 9.5 18 20 6.5' />
+                </svg>
+              ) : (
+                String(i + 1).padStart(2, "0")
+              )}
+            </span>
+            <span className={styles.text}>
+              <span className={styles.stepTitle}>
+                {step.title}
+                {STATUS_LABEL[step.status] ? (
+                  <span className={styles.tag}>
+                    {STATUS_LABEL[step.status]}
+                  </span>
+                ) : null}
+              </span>
+              <span className={styles.copy}>{step.description}</span>
+            </span>
+          </li>
         ))}
-      </div>
-      <div className={styles.notice}>
-        <span className={styles.noticeIcon}>⏰</span>
-        <span>
-          <strong>No payment required yet.</strong> We&apos;ll send you a payment
-          link after we review and approve your request.
-        </span>
-      </div>
+      </ol>
+      <p className={styles.notice}>
+        <strong>No payment yet.</strong> Nothing is charged until dispatch
+        approves your trip and you pay by the link.
+      </p>
     </div>
   );
 }

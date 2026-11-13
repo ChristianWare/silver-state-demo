@@ -1,18 +1,29 @@
-// src/app/book/success/page.tsx
-import styles from "./BookSuccess.module.css";
-import Nav from "@/components/shared/Nav/Nav";
+// /book/success: after a ride request goes in. The heading, the request ID
+// and the link to track it on the left; what happens next on the right, the
+// same panel as the booking page's "How booking works". Under them, the
+// estimate PDF and (for guests) an account to keep the ride in. Then the FAQ.
+
+import type { Metadata } from "next";
+import Link from "next/link";
+import SiteNav from "@/components/shared/SiteNav/SiteNav";
 import LayoutWrapper from "@/components/shared/LayoutWrapper";
-import SuccessClient from "./SuccessClient";
-import Check from "@/components/shared/icons/Check/Check";
-import Button from "@/components/shared/Button/Button";
-import Faq from "@/components/shared/Faq/Faq";
-import AboutNumbers from "@/components/shared/AboutNumbers/AboutNumbers";
+import PulseEyeBrow from "@/components/shared/PulseEyeBrow/PulseEyeBrow";
+import ArrowButton from "@/components/shared/ArrowButton/ArrowButton";
 import WhatHappensNext from "@/components/shared/WhatHappensNext";
+import FaqSection from "@/components/HomePage/FaqSection/FaqSection";
+import { SITE } from "@/config/site";
+import { getCompanySettings } from "../../../../actions/admin/companySettings";
+import SuccessClient from "./SuccessClient";
 import EstimateDownload from "./EstimateDownload";
-import { homeQuestions } from "@/lib/data";
+import styles from "./BookSuccess.module.css";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: `Request received | ${SITE.name}`,
+  robots: { index: false, follow: false },
+};
 
 export default async function BookSuccessPage(props: {
   searchParams?: Promise<{ id?: string; t?: string }>;
@@ -24,93 +35,108 @@ export default async function BookSuccessPage(props: {
   const trackHref = t ? `/book/track?t=${encodeURIComponent(t)}` : null;
   const nextTrack = trackHref ? `?next=${encodeURIComponent(trackHref)}` : "";
 
-  // Determine if this is a guest checkout (has tracking token)
+  // A tracking token means the rider booked as a guest.
   const isGuestCheckout = Boolean(t);
+
+  const companySettings = await getCompanySettings();
+  const phone = companySettings.dispatchPhone || SITE.phone.display;
+  const phoneTel = companySettings.dispatchPhoneRaw
+    ? `+1${companySettings.dispatchPhoneRaw}`
+    : SITE.phone.tel;
 
   return (
     <main>
-      <Nav background='cream' />
+      <SiteNav variant='solid' />
       <SuccessClient />
-      <section className={styles.parent}>
+
+      <section className={styles.section}>
         <LayoutWrapper>
-          <div className={styles.container}>
-            <div className={styles.card}>
-              <div className={styles.icon}>
-                <Check className={styles.check} />
-              </div>
-              <h1 className={`${styles.heading} h2`}>Success!</h1>
-              <p className={styles.copy}>
-                Your request has been submitted. Dispatch will review it and
-                email you a payment link once approved, typically within 24
-                hours.
+          <div className={styles.grid}>
+            <div className={styles.content}>
+              <PulseEyeBrow text='Request received' />
+              {/* Two lines, set by the break; they never wrap. */}
+              <h1 className={styles.heading}>
+                Request
+                <br />
+                received
+              </h1>
+              <p className={styles.intro}>
+                Dispatch will check your trip and email you a payment link once
+                it&apos;s approved, usually within 24 hours. Nothing is charged
+                before then.
               </p>
 
               {id ? (
-                <div className={`${styles.meta} pill pillGood`}>
-                  Request ID: {id}
-                </div>
+                <dl className={styles.details}>
+                  <div className={styles.detail}>
+                    <dt className={styles.detailLabel}>Request ID</dt>
+                    <dd className={styles.detailValue}>{id.toUpperCase()}</dd>
+                  </div>
+                  <div className={styles.detail}>
+                    <dt className={styles.detailLabel}>Status</dt>
+                    <dd className={styles.detailValue}>
+                      <span className={styles.statusDot} aria-hidden='true' />
+                      Waiting for review
+                    </dd>
+                  </div>
+                </dl>
               ) : null}
 
-              {/* ✅ What Happens Next - shows the step-by-step process */}
-              <WhatHappensNext />
+              {trackHref ? (
+                <ArrowButton
+                  href={trackHref}
+                  text='Track your request'
+                  variant='midnight'
+                />
+              ) : null}
 
-              {/* ✅ Estimate download — only show if we have a booking ID */}
-              {id && <EstimateDownload bookingId={id} />}
+              <p className={styles.note}>
+                A confirmation with your trip details is on its way to your
+                inbox. Don&apos;t see it? Check spam, or call dispatch on{" "}
+                <a href={`tel:${phoneTel}`} className={styles.noteLink}>
+                  {phone}
+                </a>
+                .
+              </p>
+            </div>
 
-              <div className={styles.actions}>
-                {trackHref ? (
-                  <Button
-                    href={trackHref}
-                    text='Track your request'
-                    btnType='underlinedBlack'
-                    arrow
-                  />
-                ) : null}
-              </div>
+            <WhatHappensNext />
+          </div>
 
-              {/* ✅ Only show account creation for guest checkout */}
+          {id || isGuestCheckout ? (
+            <div className={styles.extras}>
+              {id ? <EstimateDownload bookingId={id} /> : null}
+
               {isGuestCheckout && trackHref ? (
-                <div style={{ display: "grid", gap: 10, paddingTop: 10 }}>
-                  <div className='miniNote'>
-                    Want faster checkout next time? Create an account to manage
-                    requests and updates.
-                  </div>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      gap: 20,
-                      marginTop: 5,
-                    }}
-                  >
-                    <Button
+                <div className={styles.card}>
+                  <p className={styles.cardTitle}>
+                    Keep your rides in one place
+                  </p>
+                  <p className={styles.cardCopy}>
+                    Create an account to follow your requests and updates, and
+                    book faster next time.
+                  </p>
+                  <div className={styles.cardActions}>
+                    <ArrowButton
                       href={`/register${nextTrack}`}
                       text='Create account'
-                      btnType='blackReg'
+                      variant='midnight'
                     />
-                    <Button
+                    <Link
                       href={`/login${nextTrack}`}
-                      text='Sign in'
-                      btnType='redReg'
-                    />
+                      className={styles.outline}
+                    >
+                      Sign in
+                    </Link>
                   </div>
                 </div>
               ) : null}
-
-              <div className='miniNote' style={{ marginTop: 16 }}>
-                📧 Check your email! We&apos;ve sent you a confirmation with
-                your booking details.
-              </div>
-
-              <div className='miniNote'>
-                If you don&apos;t see an email, check spam or contact support.
-              </div>
             </div>
-          </div>
+          ) : null}
         </LayoutWrapper>
       </section>
-      <Faq items={homeQuestions} />
-      <AboutNumbers />
+
+      <FaqSection />
     </main>
   );
 }

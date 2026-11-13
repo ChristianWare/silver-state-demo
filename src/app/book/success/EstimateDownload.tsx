@@ -1,7 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
+// The estimate PDF, for riders who need approval before they pay. A card
+// beside the account card on /book/success. The deposit details only show
+// when a deposit amount is passed in.
+
 import { useState } from "react";
+import DownloadIcon from "@/components/shared/DownloadIcon/DownloadIcon";
+import styles from "./EstimateDownload.module.css";
 
 type Props = {
   bookingId: string;
@@ -42,15 +47,16 @@ export default function EstimateDownload({
   depositPercent,
   depositCents,
   balanceCents,
-  totalCents,
   currency = "USD",
   depositDueDate,
   balanceDueDate,
 }: Props) {
   const [isDownloading, setIsDownloading] = useState(false);
+  const [error, setError] = useState(false);
 
   async function handleDownload() {
     setIsDownloading(true);
+    setError(false);
     try {
       const params = new URLSearchParams();
       if (depositMode && depositPercent) {
@@ -74,7 +80,7 @@ export default function EstimateDownload({
       a.click();
       URL.revokeObjectURL(url);
     } catch {
-      alert("Could not generate estimate. Please contact support.");
+      setError(true);
     } finally {
       setIsDownloading(false);
     }
@@ -85,140 +91,67 @@ export default function EstimateDownload({
   const hasBalance = balanceCents != null && balanceCents > 0;
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gap: "1.2rem",
-        padding: "1.6rem",
-        background: "#f0f9ff",
-        border: "1px solid #bae6fd",
-        borderRadius: 10,
-        marginTop: "1.6rem",
-      }}
-    >
-      {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        <span style={{ fontSize: "1.8rem" }}>📄</span>
-        <div>
-          <div style={{ fontWeight: 700, fontSize: "1.4rem" }}>
-            Download Your Estimate
-          </div>
-          <div style={{ fontSize: "1.3rem", color: "#64748b", marginTop: 2 }}>
-            Need internal approval? Download a price estimate PDF to share with
-            your team or company.
-          </div>
-        </div>
-      </div>
+    <div className={styles.card}>
+      <p className={styles.title}>Need approval first?</p>
+      <p className={styles.copy}>
+        Download a price estimate to share with your team or company before you
+        pay.
+      </p>
 
-      {/* Deposit callout */}
+      <p className={styles.small}>
+        This estimate isn&apos;t binding and the final price may change. Your
+        invoice comes once payment is complete.
+      </p>
+
       {hasDeposit && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-start",
-            gap: "0.8rem",
-            padding: "1rem 1.2rem",
-            background: "#ecfdf5",
-            border: "1px solid #6ee7b7",
-            borderRadius: 8,
-            fontSize: "1.3rem",
-          }}
-        >
-          <span>💳</span>
-          <div style={{ display: "grid", gap: "0.5rem", lineHeight: 1.6 }}>
-            {/* Summary line */}
-            <div>
-              <strong>Deposit option included:</strong> customer can pay a{" "}
-              {depositPercent}% deposit of{" "}
-              <strong>{fmt(depositCents!, currency)}</strong> now
-              {hasBalance ? (
-                <>
-                  , then the <strong>{fmt(balanceCents!, currency)}</strong>{" "}
-                  balance later
-                </>
-              ) : null}
-              , or pay the full amount upfront.
-            </div>
-
-            {/* Due dates */}
-            {(depositDueDate || (hasBalance && balanceDueDate)) && (
-              <div
-                style={{
-                  display: "grid",
-                  gap: "0.3rem",
-                  padding: "0.6rem 0.8rem",
-                  background: "rgba(255,255,255,0.6)",
-                  borderRadius: 6,
-                  fontSize: "1.2rem",
-                }}
-              >
-                {depositDueDate && (
-                  <div style={{ color: "#065f46" }}>
-                    <strong>Deposit due:</strong> {fmtDate(depositDueDate)}
-                  </div>
-                )}
-                {hasBalance && balanceDueDate && (
-                  <div style={{ color: "#065f46" }}>
-                    <strong>Balance due:</strong> {fmtDate(balanceDueDate)}
-                  </div>
-                )}
-              </div>
-            )}
-
-            <div style={{ fontSize: "1.2rem", color: "#6b7280" }}>
-              Both payment options are reflected in the downloaded PDF.
-            </div>
-          </div>
+        <div className={styles.deposit}>
+          <p>
+            <strong>Deposit option included.</strong> Pay a {depositPercent}%
+            deposit of {fmt(depositCents!, currency)} now
+            {hasBalance ? (
+              <> and the {fmt(balanceCents!, currency)} balance later</>
+            ) : null}
+            , or the full amount up front.
+          </p>
+          {depositDueDate && (
+            <p>
+              <strong>Deposit due:</strong> {fmtDate(depositDueDate)}
+            </p>
+          )}
+          {hasBalance && balanceDueDate && (
+            <p>
+              <strong>Balance due:</strong> {fmtDate(balanceDueDate)}
+            </p>
+          )}
+          <p className={styles.small}>Both options are in the PDF.</p>
         </div>
       )}
 
-      {/* Download button */}
-      <button
-        type='button'
-        onClick={handleDownload}
-        disabled={isDownloading}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "0.8rem",
-          padding: "0.9rem 2rem",
-          background: isDownloading ? "#94a3b8" : "#1e40af",
-          color: "white",
-          border: "none",
-          borderRadius: 8,
-          fontSize: "1.4rem",
-          fontWeight: 600,
-          cursor: isDownloading ? "not-allowed" : "pointer",
-          width: "fit-content",
-          transition: "background 0.15s",
-        }}
-      >
-        {isDownloading ? (
-          <>
-            <span
-              style={{
-                width: 16,
-                height: 16,
-                border: "2px solid rgba(255,255,255,0.3)",
-                borderTopColor: "white",
-                borderRadius: "50%",
-                display: "inline-block",
-                animation: "spin 0.8s linear infinite",
-              }}
-            />
-            Generating PDF...
-          </>
-        ) : (
-          <>📥 Download Estimate PDF</>
-        )}
-      </button>
+      <div className={styles.actions}>
+        <button
+          type='button'
+          onClick={handleDownload}
+          disabled={isDownloading}
+          className={styles.btn}
+          aria-busy={isDownloading}
+        >
+          {isDownloading ? "Preparing PDF…" : "Download estimate"}
+          <span className={styles.box} aria-hidden='true'>
+            {isDownloading ? (
+              <span className={styles.spinner} />
+            ) : (
+              <DownloadIcon className={styles.icon} />
+            )}
+          </span>
+        </button>
+      </div>
 
-      {/* Disclaimer */}
-      <p style={{ fontSize: "1.2rem", color: "#64748b", margin: 0 }}>
-        This is a non-binding estimate. Final price may vary. A confirmed
-        invoice will be sent once payment is complete.
-      </p>
+      {error ? (
+        <p className={styles.error} role='alert'>
+          We couldn&apos;t make the PDF just now. Try again, or call dispatch
+          and we&apos;ll email it to you.
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -79,6 +79,9 @@ html {
 
 body {
   font-size: 1.6rem;
+  /* Anything without its own font gets the site's, never the browser's. */
+  font-family: var(--SofiaSansRegular), Arial, Helvetica, sans-serif;
+  color: var(--midnight);
 }
 
 a {
