@@ -6,6 +6,12 @@
 import styles from "./RoutePicker.module.css";
 import { RefObject, useEffect, useRef, useState } from "react";
 import { googleMapsSrc, GOOGLE_MAPS_SCRIPT_ATTR } from "@/lib/googleMaps";
+import {
+  brandMapOptions,
+  brandMarkerIcon,
+  brandRouteLines,
+  readBrandColors,
+} from "@/lib/brandMap";
 
 type LatLng = { lat: number; lng: number };
 
@@ -133,6 +139,8 @@ export default function RoutePicker({
   const dropoffMarker = useRef<any>(null);
   const stopMarkers = useRef<any[]>([]);
   const routePolyline = useRef<any>(null);
+  // The soft accent edge drawn under the route line.
+  const routeEdge = useRef<any>(null);
 
   const pickupAC = useRef<any>(null);
   const dropoffAC = useRef<any>(null);
@@ -183,13 +191,11 @@ export default function RoutePicker({
         const google = window.google;
 
         if (!mapInstance.current && mapRef.current) {
-          mapInstance.current = new google.maps.Map(mapRef.current, {
-            center: { lat: 33.4484, lng: -112.074 }, // Phoenix
-            zoom: 10,
-            mapTypeControl: false,
-            streetViewControl: false,
-            fullscreenControl: false,
-          });
+          // The site's look: colors come from globals.css (src/lib/brandMap).
+          mapInstance.current = new google.maps.Map(
+            mapRef.current,
+            brandMapOptions(readBrandColors()),
+          );
           setMapReady(true);
         }
 
@@ -278,46 +284,37 @@ export default function RoutePicker({
     if (!google?.maps || !mapInstance.current) return;
 
     const map = mapInstance.current;
+    const colors = readBrandColors();
 
-    // Pickup marker (green)
+    // Pickup marker: the accent, with an A
     if (pickup) {
       if (!pickupMarker.current)
-        pickupMarker.current = new google.maps.Marker({ map });
+        pickupMarker.current = new google.maps.Marker({ map, zIndex: 30 });
       pickupMarker.current.setPosition(pickup.location);
-      pickupMarker.current.setLabel("A");
-      pickupMarker.current.setIcon({
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 10,
-        fillColor: "#22c55e",
-        fillOpacity: 1,
-        strokeColor: "#fff",
-        strokeWeight: 2,
-      });
+      pickupMarker.current.setTitle(`Pickup: ${pickup.address}`);
+      pickupMarker.current.setIcon(
+        brandMarkerIcon(google, "pickup", "A", colors),
+      );
     } else if (pickupMarker.current) {
       pickupMarker.current.setMap(null);
       pickupMarker.current = null;
     }
 
-    // Dropoff marker (red)
+    // Drop-off marker: midnight, with an accent B
     if (dropoff) {
       if (!dropoffMarker.current)
-        dropoffMarker.current = new google.maps.Marker({ map });
+        dropoffMarker.current = new google.maps.Marker({ map, zIndex: 30 });
       dropoffMarker.current.setPosition(dropoff.location);
-      dropoffMarker.current.setLabel("B");
-      dropoffMarker.current.setIcon({
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 10,
-        fillColor: "#ef4444",
-        fillOpacity: 1,
-        strokeColor: "#fff",
-        strokeWeight: 2,
-      });
+      dropoffMarker.current.setTitle(`Drop-off: ${dropoff.address}`);
+      dropoffMarker.current.setIcon(
+        brandMarkerIcon(google, "dropoff", "B", colors),
+      );
     } else if (dropoffMarker.current) {
       dropoffMarker.current.setMap(null);
       dropoffMarker.current = null;
     }
 
-    // Stop markers (blue)
+    // Stop markers: small and white, numbered
     stopMarkers.current.forEach((m) => m.setMap(null));
     stopMarkers.current = [];
 
@@ -327,16 +324,9 @@ export default function RoutePicker({
         const marker = new google.maps.Marker({
           map,
           position: stop.location,
-          label: String(index + 1),
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 8,
-            fillColor: "#3b82f6",
-            fillOpacity: 1,
-            strokeColor: "#fff",
-            strokeWeight: 2,
-          },
+          icon: brandMarkerIcon(google, "stop", String(index + 1), colors),
           title: `Stop ${index + 1}: ${stop.address}`,
+          zIndex: 20,
         });
         stopMarkers.current.push(marker);
       }
@@ -367,6 +357,10 @@ export default function RoutePicker({
       if (routePolyline.current) {
         routePolyline.current.setMap(null);
         routePolyline.current = null;
+      }
+      if (routeEdge.current) {
+        routeEdge.current.setMap(null);
+        routeEdge.current = null;
       }
 
       onChange({
@@ -429,20 +423,30 @@ export default function RoutePicker({
           routePolyline.current.setMap(null);
           routePolyline.current = null;
         }
+        if (routeEdge.current) {
+          routeEdge.current.setMap(null);
+          routeEdge.current = null;
+        }
 
         if (data.encodedPolyline) {
           const geom = google.maps.geometry?.encoding;
           if (geom?.decodePath) {
             const path = geom.decodePath(data.encodedPolyline);
 
+            // A midnight line over a soft accent edge.
+            const [edge, line] = brandRouteLines(readBrandColors());
+            routeEdge.current = new google.maps.Polyline({
+              path,
+              geodesic: true,
+              ...edge,
+            });
             routePolyline.current = new google.maps.Polyline({
               path,
               geodesic: true,
-              strokeColor: "#1A73E8",
-              strokeOpacity: 0.9,
-              strokeWeight: 4,
+              ...line,
             });
 
+            routeEdge.current.setMap(mapInstance.current);
             routePolyline.current.setMap(mapInstance.current);
 
             const bounds = new google.maps.LatLngBounds();
