@@ -3,6 +3,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { PlacesAutocomplete } from "@/lib/placesAutocomplete";
 
 type LatLng = { lat: number; lng: number };
 
@@ -310,7 +311,7 @@ export default function RoutePickerAdmin({
 
     // Pickup autocomplete
     if (pickupInputRef.current && !pickupAC.current) {
-      pickupAC.current = new google.maps.places.Autocomplete(
+      pickupAC.current = new PlacesAutocomplete(
         pickupInputRef.current,
         {
           fields: ["place_id", "formatted_address", "geometry"],
@@ -348,7 +349,7 @@ export default function RoutePickerAdmin({
 
     // Dropoff autocomplete
     if (dropoffInputRef.current && !dropoffAC.current) {
-      dropoffAC.current = new google.maps.places.Autocomplete(
+      dropoffAC.current = new PlacesAutocomplete(
         dropoffInputRef.current,
         {
           fields: ["place_id", "formatted_address", "geometry"],

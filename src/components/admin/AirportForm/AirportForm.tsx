@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useDirtyForm } from "@/components/shared/DirtyFormProvider/DirtyFormProvider";
 import Button from "@/components/shared/Button/Button";
+import { PlacesAutocomplete } from "@/lib/placesAutocomplete";
 
 type ActionResult = { success?: string; error?: string };
 
@@ -208,7 +209,7 @@ export default function AirportForm({
         const el = addressRef.current;
         if (!google?.maps?.places || !el) return;
 
-        const ac = new google.maps.places.Autocomplete(el, {
+        const ac = new PlacesAutocomplete(el, {
           fields: ["place_id", "formatted_address", "geometry"],
           componentRestrictions: { country: "us" },
         });

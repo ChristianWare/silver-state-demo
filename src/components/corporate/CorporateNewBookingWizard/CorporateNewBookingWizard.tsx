@@ -46,6 +46,7 @@ import {
   formatUsd,
   stopSurchargeCents,
 } from "@/lib/booking/rules";
+import { PlacesAutocomplete } from "@/lib/placesAutocomplete";
 // ───────────── Types ─────────────
 
 type PricingStrategy = "POINT_TO_POINT" | "HOURLY" | "FLAT";
@@ -1483,7 +1484,7 @@ export default function CorporateNewBookingWizard({
                                 const existingAC = (el as any).__stopAC;
                                 if (!existingAC) {
                                   const ac =
-                                    new window.google.maps.places.Autocomplete(
+                                    new PlacesAutocomplete(
                                       el,
                                       {
                                         fields: [

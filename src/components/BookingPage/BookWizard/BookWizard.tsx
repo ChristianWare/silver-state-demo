@@ -61,6 +61,7 @@ import {
   includedFor,
   type RideKind,
 } from "@/lib/booking/rules";
+import { PlacesAutocomplete } from "@/lib/placesAutocomplete";
 
 type PricingStrategy = "POINT_TO_POINT" | "HOURLY" | "FLAT";
 type AirportLeg = "NONE" | "PICKUP" | "DROPOFF";
@@ -1640,7 +1641,7 @@ export default function BookingWizard({
                       if (el && window.google?.maps?.places) {
                         const existingAC = (el as any).__stopAC;
                         if (!existingAC) {
-                          const ac = new window.google.maps.places.Autocomplete(
+                          const ac = new PlacesAutocomplete(
                             el,
                             {
                               fields: [
