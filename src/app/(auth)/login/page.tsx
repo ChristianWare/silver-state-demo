@@ -2,8 +2,7 @@
 import { auth } from "../../../../auth";
 import { redirect } from "next/navigation";
 import LoginPageIntro from "@/components/loginPage/LoginPageIntro/LoginPageIntro";
-import Nav from "@/components/shared/Nav/Nav";
-import AboutNumbers from "@/components/shared/AboutNumbers/AboutNumbers";
+import SiteNav from "@/components/shared/SiteNav/SiteNav";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -25,8 +24,6 @@ export default async function LoginPage({
   const session = await auth();
 
   if (session) {
-    console.log("SESSION DUMP:", JSON.stringify(session, null, 2));
-
     const user = session.user as any;
     const rawRoles =
       user?.roles ??
@@ -61,9 +58,8 @@ export default async function LoginPage({
 
   return (
     <main>
-      <Nav background='white' />
+      <SiteNav variant='solid' />
       <LoginPageIntro />
-      <AboutNumbers />
     </main>
   );
 }

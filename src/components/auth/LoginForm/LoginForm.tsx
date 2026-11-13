@@ -1,16 +1,20 @@
 "use client";
 
-import styles from "./LoginForm.module.css";
+// The sign-in form on /login. After signing in, the rider goes to `next`
+// when it's a path on this site (the track page sends them back to their
+// ride), otherwise to their account. An address that isn't confirmed yet
+// gets a new confirmation link instead, and stays on the page.
+
+import Link from "next/link";
+import { useState, useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, LoginSchemaType } from "@/schemas/LoginSchema";
 import FormField from "../FormField/FormField";
-import Link from "next/link";
-import { useState, useTransition } from "react";
+import Arrow from "@/components/shared/icons/Arrow/Arrow";
 import { login } from "../../../../actions/auth/login";
-import Alert from "@/components/shared/Alert/Alert";
-import { useRouter, useSearchParams } from "next/navigation";
-import Button from "@/components/shared/Button/Button";
+import styles from "../AuthPage/AuthForm.module.css";
 
 export default function LoginForm() {
   const {
@@ -26,29 +30,35 @@ export default function LoginForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const next = searchParams.get("next");
+  const safeNext = next && next.startsWith("/") ? next : null;
+  const nextQuery = safeNext ? `?next=${encodeURIComponent(safeNext)}` : "";
+
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
-      ? "Email in use with different provider!"
+      ? "This email is already used with another way of signing in."
       : "";
 
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
     setError("");
     setSuccess("");
 
-    const next = searchParams.get("next");
-    const safeNext = next && next.startsWith("/") ? next : null;
-    const destination = safeNext ?? "/dashboard";
-
     startTransition(() => {
-      login(data).then((res) => {
+      login(data, safeNext).then((res) => {
         if (res?.error) {
           setError(res.error);
           return;
         }
 
-        if (res?.success) setSuccess(res.success);
+        // Not confirmed yet: a new link went out. Stay here.
+        if (res?.success) {
+          setSuccess(
+            "Your email isn't confirmed yet. We've sent you a new link: open it, then log in.",
+          );
+          return;
+        }
 
-        router.replace(destination);
+        router.replace(safeNext ?? "/dashboard");
         router.refresh();
       });
     });
@@ -60,8 +70,9 @@ export default function LoginForm() {
         onSubmit={handleSubmit(onSubmit)}
         className={styles.form}
         autoComplete='off'
+        noValidate
       >
-        {/* Honeypot inputs (no inline styles) */}
+        {/* Honeypot inputs */}
         <input
           className={styles.honeypot}
           type='text'
@@ -83,53 +94,59 @@ export default function LoginForm() {
           id='email'
           register={register}
           errors={errors}
-          label='email'
+          label='Email'
           disabled={isPending}
           type='email'
           autoComplete='off'
         />
 
-        <FormField
-          id='password'
-          register={register}
-          errors={errors}
-          type='password'
-          label='password'
-          disabled={isPending}
-          eye
-          autoComplete='new-password'
-        />
-
-        {error && <Alert message={error} error />}
-        {urlError && <Alert message={urlError} error />}
-        {success && <Alert message={success} success />}
-
-        <div className={styles.btnContainer}>
-          <Button
-            text={isPending ? "Submitting..." : "Sign In"}
-            type='submit'
+        <div className={styles.passwordGroup}>
+          <FormField
+            id='password'
+            register={register}
+            errors={errors}
+            type='password'
+            label='Password'
             disabled={isPending}
-            btnType='black'
-            arrow
+            eye
+            autoComplete='new-password'
           />
+          <Link href='/forgot-password' className={styles.forgot}>
+            Forgot password?
+          </Link>
         </div>
+
+        {(error || urlError) && (
+          <p
+            className={`${styles.message} ${styles.messageError}`}
+            role='alert'
+          >
+            {error || urlError}
+          </p>
+        )}
+        {success && (
+          <p
+            className={`${styles.message} ${styles.messageSuccess}`}
+            role='status'
+          >
+            {success}
+          </p>
+        )}
+
+        <button type='submit' className={styles.submit} disabled={isPending}>
+          {isPending ? "Logging in…" : "Log in"}
+          <span className={styles.box} aria-hidden='true'>
+            <Arrow className={styles.arrow} />
+          </span>
+        </button>
       </form>
 
-      <footer className={styles.cardFooter}>
-        <p className={styles.footerText}>
-          Don&apos;t have an account?{" "}
-          <Link href='/register' className={styles.link}>
-            Sign up
-          </Link>
-        </p>
-
-        <p className={styles.footerText}>
-          Forgot password?{" "}
-          <Link href='/forgot-password' className={styles.link}>
-            Click here
-          </Link>
-        </p>
-      </footer>
+      <p className={styles.switch}>
+        New here?{" "}
+        <Link href={`/register${nextQuery}`} className={styles.link}>
+          Create an account
+        </Link>
+      </p>
     </div>
   );
 }

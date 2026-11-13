@@ -80,7 +80,7 @@ export default function FormField<T extends FieldValues>({
           autoCorrect='off'
           spellCheck={false}
           {...register(id as Path<T>)}
-          className={`${inputClassName} inputBorder emptySmall`}
+          className={inputClassName}
           name={id}
         />
         {eye && type === "password" && (
@@ -91,14 +91,18 @@ export default function FormField<T extends FieldValues>({
             aria-label={show ? "Hide password" : "Show password"}
           >
             {show ? (
-              <EyeOn className={styles.icon} />
+              <EyeOn className={styles.icon} aria-hidden='true' />
             ) : (
-              <EyeOff className={styles.icon} />
+              <EyeOff className={styles.icon} aria-hidden='true' />
             )}
           </button>
         )}
       </div>
-      {message && <span className={styles.error}>{message}</span>}
+      {message && (
+        <span className={styles.error} role='alert'>
+          {message}
+        </span>
+      )}
       {children}
     </div>
   );

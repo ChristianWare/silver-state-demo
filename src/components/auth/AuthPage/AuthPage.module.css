@@ -1,0 +1,154 @@
+/* /login and /register. Clears the fixed 72px nav, like the booking page. */
+.section {
+  background-color: var(--white);
+  padding: 72px 0 10rem;
+  font-family: var(--SofiaSansRegular);
+  color: var(--midnight);
+}
+
+/* Global p hyphenates; not here. */
+.section p {
+  hyphens: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 6rem;
+  align-items: start;
+  padding: 4rem 0 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.content > :first-child {
+  margin-left: -1.5rem;
+}
+
+/* Two lines, set by the break; they never wrap. */
+.heading {
+  white-space: nowrap;
+}
+
+.intro {
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: var(--slate);
+  opacity: 0.8;
+  max-width: 600px;
+}
+
+.form {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 1.2rem;
+}
+
+/* ── The panel, as on the booking page ── */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 3.2rem;
+  border: 1px solid var(--champagne);
+  border-radius: 10px;
+  background-color: var(--ivory);
+}
+
+.panelTitle {
+  font-family: var(--SofiaSansExtraCondensedExtraBold);
+  font-size: 2.5rem;
+  line-height: 0.95em;
+  text-transform: uppercase;
+  color: var(--midnight);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  border-top: 2px solid var(--midnight);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 1.6rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--champagne);
+}
+
+.stepNum {
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--bronze);
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stepTitle {
+  font-family: var(--SofiaSansBold);
+  font-size: 1.7rem;
+  line-height: 1.3;
+  color: var(--midnight);
+}
+
+.stepCopy {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: var(--slate);
+}
+
+.note {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: var(--slate);
+}
+
+.note a {
+  font-family: var(--SofiaSansBold);
+  color: var(--midnight);
+  border-bottom: 1px solid var(--gold);
+  white-space: nowrap;
+}
+
+.note a:hover {
+  color: var(--bronze);
+}
+
+@media screen and (max-width: 1068px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6rem;
+    padding: 3rem 0 0;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section {
+    padding-bottom: 6rem;
+  }
+
+  .heading {
+    white-space: normal;
+  }
+
+  .panel {
+    padding: 2.4rem 2rem;
+  }
+}

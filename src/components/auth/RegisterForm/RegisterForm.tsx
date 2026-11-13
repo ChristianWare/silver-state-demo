@@ -1,26 +1,35 @@
 /* eslint-disable react-hooks/incompatible-library */
 "use client";
 
-import styles from "./RegisterForm.module.css";
+// The sign-up form on /register. The password rules show as you type, and
+// the fields turn green once they're right. On success, a link goes to the
+// email to confirm it; the rider logs in after that.
+
+import Link from "next/link";
+import { useTransition, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FormField from "../FormField/FormField";
-import Link from "next/link";
 import {
   RegisterSchema,
   RegisterSchemaType,
   passwordRequirements,
 } from "@/schemas/RegisterSchema";
-import { signUp } from "../../../../actions/auth/register";
-import { useTransition, useState } from "react";
-import Alert from "@/components/shared/Alert/Alert";
-import Button from "@/components/shared/Button/Button";
+import FormField from "../FormField/FormField";
 import PasswordRequirements from "../PasswordRequirements/PasswordRequirements";
+import Arrow from "@/components/shared/icons/Arrow/Arrow";
+import { signUp } from "../../../../actions/auth/register";
+import styles from "../AuthPage/AuthForm.module.css";
 
 export default function RegisterForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+
+  const searchParams = useSearchParams();
+  const next = searchParams.get("next");
+  const nextQuery =
+    next && next.startsWith("/") ? `?next=${encodeURIComponent(next)}` : "";
 
   const {
     register,
@@ -35,13 +44,11 @@ export default function RegisterForm() {
   const password = watch("password", "");
   const confirmPassword = watch("confirmPassword", "");
 
-  // Check if password meets all requirements
   const isPasswordValid =
     password.length >= passwordRequirements.minLength &&
     passwordRequirements.hasUppercase.test(password) &&
     passwordRequirements.hasNumber.test(password);
 
-  // Check if confirm password matches
   const isConfirmPasswordValid =
     confirmPassword.length > 0 && password === confirmPassword;
 
@@ -52,7 +59,11 @@ export default function RegisterForm() {
     startTransition(() => {
       signUp(data).then((res) => {
         setError(res.error);
-        setSuccess(res.success);
+        setSuccess(
+          res.success
+            ? `Almost done. We've sent a link to ${data.email}: open it to confirm your email, then log in.`
+            : "",
+        );
       });
     });
   };
@@ -63,6 +74,7 @@ export default function RegisterForm() {
         onSubmit={handleSubmit(onSubmit)}
         className={styles.form}
         autoComplete='off'
+        noValidate
       >
         {/* Honeypot inputs */}
         <input
@@ -122,35 +134,44 @@ export default function RegisterForm() {
           register={register}
           errors={errors}
           type='password'
-          label='Confirm Password'
+          label='Confirm password'
           disabled={isPending}
           eye
           autoComplete='new-password'
           isValid={isConfirmPasswordValid}
         />
 
-        {error && <Alert message={error} error />}
-        {success && <Alert message={success} success />}
+        {error && (
+          <p
+            className={`${styles.message} ${styles.messageError}`}
+            role='alert'
+          >
+            {error}
+          </p>
+        )}
+        {success && (
+          <p
+            className={`${styles.message} ${styles.messageSuccess}`}
+            role='status'
+          >
+            {success}
+          </p>
+        )}
 
-        <div className={styles.btnContainer}>
-          <Button
-            text={isPending ? "Submitting..." : "Sign Up"}
-            type='submit'
-            disabled={isPending}
-            btnType='black'
-            arrow
-          />
-        </div>
+        <button type='submit' className={styles.submit} disabled={isPending}>
+          {isPending ? "Creating your account…" : "Create account"}
+          <span className={styles.box} aria-hidden='true'>
+            <Arrow className={styles.arrow} />
+          </span>
+        </button>
       </form>
 
-      <footer className={styles.cardFooter}>
-        <p className={styles.footerText}>
-          Already have an account?{" "}
-          <Link href='/login' className={styles.link}>
-            Sign in
-          </Link>
-        </p>
-      </footer>
+      <p className={styles.switch}>
+        Already have an account?{" "}
+        <Link href={`/login${nextQuery}`} className={styles.link}>
+          Log in
+        </Link>
+      </p>
     </div>
   );
 }

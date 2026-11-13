@@ -11,7 +11,15 @@ import {
   sendEmailVerificationToken,
 } from "@/lib/emailVerification";
 
-export const login = async (values: LoginSchemaType) => {
+// Role areas a `next` link can't send someone into.
+const ROLE_OWNED_PREFIXES = [
+  "/admin",
+  "/driver-dashboard",
+  "/corporate",
+  "/dashboard",
+];
+
+export const login = async (values: LoginSchemaType, next?: string | null) => {
   const validateFields = LoginSchema.safeParse(values);
 
   if (!validateFields.success) {
@@ -51,6 +59,16 @@ export const login = async (values: LoginSchemaType) => {
   if (roles.includes("ADMIN")) redirectTo = "/admin";
   else if (roles.includes("DRIVER")) redirectTo = "/driver-dashboard";
   else if (roles.includes("CORPORATE")) redirectTo = "/corporate";
+
+  // A path on this site (like the track page) wins over the role's home.
+  if (
+    next &&
+    next.startsWith("/") &&
+    !next.startsWith("//") &&
+    !ROLE_OWNED_PREFIXES.some((prefix) => next.startsWith(prefix))
+  ) {
+    redirectTo = next;
+  }
 
   try {
     await signIn("credentials", {

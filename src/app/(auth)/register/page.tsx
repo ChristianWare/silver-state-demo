@@ -2,8 +2,7 @@
 import { auth } from "../../../../auth";
 import { redirect } from "next/navigation";
 import RegisterPageIntro from "@/components/registerPage/RegisterPageIntro";
-import Nav from "@/components/shared/Nav/Nav";
-import AboutNumbers from "@/components/shared/AboutNumbers/AboutNumbers";
+import SiteNav from "@/components/shared/SiteNav/SiteNav";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -39,9 +38,8 @@ export default async function RegisterPage({
 
   return (
     <main>
-      <Nav background='white' />
+      <SiteNav variant='solid' />
       <RegisterPageIntro />
-      <AboutNumbers />
     </main>
   );
 }

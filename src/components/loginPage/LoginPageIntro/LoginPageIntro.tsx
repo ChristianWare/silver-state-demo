@@ -1,39 +1,40 @@
-import styles from "./LoginPageIntro.module.css";
-import LayoutWrapper from "@/components/shared/LayoutWrapper";
+// /login: the sign-in form, with what an account is for beside it.
+
+import AuthPage from "@/components/auth/AuthPage/AuthPage";
 import LoginForm from "@/components/auth/LoginForm/LoginForm";
-import Image from "next/image";
-import Img1 from "../../../../public/images/login.jpg";
-import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
-import { SITE } from "@/config/site";
+
+const STEPS = [
+  {
+    title: "Every ride in one place",
+    copy: "Upcoming and past trips, and where each request stands.",
+  },
+  {
+    title: "Payments and receipts",
+    copy: "Pay by link when dispatch approves a trip, and keep every receipt.",
+  },
+  {
+    title: "Book faster",
+    copy: "Your details are saved, so the next ride takes less time.",
+  },
+];
 
 export default function LoginPageIntro() {
   return (
-    <section className={styles.container}>
-      <LayoutWrapper>
-        <div className={styles.content}>
-          <div className={styles.left}>
-            <div className={styles.imgContainer}>
-              <Image
-                src={Img1}
-                alt={`Book with ${SITE.name}`}
-                title={`Book with ${SITE.name}`}
-                fill
-                className={styles.img}
-              />
-            </div>
-          </div>
-          <div className={styles.right}>
-            <SectionHeading text='Login' dot />
-            <h1 className={`${styles.heading} h2`}>Welcome back</h1>
-            <p className={styles.copy}>
-              Enter your email and password to access your account
-            </p>
-            <div className={styles.formContainer}>
-              <LoginForm />
-            </div>
-          </div>
-        </div>
-      </LayoutWrapper>
-    </section>
+    <AuthPage
+      eyebrow='Log in'
+      heading={
+        <>
+          Welcome
+          <br />
+          back
+        </>
+      }
+      intro='Log in to see your rides, pay by link and book your next one.'
+      panelTitle='Your account'
+      steps={STEPS}
+      panelNote='Booked without an account? Your confirmation email has a link to track your ride.'
+    >
+      <LoginForm />
+    </AuthPage>
   );
 }
