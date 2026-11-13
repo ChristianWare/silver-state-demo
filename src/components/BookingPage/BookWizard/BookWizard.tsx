@@ -290,7 +290,7 @@ export default function BookingWizard({
 }: {
   /** From a share link (/book?code=…). */
   initialDiscountCode?: string;
-  /** From a link like /book?trip=from-airport&airport=PHX. */
+  /** From a link like /book?trip=from-airport&airport=LAS. */
   initialPrefill?: LinkPrefill;
   serviceTypes: ServiceTypeDTO[];
   vehicles: VehicleDTO[];

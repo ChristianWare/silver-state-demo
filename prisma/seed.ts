@@ -6,7 +6,7 @@
  *   2. Company settings          (from src/config/site.ts — editable later in Admin → Company)
  *   3. Default service types     (airport, point-to-point, hourly — prices are examples)
  *   4. Default vehicle categories (sedan, SUV, sprinter — prices are examples)
- *   5. Example airports          (Phoenix metro — replace per client in Admin → Airports)
+ *   5. Airports                  (Las Vegas: LAS, HND, VGT — edit in Admin → Airports)
  *
  * Every step is an upsert, so re-running is safe and never duplicates rows.
  * Prices are in cents. Change them in the admin, not here.
@@ -170,33 +170,40 @@ async function seedVehicles() {
 }
 
 async function seedAirports() {
-  // Example market. Replace in Admin → Airports (or edit here before first run).
+  // The Las Vegas airports. Edit or add more in Admin → Airports.
   const airports = [
     {
-      iata: "PHX",
-      name: "Phoenix Sky Harbor International Airport",
-      address: "3400 E Sky Harbor Blvd, Phoenix, AZ 85034",
-      lat: 33.4373,
-      lng: -112.0078,
+      iata: "LAS",
+      name: "Harry Reid International Airport",
+      address: "5757 Wayne Newton Blvd, Las Vegas, NV 89119",
+      lat: 36.084,
+      lng: -115.1537,
       sortOrder: 1,
     },
     {
-      iata: "SDL",
-      name: "Scottsdale Airport",
-      address: "15000 N Airport Dr, Scottsdale, AZ 85260",
-      lat: 33.6229,
-      lng: -111.9105,
+      iata: "HND",
+      name: "Henderson Executive Airport",
+      address: "3500 Executive Terminal Dr, Henderson, NV 89052",
+      lat: 35.9729,
+      lng: -115.1344,
       sortOrder: 2,
     },
     {
-      iata: "AZA",
-      name: "Phoenix–Mesa Gateway Airport",
-      address: "6033 S Sossaman Rd, Mesa, AZ 85212",
-      lat: 33.3078,
-      lng: -111.6555,
+      iata: "VGT",
+      name: "North Las Vegas Airport",
+      address: "2730 Airport Dr, North Las Vegas, NV 89032",
+      lat: 36.2106,
+      lng: -115.1944,
       sortOrder: 3,
     },
   ];
+
+  // The template's old Phoenix examples. Bookings store their own addresses,
+  // so removing these airports doesn't touch past trips.
+  const removed = await db.airport.deleteMany({
+    where: { iata: { in: ["PHX", "SDL", "AZA"] } },
+  });
+  if (removed.count) console.log(`✓ removed ${removed.count} Phoenix airports`);
 
   const airportServices = await db.serviceType.findMany({
     where: { airportLeg: { not: AirportLeg.NONE } },
@@ -206,7 +213,9 @@ async function seedAirports() {
   for (const a of airports) {
     await db.airport.upsert({
       where: { iata: a.iata },
-      update: {},
+      // Re-running keeps any edits made in the admin; it only makes sure the
+      // airport services list it.
+      update: { services: { connect: airportServices } },
       create: {
         ...a,
         services: { connect: airportServices },

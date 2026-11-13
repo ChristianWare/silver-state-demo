@@ -8,7 +8,8 @@ import styles from "./FlightTracker.module.css";
 import Link from "next/link";
 import { SITE } from "@/config/site";
 
-const PHX_AIRPORTS = ["PHX", "AZA", "SDL", "DVT"];
+// The Las Vegas airports we serve.
+const LOCAL_AIRPORTS = ["LAS", "HND", "VGT"];
 
 function formatTime(iso: string | null | undefined): string {
   if (!iso) return "—";
@@ -62,8 +63,8 @@ function getStatusLabel(status: string): { label: string; className: string } {
   return { label: status, className: styles.statusOnTime };
 }
 
-function isPhxRelated(iata: string | null | undefined): boolean {
-  return PHX_AIRPORTS.includes((iata ?? "").toUpperCase());
+function isLocalAirport(iata: string | null | undefined): boolean {
+  return LOCAL_AIRPORTS.includes((iata ?? "").toUpperCase());
 }
 
 type FlightResult =
@@ -128,8 +129,8 @@ function FlightCard({
   const arrGate = flight?.arrival.gate;
   const depDate = flight?.departure.scheduledTime;
 
-  const isArrPhx = isPhxRelated(flight?.arrival.airport.iata);
-  const isDepPhx = isPhxRelated(flight?.departure.airport.iata);
+  const isArrLocal = isLocalAirport(flight?.arrival.airport.iata);
+  const isDepLocal = isLocalAirport(flight?.departure.airport.iata);
 
   const delayMins = flight?.arrival.actualTime
     ? flight?.arrivalDelayMinutes
@@ -147,12 +148,12 @@ function FlightCard({
   let ctaLabel = "Book a Ride →";
 
   if (flight) {
-    if (isArrPhx) {
+    if (isArrLocal) {
       ctaHeadline = "Arriving in Phoenix?";
       ctaBody =
         "Skip the rideshare lines. Your personal driver will be waiting at baggage claim — tracking your flight in real time.";
       ctaLabel = "Book Airport Pickup →";
-    } else if (isDepPhx) {
+    } else if (isDepLocal) {
       ctaHeadline = "Flying out of Phoenix?";
       ctaBody =
         "We'll get you to the airport on time, every time — no surge pricing, no surprises.";

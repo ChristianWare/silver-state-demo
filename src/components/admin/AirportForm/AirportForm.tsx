@@ -304,7 +304,7 @@ export default function AirportForm({
         <input
           className='input'
           disabled={fieldsDisabled}
-          placeholder='Phoenix Sky Harbor'
+          placeholder='Harry Reid International Airport'
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -315,12 +315,12 @@ export default function AirportForm({
         <input
           className='input'
           disabled={fieldsDisabled}
-          placeholder='PHX'
+          placeholder='LAS'
           value={iata}
           onChange={(e) => setIata(e.target.value)}
         />
         <div className='miniNote'>
-          Use the 3-letter IATA code (PHX, LAX, etc.).
+          Use the 3-letter IATA code (LAS, HND, etc.).
         </div>
       </div>
 
@@ -330,7 +330,7 @@ export default function AirportForm({
           ref={addressRef}
           className='input'
           disabled={fieldsDisabled}
-          placeholder='3400 E Sky Harbor Blvd, Phoenix, AZ...'
+          placeholder='5757 Wayne Newton Blvd, Las Vegas, NV...'
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           autoComplete='off'

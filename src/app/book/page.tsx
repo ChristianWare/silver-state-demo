@@ -122,7 +122,7 @@ export default async function BookPage({
     fees: s.fees ?? [],
   }));
 
-  // A link like /book?trip=from-airport&airport=PHX opens the tool filled in.
+  // A link like /book?trip=from-airport&airport=LAS opens the tool filled in.
   const initialPrefill = bookingLinkPrefill(sp, serviceTypes);
 
   const vehicles = await db.vehicle.findMany({

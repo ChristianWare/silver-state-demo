@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
- * The site's look for Google Maps, used by the booking route map.
+ * Google Maps for the booking route map: the map options, the markers and
+ * the route line, in the site's colors. The map itself is Google's standard
+ * one; brandMapStyles is the styled version, not used right now.
  *
  * Colors are read from the global CSS variables at runtime (--gold,
  * --midnight, --ivory …), so a change in globals.css carries into the map
@@ -158,16 +160,16 @@ export function brandMapStyles(c: BrandMapColors): any[] {
   ];
 }
 
-/** Map options that go with the style: only the zoom buttons, no clutter. */
+/**
+ * Map options for the booking map: Google's standard map and controls (no
+ * custom style), opening on the Strip. brandMapStyles is kept above in case the styled
+ * look comes back: add `styles: brandMapStyles(c)` here to use it.
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function brandMapOptions(c: BrandMapColors): any {
   return {
     center: MAP_DEFAULT_CENTER,
     zoom: MAP_DEFAULT_ZOOM,
-    styles: brandMapStyles(c),
-    backgroundColor: c.ivory,
-    disableDefaultUI: true,
-    zoomControl: true,
-    clickableIcons: false,
     // One finger scrolls the page on phones; two fingers move the map.
     gestureHandling: "cooperative",
   };

@@ -1,8 +1,8 @@
 // src/lib/booking/linkPrefill.ts
 //
 // Links from other pages can open the booking tool already filled in:
-//   /book?trip=from-airport&airport=PHX  → an airport pickup at PHX
-//   /book?trip=to-airport&airport=PHX    → an airport drop-off at PHX
+//   /book?trip=from-airport&airport=LAS  → an airport pickup at LAS
+//   /book?trip=to-airport&airport=LAS    → an airport drop-off at LAS
 // Anything the link can't match (unknown airport, no airport service) is
 // ignored, so the tool simply opens empty.
 
