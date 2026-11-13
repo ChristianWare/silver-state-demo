@@ -1,164 +1,202 @@
-// src/app/book/track/page.tsx
-import styles from "./Track.module.css";
-import Nav from "@/components/shared/Nav/Nav";
-import LayoutWrapper from "@/components/shared/LayoutWrapper";
+// /book/track: where a ride request stands, from the link in the success
+// page and the confirmation email. Same layout as /book/success: the status
+// on the left, the progress panel on the right, then the trip details and
+// (for guests) an account card. A finished, cancelled or declined trip has
+// no progress, so its trip details take the right column instead.
+
+import type { Metadata } from "next";
 import Link from "next/link";
-import { db } from "@/lib/db";
-import { auth } from "../../../../auth";
 import { BookingStatus } from "@prisma/client";
+import SiteNav from "@/components/shared/SiteNav/SiteNav";
+import LayoutWrapper from "@/components/shared/LayoutWrapper";
+import PulseEyeBrow from "@/components/shared/PulseEyeBrow/PulseEyeBrow";
+import ArrowButton from "@/components/shared/ArrowButton/ArrowButton";
+import WhatHappensNext, {
+  type WhatHappensStep,
+} from "@/components/shared/WhatHappensNext/WhatHappensNext";
+import { db } from "@/lib/db";
+import { SITE } from "@/config/site";
+import { auth } from "../../../../auth";
 import { getCompanySettings } from "../../../../actions/admin/companySettings";
+import styles from "./Track.module.css";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type ProgressStep = {
-  number: string;
-  title: string;
-  description: string;
-  status: "complete" | "current" | "upcoming";
+export const metadata: Metadata = {
+  title: `Track your ride | ${SITE.name}`,
+  robots: { index: false, follow: false },
 };
 
-function getProgressSteps(bookingStatus: BookingStatus): ProgressStep[] {
-  const isPendingReview = bookingStatus === "PENDING_REVIEW";
-  const isPendingPayment = bookingStatus === "PENDING_PAYMENT";
-  const isDeclined = bookingStatus === "DECLINED";
-  const isPaidOrBeyond = [
-    "CONFIRMED",
-    "ASSIGNED",
-    "EN_ROUTE",
-    "ARRIVED",
-    "IN_PROGRESS",
-    "COMPLETED",
-  ].includes(bookingStatus);
-  const isCancelled =
-    bookingStatus === "CANCELLED" || bookingStatus === "NO_SHOW";
+const PAID_OR_BEYOND: BookingStatus[] = [
+  "CONFIRMED",
+  "ASSIGNED",
+  "EN_ROUTE",
+  "ARRIVED",
+  "IN_PROGRESS",
+  "COMPLETED",
+];
 
-  if (isDeclined || isCancelled) {
-    return [];
-  }
+const TERMINAL: BookingStatus[] = [
+  "COMPLETED",
+  "CANCELLED",
+  "NO_SHOW",
+  "DECLINED",
+  "REFUNDED",
+  "PARTIALLY_REFUNDED",
+];
+
+function getProgressSteps(status: BookingStatus): WhatHappensStep[] {
+  const isPendingReview = status === "PENDING_REVIEW";
+  const isPendingPayment = status === "PENDING_PAYMENT";
+  const isPaid = PAID_OR_BEYOND.includes(status);
 
   return [
     {
-      number: "✓",
-      title: "Request Received",
-      description: "We've got your booking request",
+      title: "Request received",
+      description:
+        "Your trip is in. You'll find it in your confirmation email.",
       status: "complete",
     },
     {
-      number: isPendingReview ? "⏳" : "✓",
-      title: "Review",
+      title: "Dispatch reviews",
       description: isPendingReview
-        ? "Our team is reviewing your request"
-        : "Your request has been reviewed",
+        ? "We're checking the route, the timing and the car."
+        : "Dispatch checked your trip and approved it.",
       status: isPendingReview ? "current" : "complete",
     },
     {
-      number: isPendingPayment ? "⏳" : isPaidOrBeyond ? "✓" : "3",
       title: "Payment",
       description: isPendingPayment
-        ? "Complete your payment to confirm"
-        : isPaidOrBeyond
-          ? "Payment received"
-          : "We'll send a payment link once approved",
-      status: isPendingPayment
-        ? "current"
-        : isPaidOrBeyond
-          ? "complete"
-          : "upcoming",
+        ? "Pay by the link to confirm your ride."
+        : isPaid
+          ? "Payment received. Thank you."
+          : "Once it's approved, we email you a secure link to pay.",
+      status: isPendingPayment ? "current" : isPaid ? "complete" : "upcoming",
     },
     {
-      number: isPaidOrBeyond ? "✓" : "4",
-      title: "Confirmed!",
-      description: isPaidOrBeyond
-        ? "Your ride is confirmed"
-        : "After payment, your ride is confirmed",
-      status: isPaidOrBeyond ? "complete" : "upcoming",
+      title: "Ride confirmed",
+      description: isPaid
+        ? "Your chauffeur and car are booked."
+        : "After payment, your chauffeur and car are booked.",
+      status: isPaid ? "complete" : "upcoming",
     },
   ];
 }
 
+type Tone = "pending" | "good" | "bad" | "done";
+
 function getStatusDisplay(status: BookingStatus): {
   label: string;
-  tone: "blue" | "yellow" | "green" | "red" | "gray";
+  tone: Tone;
   message: string;
 } {
   switch (status) {
     case "PENDING_REVIEW":
       return {
-        label: "Pending Review",
-        tone: "blue",
+        label: "Waiting for review",
+        tone: "pending",
         message:
-          "Our team is reviewing your request. We'll email you once it's approved.",
+          "Dispatch is checking your trip. We'll email you a payment link once it's approved, usually within 24 hours.",
       };
     case "PENDING_PAYMENT":
       return {
-        label: "Approved – Awaiting Payment",
-        tone: "yellow",
+        label: "Approved, waiting for payment",
+        tone: "pending",
         message:
-          "Great news! Your request has been approved. Check your email for the payment link.",
+          "Your trip is approved. Pay by the link in your email, or the button below, to confirm your ride.",
       };
     case "CONFIRMED":
       return {
         label: "Confirmed",
-        tone: "green",
-        message: "Your ride is confirmed! We'll assign a driver soon.",
+        tone: "good",
+        message:
+          "Your ride is confirmed. We'll assign your chauffeur before the pickup.",
       };
     case "ASSIGNED":
       return {
-        label: "Driver Assigned",
-        tone: "green",
-        message: "A driver has been assigned to your trip.",
+        label: "Chauffeur assigned",
+        tone: "good",
+        message: "Your chauffeur is assigned to your trip.",
       };
     case "EN_ROUTE":
       return {
-        label: "Driver En Route",
-        tone: "green",
-        message: "Your driver is on the way to pick you up!",
+        label: "On the way",
+        tone: "good",
+        message: "Your chauffeur is on the way to your pickup.",
       };
     case "ARRIVED":
       return {
-        label: "Driver Arrived",
-        tone: "green",
-        message: "Your driver has arrived at the pickup location.",
+        label: "Arrived",
+        tone: "good",
+        message: "Your chauffeur has arrived at the pickup.",
       };
     case "IN_PROGRESS":
       return {
-        label: "In Progress",
-        tone: "green",
-        message: "Your trip is in progress. Enjoy your ride!",
+        label: "In progress",
+        tone: "good",
+        message: "Your trip is under way. Enjoy the ride.",
       };
     case "COMPLETED":
       return {
         label: "Completed",
-        tone: "gray",
-        message: "This trip has been completed. Thank you for riding with us!",
+        tone: "done",
+        message: "This trip is complete. Thank you for riding with us.",
       };
     case "DECLINED":
       return {
         label: "Declined",
-        tone: "red",
+        tone: "bad",
         message:
-          "Unfortunately, we were unable to accommodate this request. Please contact us for more information.",
+          "We couldn't take this trip. Call dispatch and we'll help you find another time or option.",
       };
     case "CANCELLED":
       return {
         label: "Cancelled",
-        tone: "gray",
+        tone: "done",
         message: "This booking has been cancelled.",
+      };
+    case "REFUNDED":
+    case "PARTIALLY_REFUNDED":
+      return {
+        label: status === "REFUNDED" ? "Refunded" : "Partly refunded",
+        tone: "done",
+        message:
+          "This booking has been refunded. Your bank may take a few days to show it.",
       };
     case "NO_SHOW":
       return {
-        label: "No Show",
-        tone: "red",
+        label: "No-show",
+        tone: "bad",
         message: "This booking was marked as a no-show.",
       };
     default:
       return {
-        label: String(status).replace(/_/g, " "),
-        tone: "gray",
+        label: String(status).replace(/_/g, " ").toLowerCase(),
+        tone: "done",
         message: "",
       };
   }
+}
+
+function getNotice(status: BookingStatus) {
+  if (status === "PENDING_REVIEW") {
+    return (
+      <>
+        <strong>No payment yet.</strong> Nothing is charged until dispatch
+        approves your trip and you pay by the link.
+      </>
+    );
+  }
+  if (status === "PENDING_PAYMENT") {
+    return (
+      <>
+        <strong>One step left.</strong> Your ride is confirmed as soon as the
+        payment goes through.
+      </>
+    );
+  }
+  return null;
 }
 
 function formatDateTime(d: Date, timeZone: string) {
@@ -169,8 +207,13 @@ function formatDateTime(d: Date, timeZone: string) {
     year: "numeric",
     hour: "numeric",
     minute: "2-digit",
+    timeZoneName: "short",
     timeZone,
   }).format(d);
+}
+
+function plural(n: number, word: string) {
+  return `${n} ${word}${n === 1 ? "" : "s"}`;
 }
 
 export default async function TrackPage({
@@ -181,70 +224,81 @@ export default async function TrackPage({
   const sp = (await searchParams) ?? {};
   const t = (sp.t ?? "").trim();
 
-  if (!t) {
-    return (
-      <main>
-        <Nav background='white' />
-        <LayoutWrapper>
-          <section className={styles.container}>
-            <div className={styles.card}>
-              <h1 className={`${styles.heading} cardTitle h2`}>Track your request</h1>
-              <p className={styles.subheading}>Missing tracking token.</p>
-              <Link href='/book' className={styles.primary}>
-                Back to booking
-              </Link>
-            </div>
-          </section>
-        </LayoutWrapper>
-      </main>
-    );
-  }
+  const companySettings = await getCompanySettings();
+  const companyTz = companySettings.timezone;
+  const phone = companySettings.dispatchPhone || SITE.phone.display;
+  const phoneTel = companySettings.dispatchPhoneRaw
+    ? `+1${companySettings.dispatchPhoneRaw}`
+    : SITE.phone.tel;
 
-  const { timezone: companyTz } = await getCompanySettings();
+  const callLine = (
+    <p className={styles.note}>
+      Questions? Reply to your confirmation email or call dispatch on{" "}
+      <a href={`tel:${phoneTel}`} className={styles.noteLink}>
+        {phone}
+      </a>
+      .
+    </p>
+  );
 
-  const booking = await db.booking.findFirst({
-    where: { guestClaimToken: t },
-    select: {
-      id: true,
-      status: true,
-      pickupAt: true,
-      pickupAddress: true,
-      dropoffAddress: true,
-      passengers: true,
-      luggage: true,
-      createdAt: true,
-      guestEmail: true,
-      guestPhone: true,
-      totalCents: true,
-      currency: true,
-      serviceType: { select: { name: true } },
-      vehicle: { select: { name: true } },
-      payment: {
+  const booking = t
+    ? await db.booking.findFirst({
+        where: { guestClaimToken: t },
         select: {
+          id: true,
           status: true,
-          checkoutUrl: true,
+          pickupAt: true,
+          pickupAddress: true,
+          dropoffAddress: true,
+          passengers: true,
+          luggage: true,
+          serviceType: { select: { name: true } },
+          vehicle: { select: { name: true } },
+          payment: { select: { checkoutUrl: true } },
         },
-      },
-    },
-  });
+      })
+    : null;
 
+  // No token, or a token that doesn't match a booking.
   if (!booking) {
     return (
       <main>
-        <Nav background='white' />
-        <LayoutWrapper>
-          <section className={styles.container}>
-            <div className={styles.card}>
-              <h1 className={`${styles.heading} cardTitle h2`}>Not found</h1>
-              <p className={styles.subheading}>
-                This tracking link is invalid or expired.
-              </p>
-              <Link href='/book' className={styles.primary}>
-                Back to booking
-              </Link>
+        <SiteNav variant='solid' />
+        <section className={styles.section}>
+          <LayoutWrapper>
+            <div className={styles.grid}>
+              <div className={styles.content}>
+                <PulseEyeBrow text='Ride status' />
+                <h1 className={styles.heading}>
+                  {t ? (
+                    <>
+                      Link not
+                      <br />
+                      found
+                    </>
+                  ) : (
+                    <>
+                      Track your
+                      <br />
+                      ride
+                    </>
+                  )}
+                </h1>
+                <p className={styles.intro}>
+                  {t
+                    ? "This tracking link is invalid or has expired. Use the link in your confirmation email, or book a new ride."
+                    : "Open the tracking link in your confirmation email to see where your request stands."}
+                </p>
+                <ArrowButton
+                  href='/book'
+                  text='Back to booking'
+                  variant='midnight'
+                />
+                {callLine}
+              </div>
             </div>
-          </section>
-        </LayoutWrapper>
+          </LayoutWrapper>
+        </section>
       </main>
     );
   }
@@ -254,147 +308,141 @@ export default async function TrackPage({
 
   const status = booking.status as BookingStatus;
   const statusDisplay = getStatusDisplay(status);
-  const progressSteps = getProgressSteps(status);
+  const isTerminal = TERMINAL.includes(status);
   const confirmationCode = booking.id.slice(0, 8).toUpperCase();
+  const checkoutUrl =
+    status === "PENDING_PAYMENT" ? booking.payment?.checkoutUrl : null;
+  const nextTrack = `?next=${encodeURIComponent(`/book/track?t=${t}`)}`;
 
-  const showPaymentButton =
-    status === "PENDING_PAYMENT" && booking.payment?.checkoutUrl;
+  const tripDetails = (
+    <div className={styles.card}>
+      <p className={styles.cardTitle}>Trip details</p>
+      <dl className={styles.trip}>
+        <div className={styles.tripRow}>
+          <dt className={styles.tripLabel}>Pickup</dt>
+          <dd className={styles.tripValue}>
+            {formatDateTime(booking.pickupAt, companyTz)}
+          </dd>
+        </div>
+        <div className={styles.tripRow}>
+          <dt className={styles.tripLabel}>Service</dt>
+          <dd className={styles.tripValue}>
+            {booking.serviceType?.name ?? "—"}
+            {booking.vehicle?.name ? `, ${booking.vehicle.name}` : ""}
+          </dd>
+        </div>
+        <div className={styles.tripRow}>
+          <dt className={styles.tripLabel}>Travelers</dt>
+          <dd className={styles.tripValue}>
+            {plural(booking.passengers, "passenger")},{" "}
+            {plural(booking.luggage, "bag")}
+          </dd>
+        </div>
+        <div className={styles.tripRow}>
+          <dt className={styles.tripLabel}>From</dt>
+          <dd className={styles.tripValue}>{booking.pickupAddress}</dd>
+        </div>
+        <div className={styles.tripRow}>
+          <dt className={styles.tripLabel}>To</dt>
+          <dd className={styles.tripValue}>{booking.dropoffAddress}</dd>
+        </div>
+      </dl>
+    </div>
+  );
 
-  const isTerminal = ["COMPLETED", "CANCELLED", "NO_SHOW", "DECLINED"].includes(
-    status,
+  const accountCard = isAuthed ? (
+    <div className={styles.card}>
+      <p className={styles.cardTitle}>All your rides</p>
+      <p className={styles.cardCopy}>
+        See this trip with the rest of your bookings, payments and receipts.
+      </p>
+      <div className={styles.cardActions}>
+        <ArrowButton
+          href='/dashboard/trips'
+          text='View all trips'
+          variant='midnight'
+        />
+      </div>
+    </div>
+  ) : (
+    <div className={styles.card}>
+      <p className={styles.cardTitle}>Keep your rides in one place</p>
+      <p className={styles.cardCopy}>
+        Create an account to follow your requests and updates, and book faster
+        next time.
+      </p>
+      <div className={styles.cardActions}>
+        <ArrowButton
+          href={`/register${nextTrack}`}
+          text='Create account'
+          variant='midnight'
+        />
+        <Link href={`/login${nextTrack}`} className={styles.outline}>
+          Sign in
+        </Link>
+      </div>
+    </div>
   );
 
   return (
     <main>
-      <Nav background='white' />
-      <LayoutWrapper>
-        <section className={styles.container}>
-          <div className={styles.card}>
-            <h1 className={`${styles.heading} cardTitle h2`}>Request Status</h1>
+      <SiteNav variant='solid' />
+      <section className={styles.section}>
+        <LayoutWrapper>
+          <div className={styles.grid}>
+            <div className={styles.content}>
+              <PulseEyeBrow text='Track your ride' />
+              {/* Two lines, set by the break; they never wrap. */}
+              <h1 className={styles.heading}>
+                Request
+                <br />
+                status
+              </h1>
+              {statusDisplay.message ? (
+                <p className={styles.intro}>{statusDisplay.message}</p>
+              ) : null}
 
-            <div className={styles.confirmationCode}>
-              <span className={styles.confirmationLabel}>Confirmation #</span>
-              <span className={styles.confirmationValue}>
-                {confirmationCode}
-              </span>
+              <dl className={styles.details}>
+                <div className={styles.detail}>
+                  <dt className={styles.detailLabel}>Confirmation</dt>
+                  <dd className={styles.detailValue}>{confirmationCode}</dd>
+                </div>
+                <div className={styles.detail}>
+                  <dt className={styles.detailLabel}>Status</dt>
+                  <dd className={styles.detailValue}>
+                    <span
+                      className={`${styles.statusDot} ${styles[statusDisplay.tone]}`}
+                      aria-hidden='true'
+                    />
+                    {statusDisplay.label}
+                  </dd>
+                </div>
+              </dl>
+
+              {checkoutUrl ? (
+                <ArrowButton href={checkoutUrl} text='Pay and confirm' />
+              ) : null}
+
+              {callLine}
             </div>
 
-            <div
-              className={`${styles.statusBadge} ${styles[`status_${statusDisplay.tone}`]}`}
-            >
-              {statusDisplay.label}
-            </div>
-
-            {statusDisplay.message && (
-              <p className={styles.statusMessage}>{statusDisplay.message}</p>
+            {isTerminal ? (
+              tripDetails
+            ) : (
+              <WhatHappensNext
+                title='Progress'
+                steps={getProgressSteps(status)}
+                notice={getNotice(status)}
+              />
             )}
-
-            {showPaymentButton && (
-              <div className={styles.paymentSection}>
-                <a
-                  href={booking.payment!.checkoutUrl!}
-                  className={styles.paymentButton}
-                >
-                  Complete Payment →
-                </a>
-              </div>
-            )}
-
-            {!isTerminal && progressSteps.length > 0 && (
-              <div className={styles.progressSection}>
-                <h3 className={styles.progressTitle}>Progress</h3>
-                <div className={styles.progressSteps}>
-                  {progressSteps.map((step, index) => (
-                    <div key={index} className={styles.progressStep}>
-                      <div
-                        className={`${styles.stepNumber} ${styles[`step_${step.status}`]}`}
-                      >
-                        {step.number}
-                      </div>
-                      <div className={styles.stepContent}>
-                        <div className={styles.stepTitle}>{step.title}</div>
-                        <div className={styles.stepDescription}>
-                          {step.description}
-                        </div>
-                      </div>
-                      {index < progressSteps.length - 1 && (
-                        <div className={styles.stepConnector} />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className={styles.detailsSection}>
-              <h3 className={styles.detailsTitle}>Trip Details</h3>
-              <div className={styles.grid}>
-                <div className={styles.gridItem}>
-                  <div className={styles.k}>📅 Pickup</div>
-                  <div className={styles.v}>
-                    {formatDateTime(booking.pickupAt, companyTz)}
-                  </div>
-                </div>
-                <div className={styles.gridItem}>
-                  <div className={styles.k}>🚗 Service</div>
-                  <div className={styles.v}>
-                    {booking.serviceType?.name ?? "—"} •{" "}
-                    {booking.vehicle?.name ?? "—"}
-                  </div>
-                </div>
-                <div className={styles.gridItem}>
-                  <div className={styles.k}>👥 Travelers</div>
-                  <div className={styles.v}>
-                    {booking.passengers} passenger
-                    {booking.passengers !== 1 ? "s" : ""} • {booking.luggage}{" "}
-                    bag{booking.luggage !== 1 ? "s" : ""}
-                  </div>
-                </div>
-                <div className={styles.gridItem}>
-                  <div className={styles.k}>📍 Pickup Location</div>
-                  <div className={styles.v}>{booking.pickupAddress}</div>
-                </div>
-                <div className={styles.gridItem}>
-                  <div className={styles.k}>🏁 Dropoff Location</div>
-                  <div className={styles.v}>{booking.dropoffAddress}</div>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.actions}>
-              {!isAuthed ? (
-                <>
-                  <p className={styles.accountPrompt}>
-                    Create an account to manage all your bookings in one place.
-                  </p>
-                  <div className={styles.actionButtons}>
-                    <Link
-                      href={`/register?next=${encodeURIComponent(`/book/track?t=${t}`)}`}
-                      className={styles.primary}
-                    >
-                      Create account
-                    </Link>
-                    <Link
-                      href={`/login?next=${encodeURIComponent(`/book/track?t=${t}`)}`}
-                      className={styles.secondary}
-                    >
-                      Sign in
-                    </Link>
-                  </div>
-                </>
-              ) : (
-                <Link href='/dashboard/trips' className={styles.primary}>
-                  View all trips
-                </Link>
-              )}
-            </div>
-
-            <div className={styles.note}>
-              Questions? Reply to your confirmation email or contact support.
-            </div>
           </div>
-        </section>
-      </LayoutWrapper>
+
+          <div className={styles.extras}>
+            {isTerminal ? null : tripDetails}
+            {accountCard}
+          </div>
+        </LayoutWrapper>
+      </section>
     </main>
   );
 }

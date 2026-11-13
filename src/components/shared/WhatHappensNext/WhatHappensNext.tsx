@@ -1,16 +1,18 @@
 // After a ride request: the four steps from request to confirmed ride, in
-// the same panel as the booking page's "How booking works". The first step
-// is done, the second is where the request is now.
+// the same panel as the booking page's "How booking works". By default the
+// first step is done and the second is where the request is now (the
+// success page). The track page passes its own steps from the live status.
 
+import type { ReactNode } from "react";
 import styles from "./WhatHappensNext.module.css";
 
-type Step = {
+export type WhatHappensStep = {
   title: string;
   description: string;
   status: "complete" | "current" | "upcoming";
 };
 
-const STEPS: Step[] = [
+const DEFAULT_STEPS: WhatHappensStep[] = [
   {
     title: "Request received",
     description: "Your trip is in. You'll find it in your confirmation email.",
@@ -33,18 +35,34 @@ const STEPS: Step[] = [
   },
 ];
 
-const STATUS_LABEL: Record<Step["status"], string> = {
+const STATUS_LABEL: Record<WhatHappensStep["status"], string> = {
   complete: "Done",
   current: "Now",
   upcoming: "",
 };
 
-export default function WhatHappensNext() {
+const DEFAULT_NOTICE = (
+  <>
+    <strong>No payment yet.</strong> Nothing is charged until dispatch approves
+    your trip and you pay by the link.
+  </>
+);
+
+export default function WhatHappensNext({
+  title = "What happens next",
+  steps = DEFAULT_STEPS,
+  notice = DEFAULT_NOTICE,
+}: {
+  title?: string;
+  steps?: WhatHappensStep[];
+  /** A line under the steps; null for none. */
+  notice?: ReactNode;
+} = {}) {
   return (
     <div className={styles.panel}>
-      <p className={styles.title}>What happens next</p>
+      <p className={styles.title}>{title}</p>
       <ol className={styles.steps}>
-        {STEPS.map((step, i) => (
+        {steps.map((step, i) => (
           <li
             key={step.title}
             className={`${styles.step} ${styles[step.status]}`}
@@ -82,10 +100,7 @@ export default function WhatHappensNext() {
           </li>
         ))}
       </ol>
-      <p className={styles.notice}>
-        <strong>No payment yet.</strong> Nothing is charged until dispatch
-        approves your trip and you pay by the link.
-      </p>
+      {notice ? <p className={styles.notice}>{notice}</p> : null}
     </div>
   );
 }
