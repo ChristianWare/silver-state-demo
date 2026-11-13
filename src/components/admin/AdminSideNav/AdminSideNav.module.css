@@ -125,12 +125,12 @@
 
 .navLink.navLinkActive {
   background-color: var(--accent);
-  color: var(--white);
+  /* color: var(--white); */
 }
 
-.navLinkActive .navIcon {
+/* .navLinkActive .navIcon {
   color: var(--white);
-}
+} */
 
 .tooltip {
   display: none;
@@ -351,12 +351,12 @@
 @media (hover: hover) {
   .navLink:hover {
     background-color: var(--accent);
-    color: var(--white);
+    /* color: var(--white); */
   }
 
-  .navLink:hover .navIcon {
+  /* .navLink:hover .navIcon {
     color: var(--white);
-  }
+  } */
 
   .signOutBtn:hover {
     background-color: var(--black400);
