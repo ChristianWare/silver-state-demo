@@ -10,6 +10,8 @@
     "typecheck": "tsc --noEmit",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
+    "db:demo": "tsx prisma/seed-demo.ts",
+    "db:demo:clear": "tsx prisma/seed-demo.ts --clear",
     "db:studio": "prisma studio",
     "postinstall": "prisma generate"
   },

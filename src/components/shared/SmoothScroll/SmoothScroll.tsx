@@ -1,30 +1,42 @@
 "use client";
 
-// Smooth scrolling for the marketing site, using Lenis. Mouse-wheel and trackpad scrolling glide to a stop; touch
-// scrolling on phones stays native. Wraps the app in the root layout.
+// Smooth scrolling for the marketing site, using Lenis. Mouse-wheel and
+// trackpad scrolling glide to a stop; touch scrolling on phones stays
+// native. Wraps the app in the root layout.
 //
-// The admin, portals, booking tool and checkout keep normal browser
-// scrolling: they're full of scrollable tables, lists, modals and map
-// popups that are easier to use without it.
+// The admin, the customer, driver and corporate dashboards, the booking
+// tool and checkout don't run Lenis at all, and they turn off the global
+// `scroll-behavior: smooth` too (via data-native-scroll on <html>), so
+// page changes, keyboard scrolling and in-page jumps are instant. They're
+// full of scrollable tables, lists, modals and map popups that are easier
+// to use with plain browser scrolling.
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 
 const NATIVE_SCROLL_ROUTES =
   /^\/(admin|dashboard|driver-dashboard|corporate|book|pay)(\/|$)/;
 
-const onNativeRoute = () =>
-  typeof window !== "undefined" &&
-  NATIVE_SCROLL_ROUTES.test(window.location.pathname);
-
 export default function SmoothScroll({ children }: { children: ReactNode }) {
+  const pathname = usePathname() ?? "/";
+  const native = NATIVE_SCROLL_ROUTES.test(pathname);
+
   // People who turn off motion on their device keep normal scrolling.
   const [reducedMotion] = useState(
     () =>
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (native) html.setAttribute("data-native-scroll", "");
+    else html.removeAttribute("data-native-scroll");
+  }, [native]);
+
+  if (native) return <>{children}</>;
 
   return (
     <ReactLenis
@@ -36,8 +48,6 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
         smoothWheel: !reducedMotion,
         // Links to a spot on the same page (href='#services') glide there.
         anchors: true,
-        // Hand scrolling back to the browser on the app routes above.
-        prevent: () => onNativeRoute(),
         // Leave sideways gestures alone, so rows that scroll sideways
         // still work with a trackpad.
         virtualScroll: ({ deltaX, deltaY }) =>

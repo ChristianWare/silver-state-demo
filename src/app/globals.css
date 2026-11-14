@@ -66,6 +66,14 @@
   /* overscroll-behavior: none; */
 }
 
+/* The admin, dashboards, booking tool and checkout scroll plainly: no
+   gliding on page changes, keyboard scrolling or in-page jumps. Set by
+   SmoothScroll. */
+html[data-native-scroll],
+html[data-native-scroll] * {
+  scroll-behavior: auto !important;
+}
+
 html {
   font-size: 62.5%;
   height: 100%;
