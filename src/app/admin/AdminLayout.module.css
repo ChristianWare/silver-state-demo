@@ -1,5 +1,5 @@
 .container {
-  padding: 10rem 0rem;
+  padding: 4rem 0rem 10rem;
 }
 
 .content {
@@ -79,4 +79,306 @@
 :global(body.modal-open) .right {
   position: relative;
   z-index: -999;
+}
+/* ─────────────────────────────────────────────────────────────────────
+   The site's look for every admin page. The pages share global classes
+   (.cardTitle, .miniNote, .badge, .input, .primaryBtn …); they're
+   restyled here, inside the admin area only, the same way the booking
+   tool restyles them. Layout and behaviour don't change.
+   ───────────────────────────────────────────────────────────────────── */
+
+.right {
+  /* Admin pages tint cards and header bars with these light blues; in the
+     admin they take the site's ivory and champagne instead. */
+  --lighterBlue: var(--ivory);
+  --lightBlue: var(--champagne);
+
+  font-family: var(--SofiaSansRegular);
+  color: var(--midnight);
+}
+
+/* .h5 and .h6 have no size in globals.css, so a heading with them falls
+   back to its tag's size (an h3 with .h6 shows at 48px). Give them one. */
+.right :global(.h5) {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.right :global(.h6) {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* Buttons, selects, labels and table cells don't pick up the page font on
+   their own. */
+.right :where(button, select, label, textarea, input, dd, dt, li, td, th) {
+  font-family: inherit;
+}
+
+/* Page titles: the h3 size, not the marketing h2. */
+.right :global(h1.h2) {
+  font-size: 48px;
+  line-height: 0.9em;
+  letter-spacing: normal;
+}
+
+/* Card titles: condensed caps over a midnight rule, like the site's
+   panels, in place of the cream bar. */
+.right :global(.cardTitle) {
+  padding: 0 0 1.2rem;
+  border-bottom: 2px solid var(--midnight);
+  border-radius: 0;
+  background-color: transparent;
+  font-family: var(--SofiaSansExtraCondensedExtraBold);
+  line-height: 0.95em;
+  text-transform: uppercase;
+  color: var(--midnight);
+}
+
+.right :global(.emptyTitle) {
+  font-family: var(--SofiaSansBold);
+  font-size: 1.3rem;
+  font-weight: normal;
+  letter-spacing: 0.06em;
+  color: var(--midnight);
+}
+
+.right :global(.emptyTitleSmall) {
+  font-family: var(--SofiaSansBold);
+  font-weight: normal;
+  color: var(--midnight);
+}
+
+/* The smaller title sizes are section and field labels: small bold caps
+   over a light rule; on a <label>, no rule at all. */
+.right :global(.cardTitle.h5),
+.right :global(.cardTitle.h6) {
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--stroke);
+  font-family: var(--SofiaSansBold);
+  font-size: 1.3rem;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+
+.right label:global(.cardTitle) {
+  padding: 0;
+  border-bottom: none;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+/* A card title flagged with a border (alerts waiting) keeps just the
+   rule, in red. */
+.right :global(.cardTitle.redBorder) {
+  border: none;
+  border-bottom: 2px solid var(--danger);
+}
+
+/* "View all bookings →" and back links: midnight with an accent rule, as on
+   the rest of the site, in place of blue. */
+.right :global(.backBtn) {
+  border-bottom-color: var(--gold);
+  font-family: var(--SofiaSansBold);
+  font-weight: normal;
+  color: var(--midnight);
+}
+
+.right :global(.backBtn):hover {
+  color: var(--bronze);
+}
+
+.right :global(.underline) {
+  border-bottom-width: 1px;
+}
+
+.right :global(.miniNote) {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--slate);
+  opacity: 1;
+}
+
+.right :global(.subheading) {
+  font-weight: normal;
+  color: var(--slate);
+}
+
+.right :global(.emptySmall),
+.right th {
+  letter-spacing: normal;
+}
+
+.right th {
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--steel);
+  opacity: 1;
+}
+
+.right :global(.box) {
+  border-width: 1px;
+  border-radius: 10px;
+}
+
+/* Tags: small bold caps, as on the progress panel. */
+.right :global(.badge),
+.right :global(.pill) {
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.06em;
+}
+
+.right :global(.label) {
+  font-family: var(--SofiaSansBold);
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--midnight);
+}
+
+/* ── Inputs and selects: the booking tool's fields ── */
+
+.right :global(.input),
+.right :global(.inputBorder),
+.right :global(.select),
+.right :global(.selectBorder) {
+  min-height: 44px;
+  padding: 0 1.2rem;
+  border: 1px solid var(--stroke);
+  border-radius: 4px;
+  background-color: var(--white);
+  font-family: var(--SofiaSansRegular);
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--midnight);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.right textarea:global(.input),
+.right textarea:global(.inputBorder) {
+  padding: 1rem 1.2rem;
+  line-height: 1.5;
+}
+
+.right :global(.select),
+.right :global(.selectBorder) {
+  padding-right: 4rem;
+  background-position: right 1.2rem center;
+  background-size: 16px 16px;
+}
+
+.right :global(.input):hover:not(:disabled),
+.right :global(.inputBorder):hover:not(:disabled),
+.right :global(.select):hover:not(:disabled),
+.right :global(.selectBorder):hover:not(:disabled) {
+  border-color: var(--steel);
+}
+
+.right :global(.input):focus,
+.right :global(.inputBorder):focus,
+.right :global(.select):focus,
+.right :global(.selectBorder):focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(255, 159, 0, 0.25);
+}
+
+.right :global(.input):disabled,
+.right :global(.inputBorder):disabled,
+.right :global(.select):disabled,
+.right :global(.selectBorder):disabled {
+  background-color: var(--ivory);
+  color: var(--steel);
+}
+
+/* ── Small action buttons (.primaryBtn …): square, Sofia Sans ── */
+
+.right :global(.primaryBtn),
+.right :global(.secondaryBtn),
+.right :global(.tertiaryBtn),
+.right :global(.warningBtn),
+.right :global(.dangerBtn),
+.right :global(.neutralBtn),
+.right :global(.goodBtn),
+.right :global(.blueBtn),
+.right :global(.goodBtnii) {
+  min-height: 40px;
+  padding: 0 1.4rem;
+  border-radius: 4px;
+  font-family: var(--SofiaSansRegular);
+  font-size: 1.5rem;
+  font-weight: normal;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.right :global(.primaryBtn) {
+  border-color: var(--midnight);
+  background: var(--midnight);
+  color: var(--ivory);
+}
+
+.right :global(.primaryBtn):hover {
+  border-color: var(--navy);
+  background: var(--navy);
+}
+
+.right :global(.secondaryBtn),
+.right :global(.neutralBtn),
+.right :global(.blueBtn),
+.right :global(.tertiaryBtn) {
+  border-color: var(--stroke);
+  background: var(--white);
+  color: var(--midnight);
+}
+
+.right :global(.secondaryBtn):hover,
+.right :global(.neutralBtn):hover,
+.right :global(.blueBtn):hover,
+.right :global(.tertiaryBtn):hover {
+  border-color: var(--midnight);
+}
+
+.right :global(.dangerBtn) {
+  border-color: var(--danger);
+  background: var(--white);
+  color: var(--danger);
+}
+
+.right :global(.dangerBtn):hover {
+  background: var(--danger);
+  color: var(--white);
+}
+
+.right :global(.goodBtn),
+.right :global(.goodBtnii) {
+  border-color: var(--darkGreen);
+  background: var(--darkGreen);
+  color: var(--white);
+}
+
+.right :global(.goodBtn):hover,
+.right :global(.goodBtnii):hover {
+  border-color: #075f39;
+  background: #075f39;
+}
+
+.right :global(.warningBtn) {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--midnight);
+}
+
+.right :global(.warningBtn):hover {
+  border-color: var(--midnight);
 }

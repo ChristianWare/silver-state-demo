@@ -96,7 +96,7 @@ export default function InquiryActionsClient({
           {!isPending && (
             <Button
               text='Cancel'
-              btnType='redReg'
+              btnType='grayReg'
               type='button'
               onClick={handleCancelNotes}
             />

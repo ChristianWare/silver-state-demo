@@ -119,7 +119,7 @@ export default function DashboardProfile({
           {!emailPending && (
             <Button
               text='Cancel'
-              btnType='redReg'
+              btnType='grayReg'
               type='button'
               onClick={handleEmailCancel}
             />
@@ -221,7 +221,7 @@ export default function DashboardProfile({
           {!namePending && (
             <Button
               text='Cancel'
-              btnType='redReg'
+              btnType='grayReg'
               type='button'
               onClick={handleNameCancel}
             />
@@ -321,7 +321,7 @@ export default function DashboardProfile({
           {!phonePending && (
             <Button
               text='Cancel'
-              btnType='redReg'
+              btnType='grayReg'
               type='button'
               onClick={handlePhoneCancel}
             />
@@ -434,7 +434,7 @@ export default function DashboardProfile({
           {!pwPending && (
             <Button
               text='Cancel'
-              btnType='redReg'
+              btnType='grayReg'
               type='button'
               onClick={handlePwCancel}
             />

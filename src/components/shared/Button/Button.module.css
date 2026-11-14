@@ -1,23 +1,56 @@
+/* The shared button, in the site's style: square 4px corners, Sofia Sans,
+   and the arrow in a small square box (the ArrowButton look).
+
+   Variants, by what they're used for:
+   - Main action, midnight:   black, blackAdmin, blackReg, blackRegSmall,
+                              primary
+   - Booking calls, accent:    red, accent  (New booking, Book a ride)
+   - Save / approve, green:    green, greenReg, greenii
+   - Second action, outline:  gray, grayReg, cream, lightRed, blackOutline,
+                              blue, blueReg
+   - Destructive, red outline: redReg  (Decline, Delete, Remove…)
+   - On dark backgrounds:      white, transparent, underlinedWhite
+   The "Reg" variants are the compact ones used in forms and tables. */
 .btn {
   position: relative;
   overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 1.8rem;
-  text-align: center;
-  /* border-radius: 5px; */
-  border-radius: 50px;
-  padding: 6px 6px 6px 18px;
+  gap: 1.6rem;
+  min-height: 52px;
+  padding: 6px 6px 6px 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-family: var(--SofiaSansRegular);
   font-size: 16px;
-  font-weight: 500;
-  letter-spacing: -0.8px;
-  transition: all 0.2s ease-in-out;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 1;
+  text-align: center;
   white-space: nowrap;
   cursor: pointer;
-  /* text-transform: capitalize; */
-  line-height: 1;
   user-select: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Without an icon, the text sits evenly in the button. */
+.btn:not(:has(.arrowContainer, .plusContainer, .optionalIcon)) {
+  padding: 0 20px;
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .btn:link,
@@ -72,15 +105,18 @@
 /* ================================
    Arrow Slide Animation Styles
    ================================ */
+/* The square icon box: accent with a midnight icon unless a variant says
+   otherwise. */
 .arrowContainer,
 .plusContainer {
-  background-color: var(--white);
-  /* border-radius: 4px 4px 10px; */
-  border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  background-color: var(--gold);
   overflow: hidden;
 }
 
@@ -107,16 +143,17 @@
 }
 
 .arrow {
-  color: var(--black);
+  width: 15px;
+  height: 15px;
+  color: var(--midnight);
   transform: rotate(90deg);
 }
 
 .optionalIcon {
-  color: var(--black);
   position: relative;
-  top: 2px;
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  color: var(--midnight);
 }
 
 .plusContainer {
@@ -130,245 +167,311 @@
 /* ================================
    Button Variants
    ================================ */
+
+/* ── On dark backgrounds ── */
 .underlinedWhite,
 .underlinedWhite:link,
 .underlinedWhite:visited {
+  min-height: 0;
+  padding: 5px 0;
+  border-radius: 0;
   background-color: transparent;
   color: var(--white);
-  /* border-bottom: 1px solid var(--white); */
-  border-radius: 0px;
-  padding: 5px 0px;
   font-size: 2rem;
-
   justify-content: space-between;
 }
 
 .underlinedBlack,
 .underlinedBlack:link,
 .underlinedBlack:visited {
+  min-height: 0;
+  padding: 5px 0;
+  border-radius: 0;
   background-color: transparent;
-  color: var(--black);
+  color: var(--midnight);
   font-size: 2rem;
-  /* border-bottom: 3px solid var(--stroke); */
-  border-radius: 0px;
-  padding: 5px 0px;
   justify-content: space-between;
-}
-
-.underlinedBlack .arrowContainer {
-  background-color: var(--accent);
-}
-
-.underlinedBlack .arrowContainer .arrow {
-  color: var(--white);
 }
 
 .underlinedBlackii,
 .underlinedBlackii:link,
 .underlinedBlackii:visited {
+  min-height: 0;
+  padding: 5px 0 10px;
+  border-radius: 0;
+  border-bottom: 1px solid var(--midnight);
   background-color: transparent;
-  color: var(--black);
+  color: var(--midnight);
   font-size: 2rem;
-  border-bottom: 1px solid var(--black);
-  border-radius: 0px;
-  padding: 5px 0px;
-  padding-bottom: 10px;
   justify-content: space-between;
 }
 
 .underlinedBlackii .arrowContainer {
-  background-color: var(--black);
+  background-color: var(--midnight);
 }
 
 .underlinedBlackii .arrowContainer .arrow {
-  color: var(--white);
-}
-
-.black,
-.black:link,
-.black:visited {
-  background-color: var(--black);
-  color: var(--white);
-  border: 1px solid var(--black);
-  display: flex;
-  justify-content: space-between;
-}
-
-.blackAdmin,
-.blackAdmin:link,
-.blackAdmin:visited {
-  background-color: var(--black);
-  color: var(--white);
-  border: 1px solid var(--black);
-  display: flex;
-  justify-content: space-between;
+  color: var(--gold);
 }
 
 .white,
 .white:link,
 .white:visited {
-  background-color: var(--white);
-  color: var(--black);
-  border: 1px solid var(--white);
   display: flex;
   justify-content: space-between;
+  border-color: var(--white);
+  background-color: var(--white);
+  color: var(--midnight);
 }
 
 .white .arrowContainer {
-  background-color: var(--black);
+  background-color: var(--navy);
 }
 
 .white .arrowContainer .arrow {
-  color: var(--white);
+  color: var(--gold);
 }
 
-.gray,
-.gray:link,
-.gray:visited {
-  background-color: var(--stroke);
-  color: var(--black);
-  border: 1px solid var(--strokeii);
+.transparent,
+.transparent:link,
+.transparent:visited {
   display: flex;
   justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--white) !important;
 }
 
+/* ── Main action: midnight ── */
+.black,
+.black:link,
+.black:visited,
+.blackAdmin,
+.blackAdmin:link,
+.blackAdmin:visited,
+.primary,
+.primary:link,
+.primary:visited {
+  display: flex;
+  justify-content: space-between;
+  border-color: var(--midnight);
+  background-color: var(--midnight);
+  color: var(--ivory);
+}
+
+/* ── Booking calls: accent, midnight box with an accent arrow ── */
 .red,
 .red:link,
-.red:visited {
-  background-color: var(--accent);
-  color: var(--white);
-  border: 1px solid var(--accent600);
+.red:visited,
+.accent,
+.accent:link,
+.accent:visited {
   display: flex;
   justify-content: space-between;
+  border-color: var(--gold);
+  background-color: var(--gold);
+  color: var(--midnight);
 }
 
+.red .arrowContainer,
+.red .plusContainer,
+.accent .arrowContainer,
+.accent .plusContainer {
+  background-color: var(--midnight);
+}
+
+.red .arrow,
+.red .optionalIcon,
+.accent .arrow,
+.accent .optionalIcon {
+  color: var(--gold);
+}
+
+/* ── Save / approve: green ── */
 .green,
 .green:link,
-.green:visited {
-  background-color: var(--green);
-  color: var(--white);
-  border: 1px solid var(--darkGreen);
-  display: flex;
-  justify-content: space-between;
-}
-
+.green:visited,
 .greenii,
 .greenii:link,
 .greenii:visited {
-  background-color: var(--lighterGreen);
-  color: var(--green);
-  font-weight: 700;
-  letter-spacing: normal;
-  border: 1px solid var(--darkGreen);
   display: flex;
   justify-content: space-between;
+  border-color: var(--darkGreen);
+  background-color: var(--darkGreen);
+  color: var(--white);
 }
 
-.lightRed,
-.lightRed:link,
-.lightRed:visited {
-  background-color: #0000001a;
-  color: var(--black);
-  border: 1px solid var(--accent);
-  display: flex;
-  justify-content: space-between;
+.green .arrowContainer,
+.green .plusContainer,
+.greenii .arrowContainer,
+.greenii .plusContainer {
+  background-color: var(--white);
 }
 
+.green .arrow,
+.green .optionalIcon,
+.greenii .arrow,
+.greenii .optionalIcon {
+  color: var(--darkGreen);
+}
+
+/* ── Second action: white with an outline ── */
+.gray,
+.gray:link,
+.gray:visited,
 .cream,
 .cream:link,
-.cream:visited {
-  background-color: var(--cream);
-  color: var(--black);
-  border: 1px solid var(--strokeii);
+.cream:visited,
+.lightRed,
+.lightRed:link,
+.lightRed:visited,
+.blackOutline,
+.blackOutline:link,
+.blackOutline:visited,
+.blue,
+.blue:link,
+.blue:visited {
   display: flex;
   justify-content: space-between;
+  border-color: var(--midnight);
+  background-color: var(--white);
+  color: var(--midnight);
 }
 
-.blackOutline {
-  background-color: transparent;
-  color: var(--black);
-  border: 1px solid var(--black);
-}
-
-.transparent {
-  color: var(--white) !important;
-  background-color: #ffffff1a;
-  display: flex;
-  justify-content: space-between;
-}
-
-.blackReg {
-  background-color: var(--black);
-  color: var(--white) !important;
-  border: 1px solid var(--black);
-  border-radius: 5px;
+/* ── Compact form and table buttons ── */
+.blackReg,
+.blackRegSmall,
+.greenReg,
+.redReg,
+.grayReg,
+.blueReg {
   display: flex;
   justify-content: center;
-  padding: 8px 15px;
+  min-height: 44px;
+  padding: 0 1.8rem;
+  font-size: 15px;
+}
+
+/* An icon in a compact button gets a smaller box. */
+.blackReg:has(.arrowContainer, .plusContainer),
+.greenReg:has(.arrowContainer, .plusContainer),
+.redReg:has(.arrowContainer, .plusContainer),
+.grayReg:has(.arrowContainer, .plusContainer),
+.blueReg:has(.arrowContainer, .plusContainer) {
+  justify-content: space-between;
+  padding: 4px 4px 4px 1.6rem;
+}
+
+.blackReg .arrowContainer,
+.blackReg .plusContainer,
+.greenReg .arrowContainer,
+.greenReg .plusContainer,
+.redReg .arrowContainer,
+.redReg .plusContainer,
+.grayReg .arrowContainer,
+.grayReg .plusContainer,
+.blueReg .arrowContainer,
+.blueReg .plusContainer {
+  width: 34px;
+  height: 34px;
 }
 
 .blackRegSmall {
-  background-color: var(--black);
-  color: var(--white) !important;
-  border: 1px solid var(--black);
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  padding: 5px 10px;
+  min-height: 34px;
+  padding: 0 1.2rem;
   font-size: 1.4rem;
 }
 
+.blackReg,
+.blackRegSmall {
+  border-color: var(--midnight);
+  background-color: var(--midnight);
+  color: var(--ivory) !important;
+}
+
 .greenReg {
-  background-color: var(--green);
+  border-color: var(--darkGreen);
+  background-color: var(--darkGreen);
   color: var(--white) !important;
-  border: 1px solid var(--darkGreen);
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  padding: 8px 15px;
 }
 
+.greenReg .arrowContainer,
+.greenReg .plusContainer {
+  background-color: var(--white);
+}
+
+.greenReg .arrow,
+.greenReg .optionalIcon {
+  color: var(--darkGreen);
+}
+
+/* Destructive: red outline, filled on hover. */
 .redReg {
-  background-color: var(--accent);
-  color: var(--white) !important;
-  border: 1px solid var(--accent600);
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  padding: 8px 15px;
+  border-color: var(--danger);
+  background-color: var(--white);
+  color: var(--danger) !important;
 }
 
-.grayReg {
-  background-color: var(--black300);
-  color: var(--black) !important;
-  border: 1px solid var(--black300);
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  padding: 8px 15px;
+.redReg .arrowContainer,
+.redReg .plusContainer {
+  background-color: var(--danger);
 }
 
+.redReg .arrow,
+.redReg .optionalIcon {
+  color: var(--white);
+}
+
+.grayReg,
 .blueReg {
-  background-color: var(--blue);
-  color: var(--white) !important;
-  border: 1px solid var(--blue);
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  padding: 8px 15px;
+  border-color: var(--stroke);
+  background-color: var(--white);
+  color: var(--midnight) !important;
 }
 
 /* ================================
    HOVER STATES - Desktop only
    ================================ */
 @media (hover: hover) and (pointer: fine) {
-  .blackReg:hover {
-    background-color: var(--black400);
-    border: 1px solid var(--black400);
+  .black:hover:not(:disabled),
+  .blackAdmin:hover:not(:disabled),
+  .primary:hover:not(:disabled),
+  .blackReg:hover:not(:disabled),
+  .blackRegSmall:hover:not(:disabled) {
+    border-color: var(--navy);
+    background-color: var(--navy);
   }
 
-  .greenReg:hover {
-    background-color: var(--darkGreen);
-    border: 1px solid var(--darkGreen);
+  .red:hover:not(:disabled),
+  .accent:hover:not(:disabled) {
+    border-color: var(--midnight);
+  }
+
+  .green:hover:not(:disabled),
+  .greenii:hover:not(:disabled),
+  .greenReg:hover:not(:disabled) {
+    border-color: #075f39;
+    background-color: #075f39;
+  }
+
+  .gray:hover:not(:disabled),
+  .cream:hover:not(:disabled),
+  .lightRed:hover:not(:disabled),
+  .blackOutline:hover:not(:disabled),
+  .blue:hover:not(:disabled) {
+    background-color: var(--ivory);
+  }
+
+  .grayReg:hover:not(:disabled),
+  .blueReg:hover:not(:disabled) {
+    border-color: var(--midnight);
+  }
+
+  .redReg:hover:not(:disabled) {
+    background-color: var(--danger);
+    color: var(--white) !important;
+  }
+
+  .white:hover:not(:disabled) {
+    background-color: var(--ivory);
   }
 }

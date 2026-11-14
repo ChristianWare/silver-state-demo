@@ -88,7 +88,7 @@ export default function PasswordEmailForm() {
             <div className={styles.btnContainer}>
               <Button
                 type='submit'
-                btnType='redReg'
+                btnType='blackReg'
                 disabled={isPending}
                 text={isPending ? "Sending..." : "Send reset email"}
               />
@@ -107,7 +107,7 @@ export default function PasswordEmailForm() {
               We&apos;ve sent a password reset link to your email address.
             </p>
             <div className={styles.btnContainer}>
-              <Button btnType='redReg' href='/login' text='Back to login' />
+              <Button btnType='grayReg' href='/login' text='Back to login' />
               <button
                 type='button'
                 className='backBtn'

@@ -236,7 +236,7 @@ export default function DriverNotificationSettingsForm({ initial }: Props) {
                       {!savingEmail && (
                         <Button
                           text='Cancel'
-                          btnType='redReg'
+                          btnType='grayReg'
                           type='button'
                           onClick={handleCancelEmail}
                         />

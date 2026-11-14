@@ -291,7 +291,7 @@ export default function EditServiceForm({
           {!isPending && (
             <Button
               text='Cancel'
-              btnType='redReg'
+              btnType='grayReg'
               type='button'
               onClick={handleCancel}
             />

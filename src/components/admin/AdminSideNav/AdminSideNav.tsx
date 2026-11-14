@@ -29,33 +29,62 @@ import Receipt from "@/components/shared/icons/Receipt/Receipt";
 import Driver from "@/components/shared/icons/Driver/Driver";
 
 
-const NAV_ITEMS = [
-  { title: "Dashboard", href: "/admin", icon: <House /> },
-  { title: "Earnings", href: "/admin/earnings", icon: <Money /> },
-  { title: "Bookings", href: "/admin/bookings", icon: <Appointments /> },
-  { title: "Calendar", href: "/admin/calendar", icon: <Calendar /> },
-  { title: "Drivers", href: "/admin/drivers", icon: <Driver /> },
-  { title: "Users", href: "/admin/users", icon: <Users /> },
-  { title: "Services", href: "/admin/services", icon: <Bell /> },
+// The admin pages, grouped so the list is easier to scan.
+const NAV_GROUPS = [
   {
-    title: "Vehicle Categories",
-    href: "/admin/vehicle-categories",
-    icon: <Listing />,
+    label: "Operations",
+    items: [
+      { title: "Dashboard", href: "/admin", icon: <House /> },
+      { title: "Bookings", href: "/admin/bookings", icon: <Appointments /> },
+      { title: "Calendar", href: "/admin/calendar", icon: <Calendar /> },
+      { title: "Drivers", href: "/admin/drivers", icon: <Driver /> },
+    ],
   },
-  { title: "Vehicles", href: "/admin/vehicles", icon: <Car /> },
-  { title: "Corporate Acct's", href: "/admin/corporate", icon: <Business /> },
-  { title: "Airports", href: "/admin/airports", icon: <Plane /> },
-  { title: "Reports", href: "/admin/reports", icon: <Report /> },
-  { title: "Invoices", href: "/admin/invoices", icon: <Receipt /> },
   {
-    title: "Discount Codes",
-    href: "/admin/discount-codes",
-    icon: <Listing />,
+    label: "Customers",
+    items: [
+      { title: "Users", href: "/admin/users", icon: <Users /> },
+      {
+        title: "Corporate accounts",
+        href: "/admin/corporate",
+        icon: <Business />,
+      },
+    ],
   },
-  { title: "Company", href: "/admin/company", icon: <Company /> },
-  { title: "Website Analytics", href: "/admin/analytics", icon: <Analytics /> },
-  { title: "Notifications", href: "/admin/notifications", icon: <Cog /> },
-  { title: "Assets", href: "/admin/assets", icon: <ImageIcon /> },
+  {
+    label: "Money",
+    items: [
+      { title: "Earnings", href: "/admin/earnings", icon: <Money /> },
+      { title: "Invoices", href: "/admin/invoices", icon: <Receipt /> },
+      { title: "Reports", href: "/admin/reports", icon: <Report /> },
+      {
+        title: "Discount codes",
+        href: "/admin/discount-codes",
+        icon: <Listing />,
+      },
+    ],
+  },
+  {
+    label: "Setup",
+    items: [
+      { title: "Services", href: "/admin/services", icon: <Bell /> },
+      { title: "Vehicles", href: "/admin/vehicles", icon: <Car /> },
+      {
+        title: "Vehicle categories",
+        href: "/admin/vehicle-categories",
+        icon: <Listing />,
+      },
+      { title: "Airports", href: "/admin/airports", icon: <Plane /> },
+      { title: "Company", href: "/admin/company", icon: <Company /> },
+      { title: "Notifications", href: "/admin/notifications", icon: <Cog /> },
+      { title: "Assets", href: "/admin/assets", icon: <ImageIcon /> },
+      {
+        title: "Website analytics",
+        href: "/admin/analytics",
+        icon: <Analytics />,
+      },
+    ],
+  },
 ];
 
 export type AdminSideNavProps = {
@@ -70,10 +99,10 @@ export default function AdminSideNav(
   const [isOpen, setIsOpen] = useState(false);
   const [menuModalOpen, setMenuModalOpen] = useState(false);
   const [navigatingTo, setNavigatingTo] = useState<string | null>(null);
-  const [collapsed, setCollapsed] = useState(() => {
-    if (typeof window !== "undefined") return window.innerWidth <= 568;
-    return false;
-  });
+  // Starts open on the server and the first render; the effect below folds
+  // it right after load (the fold only shows at 1068px and below). Reading
+  // the window size here made the server and browser disagree.
+  const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
 
   const navigating = navigatingTo !== null && pathname !== navigatingTo;
@@ -149,32 +178,37 @@ useEffect(() => {
             <div
               className={`${styles.linksWrapper} ${navigating ? styles.linksHidden : ""}`}
             >
-              {NAV_ITEMS.map(({ title, href, icon }) => {
-                const isDashboard = href === "/admin";
-                const active = isDashboard
-                  ? pathname === "/admin"
-                  : pathname === href || pathname.startsWith(href + "/");
+              {NAV_GROUPS.map((group) => (
+                <div key={group.label} className={styles.group}>
+                  <p className={styles.groupLabel}>{group.label}</p>
+                  {group.items.map(({ title, href, icon }) => {
+                    const isDashboard = href === "/admin";
+                    const active = isDashboard
+                      ? pathname === "/admin"
+                      : pathname === href || pathname.startsWith(href + "/");
 
-                return (
-                  <li key={href} className={styles.navItem}>
-                    <Link
-                      href={href}
-                      className={`${styles.navLink} ${
-                        active ? styles.navLinkActive : ""
-                      }`}
-                      onClick={() => {
-                        setIsOpen(false);
-                        setNavigatingTo(href);
-                      }}
-                      aria-current={active ? "page" : undefined}
-                    >
-                      <span className={styles.navIcon}>{icon}</span>
-                      <span className={styles.title}>{title}</span>
-                      <span className={styles.tooltip}>{title}</span>
-                    </Link>
-                  </li>
-                );
-              })}
+                    return (
+                      <li key={href} className={styles.navItem}>
+                        <Link
+                          href={href}
+                          className={`${styles.navLink} ${
+                            active ? styles.navLinkActive : ""
+                          }`}
+                          onClick={() => {
+                            setIsOpen(false);
+                            setNavigatingTo(href);
+                          }}
+                          aria-current={active ? "page" : undefined}
+                        >
+                          <span className={styles.navIcon}>{icon}</span>
+                          <span className={styles.title}>{title}</span>
+                          <span className={styles.tooltip}>{title}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </div>
+              ))}
 
               <div className={styles.actionBtns}>
                 <Link href='/dashboard' className={styles.dshbrdBtn}>

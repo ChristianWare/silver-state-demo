@@ -245,7 +245,7 @@ export default function FlightLookupInput({
         />
 
         <Button
-          btnType='redReg'
+          btnType='blackReg'
           text={looking ? "Looking up..." : "Look up"}
           onClick={handleLookupClick}
           disabled={looking || !flightNumber.trim() || !flightDate}

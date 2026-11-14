@@ -6,11 +6,17 @@
 // image, then a white bar with dark text once the element with `heroId` has
 // scrolled under the nav. variant="solid": the white bar from the start.
 // At 1068px and below the links fold into a full-screen menu.
+//
+// Beside Book now: Log in when signed out, or Dashboard (the home for the
+// signed-in role) and Log out when signed in. A thin bar along the bottom
+// shows while a page loads.
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLenis } from "lenis/react";
+import { signOut, useSession } from "next-auth/react";
+import NavProgress from "@/components/shared/NavProgress/NavProgress";
 import MountainIcon from "@/components/shared/icons/MountainIcon/MountainIcon";
 import Arrow from "@/components/shared/icons/Arrow/Arrow";
 import styles from "./SiteNav.module.css";
@@ -24,8 +30,15 @@ const LINKS = [
   { text: "Contact", href: "/contact" },
 ];
 
-// The full-screen menu also lists these.
-const MENU_EXTRA = [{ text: "Log in", href: "/login" }];
+type AppRole = "USER" | "ADMIN" | "DRIVER" | "CORPORATE";
+
+/** Where "Dashboard" goes for the signed-in role. */
+function dashboardFor(roles: AppRole[]): string {
+  if (roles.includes("ADMIN")) return "/admin";
+  if (roles.includes("DRIVER")) return "/driver-dashboard";
+  if (roles.includes("CORPORATE")) return "/corporate";
+  return "/dashboard";
+}
 
 const NAV_HEIGHT = 72;
 
@@ -43,6 +56,12 @@ export default function SiteNav({
   // when a link takes you somewhere else.
   const [menuOpenOn, setMenuOpenOn] = useState<string | null>(null);
   const lenis = useLenis();
+  const { data: session, status } = useSession();
+  const roles = ((session?.user as { roles?: AppRole[] } | undefined)?.roles ??
+    []) as AppRole[];
+  const signedIn = status === "authenticated";
+  const dashboardHref = dashboardFor(roles);
+  const logOut = () => signOut({ callbackUrl: "/" });
   const menuOpen = menuOpenOn === pathname;
   const setMenuOpen = (open: boolean) => setMenuOpenOn(open ? pathname : null);
 
@@ -107,12 +126,36 @@ export default function SiteNav({
             ))}
           </ul>
 
-          <Link href='/book' className={styles.bookBtn}>
-            Book now
-            <span className={styles.bookBox} aria-hidden='true'>
-              <Arrow className={styles.bookArrow} />
-            </span>
-          </Link>
+          <div className={styles.actions}>
+            {/* Nothing until the session is known, so it doesn't flicker. */}
+            {status === "loading" ? null : signedIn ? (
+              <>
+                <Link
+                  href={dashboardHref}
+                  className={`${styles.link} ${isActive(dashboardHref) ? styles.active : ""}`}
+                >
+                  Dashboard
+                </Link>
+                <button type='button' className={styles.link} onClick={logOut}>
+                  Log out
+                </button>
+              </>
+            ) : (
+              <Link
+                href='/login'
+                className={`${styles.link} ${isActive("/login") ? styles.active : ""}`}
+              >
+                Log in
+              </Link>
+            )}
+
+            <Link href='/book' className={styles.bookBtn}>
+              Book now
+              <span className={styles.bookBox} aria-hidden='true'>
+                <Arrow className={styles.bookArrow} />
+              </span>
+            </Link>
+          </div>
 
           <button
             type='button'
@@ -126,6 +169,7 @@ export default function SiteNav({
             <span />
           </button>
         </nav>
+        <NavProgress />
       </header>
 
       <div
@@ -157,7 +201,12 @@ export default function SiteNav({
         </div>
 
         <ul className={styles.menuLinks}>
-          {[...LINKS, ...MENU_EXTRA].map((l) => (
+          {[
+            ...LINKS,
+            signedIn
+              ? { text: "Dashboard", href: dashboardHref }
+              : { text: "Log in", href: "/login" },
+          ].map((l) => (
             <li key={l.href}>
               <Link
                 href={l.href}
@@ -169,6 +218,21 @@ export default function SiteNav({
               </Link>
             </li>
           ))}
+          {signedIn ? (
+            <li>
+              <button
+                type='button'
+                className={styles.menuLink}
+                onClick={() => {
+                  setMenuOpen(false);
+                  logOut();
+                }}
+                tabIndex={menuOpen ? 0 : -1}
+              >
+                Log out
+              </button>
+            </li>
+          ) : null}
         </ul>
 
         <Link

@@ -102,7 +102,7 @@ export default function PasswordResetFormClient({
             </p>
             <div className={styles.btnContainer}>
               <Button
-                btnType='redReg'
+                btnType='blackReg'
                 href='/forgot-password'
                 text='Request new link'
               />
@@ -130,7 +130,7 @@ export default function PasswordResetFormClient({
               with your new password.
             </p>
             <div className={styles.btnContainer}>
-              <Button btnType='redReg' href='/login' text='Sign in' />
+              <Button btnType='blackReg' href='/login' text='Sign in' />
             </div>
           </div>
         </LayoutWrapper>
@@ -187,7 +187,7 @@ export default function PasswordResetFormClient({
           <div className={styles.btnContainer}>
             <Button
               type='submit'
-              btnType='redReg'
+              btnType='blackReg'
               disabled={
                 isPending || !isPasswordValid || !isConfirmPasswordValid
               }

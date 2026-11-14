@@ -225,7 +225,7 @@ export default function PriceForm({
           {!isPending && (
             <Button
               text='Cancel'
-              btnType='redReg'
+              btnType='grayReg'
               type='button'
               onClick={handleCancel}
             />

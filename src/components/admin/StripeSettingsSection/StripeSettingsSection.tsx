@@ -167,7 +167,7 @@ export default function StripeSettingsSection({ initial }: Props) {
           {!isPending && (
             <Button
               text='Cancel'
-              btnType='redReg'
+              btnType='grayReg'
               type='button'
               onClick={handleCancel}
             />

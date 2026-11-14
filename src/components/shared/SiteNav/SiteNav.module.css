@@ -112,6 +112,13 @@
   padding: 0.4rem 1rem;
 }
 
+/* Log out is a button that looks like the links. */
+button.link {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .link:hover,
 .active {
   background-color: var(--gold);
@@ -124,6 +131,20 @@
 .overlay .link:hover,
 .overlay .active {
   color: var(--midnight);
+}
+
+/* ── Account links and Book now ── */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.actions .link {
+  white-space: nowrap;
 }
 
 /* ── Book button ── */
@@ -261,6 +282,8 @@
 
 .menuLink {
   display: block;
+  width: 100%;
+  text-align: left;
   padding: 1.2rem 0;
   border-bottom: 1px solid var(--stroke);
   font-family: var(--SofiaSansExtraCondensedBold);
@@ -282,9 +305,17 @@
   color: var(--midnight);
 }
 
+/* Log out in the menu is a button. */
+button.menuLink {
+  border: none;
+  border-bottom: 1px solid var(--stroke);
+  background: none;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 1068px) {
   .links,
-  .bookBtn {
+  .actions {
     display: none;
   }
 

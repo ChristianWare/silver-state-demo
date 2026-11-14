@@ -684,7 +684,7 @@ export default function CompanySettingsForm({ initial }: Props) {
           {!isSaving(section) && (
             <Button
               text='Cancel'
-              btnType='redReg'
+              btnType='grayReg'
               type='button'
               onClick={() => handleCancel(section)}
             />
