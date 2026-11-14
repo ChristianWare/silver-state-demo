@@ -293,22 +293,78 @@ button.link {
   color: var(--midnight);
 }
 
-/* ── Admin pages: the admin's sections in the menu ── */
+/* ── Admin pages: "Admin options" and its sub-menu ── */
 
-.adminMenu {
+/* In the main menu: same size as the other links, with an arrow. */
+.menuLinkAdmin {
   display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
-  margin: 1.6rem 0 3.2rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
 }
 
-.adminGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.menuLinkArrow {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--gold);
+  transform: rotate(90deg);
 }
 
-.adminGroupLabel {
+/* The sub-menu: a full panel over the menu, in from the right. */
+.sub {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 26px 26px;
+  background-color: var(--white);
+  overflow-y: auto;
+  visibility: hidden;
+  transform: translateX(100%);
+  transition:
+    transform 0.3s ease,
+    visibility 0.3s;
+}
+
+.subOpen {
+  visibility: visible;
+  transform: none;
+}
+
+.subTop {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  height: 42px;
+  padding: 0 1.4rem 0 1rem;
+  border: 1px solid var(--stroke);
+  border-radius: 4px;
+  background: none;
+  font-family: var(--SofiaSansRegular);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--midnight);
+  cursor: pointer;
+}
+
+.backArrow {
+  width: 14px;
+  height: 14px;
+  transform: rotate(-90deg);
+}
+
+.subEyebrow {
+  margin-top: 2rem;
   font-family: var(--SofiaSansBold);
   font-size: 12px;
   line-height: 1;
@@ -317,48 +373,99 @@ button.link {
   color: var(--steel);
 }
 
-.adminGrid {
+.subGroups {
+  margin: 1rem 0 3.2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.subGroup {
+  border-bottom: 1px solid var(--stroke);
+}
+
+/* Section headings: the main menu's link style, with a turning chevron. */
+.subHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  width: 100%;
+  padding: 1.2rem 0;
+  border: none;
+  background: none;
+  font-family: var(--SofiaSansExtraCondensedBold);
+  font-size: 3.2rem;
+  line-height: 1;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--midnight);
+  cursor: pointer;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--slate);
+  transition: transform 0.25s ease;
+}
+
+.chevronOpen {
+  color: var(--midnight);
+  transform: rotate(180deg);
+}
+
+/* The links under a heading, opening and closing smoothly. */
+.subPanel {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 0.8rem;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.subPanelOpen {
+  grid-template-rows: 1fr;
+}
+
+.subLinks {
+  min-height: 0;
+  overflow: hidden;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.adminItem {
+.subPanelOpen .subLinks {
+  padding-bottom: 1.2rem;
+}
+
+.subLink {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   width: 100%;
-  min-height: 48px;
+  min-height: 44px;
   padding: 0.8rem 1.2rem;
-  border: 1px solid var(--stroke);
+  border: none;
   border-radius: 4px;
-  background-color: var(--white);
+  background: none;
   font-family: var(--SofiaSansRegular);
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   line-height: 1.2;
   text-align: left;
   color: var(--midnight);
   cursor: pointer;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
-.adminItem:hover {
-  border-color: var(--midnight);
+.subLink:hover {
+  background-color: var(--ivory);
 }
 
-.adminItemActive,
-.adminItemActive:hover {
-  border-color: var(--gold);
+.subLinkActive,
+.subLinkActive:hover {
   background-color: var(--gold);
   font-family: var(--SofiaSansBold);
 }
 
-.adminIcon {
+.subIcon {
   display: flex;
   flex-shrink: 0;
   align-items: center;
@@ -368,13 +475,22 @@ button.link {
   color: var(--slate);
 }
 
-.adminItemActive .adminIcon {
+.subLinkActive .subIcon {
   color: var(--midnight);
 }
 
-.adminIcon svg {
+.subIcon > *,
+.subIcon svg {
   width: 100%;
   height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sub,
+  .subPanel,
+  .chevron {
+    transition: none;
+  }
 }
 
 .menuBook {
@@ -409,6 +525,10 @@ button.menuLink {
 }
 
 @media screen and (max-width: 568px) {
+  .sub {
+    padding: 0 16px 16px;
+  }
+
   .overlay {
     top: 8px;
     left: 8px;
