@@ -2,90 +2,16 @@
 
 import styles from "./AdminSideNav.module.css";
 import Link from "next/link";
-import Calendar from "@/components/shared/icons/Calendar/Calendar";
-import House from "@/components/shared/icons/House/House";
-import Bell from "@/components/shared/icons/Bell/Bell";
-import Users from "@/components/shared/icons/Users/Users";
-import Car from "@/components/shared/icons/Car/Car";
-import Listing from "@/components/shared/icons/Listing/Listing";
 import { useState, useEffect } from "react";
 import FalseButton from "@/components/shared/FalseButton/FalseButton";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Arrow from "@/components/shared/icons/Arrow/Arrow";
-import Cog from "@/components/shared/icons/Cog/Cog";
 import SignOutLogo from "@/components/shared/icons/SignOutLogo/SignOutLogo";
-import Plane from "@/components/shared/icons/Plane/Plane";
-import Money from "@/components/shared/icons/Money/Money";
-import Report from "@/components/shared/icons/Report/Report";
-import Company from "@/components/shared/icons/Company/Company";
-import Appointments from "@/components/shared/icons/Appointments/Appointments";
-import Analytics from "@/components/shared/icons/Analytics/Analytics";
-import Business from "@/components/shared/icons/Business/Business";
-import ImageIcon from "@/components/shared/icons/ImageIcon/ImageIcon";
 import Modal from "@/components/shared/Modal/Modal";
 import LoadingPulse from "@/components/shared/LoadingPulse/LoadingPulse";
-import Receipt from "@/components/shared/icons/Receipt/Receipt";
-import Driver from "@/components/shared/icons/Driver/Driver";
+import { ADMIN_NAV_GROUPS, isAdminNavActive } from "./adminNav";
 
-
-// The admin pages, grouped so the list is easier to scan.
-const NAV_GROUPS = [
-  {
-    label: "Operations",
-    items: [
-      { title: "Dashboard", href: "/admin", icon: <House /> },
-      { title: "Bookings", href: "/admin/bookings", icon: <Appointments /> },
-      { title: "Calendar", href: "/admin/calendar", icon: <Calendar /> },
-      { title: "Drivers", href: "/admin/drivers", icon: <Driver /> },
-    ],
-  },
-  {
-    label: "Customers",
-    items: [
-      { title: "Users", href: "/admin/users", icon: <Users /> },
-      {
-        title: "Corporate accounts",
-        href: "/admin/corporate",
-        icon: <Business />,
-      },
-    ],
-  },
-  {
-    label: "Money",
-    items: [
-      { title: "Earnings", href: "/admin/earnings", icon: <Money /> },
-      { title: "Invoices", href: "/admin/invoices", icon: <Receipt /> },
-      { title: "Reports", href: "/admin/reports", icon: <Report /> },
-      {
-        title: "Discount codes",
-        href: "/admin/discount-codes",
-        icon: <Listing />,
-      },
-    ],
-  },
-  {
-    label: "Setup",
-    items: [
-      { title: "Services", href: "/admin/services", icon: <Bell /> },
-      { title: "Vehicles", href: "/admin/vehicles", icon: <Car /> },
-      {
-        title: "Vehicle categories",
-        href: "/admin/vehicle-categories",
-        icon: <Listing />,
-      },
-      { title: "Airports", href: "/admin/airports", icon: <Plane /> },
-      { title: "Company", href: "/admin/company", icon: <Company /> },
-      { title: "Notifications", href: "/admin/notifications", icon: <Cog /> },
-      { title: "Assets", href: "/admin/assets", icon: <ImageIcon /> },
-      {
-        title: "Website analytics",
-        href: "/admin/analytics",
-        icon: <Analytics />,
-      },
-    ],
-  },
-];
 
 export type AdminSideNavProps = {
   bookingNeedsAttentionCount?: number;
@@ -178,14 +104,11 @@ useEffect(() => {
             <div
               className={`${styles.linksWrapper} ${navigating ? styles.linksHidden : ""}`}
             >
-              {NAV_GROUPS.map((group) => (
+              {ADMIN_NAV_GROUPS.map((group) => (
                 <div key={group.label} className={styles.group}>
                   <p className={styles.groupLabel}>{group.label}</p>
                   {group.items.map(({ title, href, icon }) => {
-                    const isDashboard = href === "/admin";
-                    const active = isDashboard
-                      ? pathname === "/admin"
-                      : pathname === href || pathname.startsWith(href + "/");
+                    const active = isAdminNavActive(pathname, href);
 
                     return (
                       <li key={href} className={styles.navItem}>

@@ -10,6 +10,11 @@
 // Beside Book now: Log in when signed out, or Dashboard (the home for the
 // signed-in role) and Log out when signed in. A thin bar along the bottom
 // shows while a page loads.
+//
+// On admin pages the full-screen menu is the admin's navigation (it
+// replaces the side nav at 1068px and below): the admin pages in their
+// groups, then the dashboards and Log out, then the public site's pages
+// under "Website".
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -17,6 +22,10 @@ import { usePathname } from "next/navigation";
 import { useLenis } from "lenis/react";
 import { signOut, useSession } from "next-auth/react";
 import NavProgress from "@/components/shared/NavProgress/NavProgress";
+import {
+  ADMIN_NAV_GROUPS,
+  isAdminNavActive,
+} from "@/components/admin/AdminSideNav/adminNav";
 import MountainIcon from "@/components/shared/icons/MountainIcon/MountainIcon";
 import Arrow from "@/components/shared/icons/Arrow/Arrow";
 import styles from "./SiteNav.module.css";
@@ -102,6 +111,9 @@ export default function SiteNav({
   }, [menuOpen, lenis]);
 
   const solid = variant === "solid" || pastHero;
+  const inAdmin = pathname === "/admin" || pathname.startsWith("/admin/");
+  const closeMenu = () => setMenuOpen(false);
+  const menuTab = menuOpen ? 0 : -1;
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
 
@@ -175,6 +187,7 @@ export default function SiteNav({
       <div
         id='site-menu'
         className={`${styles.menu} ${menuOpen ? styles.menuOpen : ""}`}
+        data-lenis-prevent
         role='dialog'
         aria-modal='true'
         aria-label='Menu'
@@ -200,48 +213,137 @@ export default function SiteNav({
           </button>
         </div>
 
-        <ul className={styles.menuLinks}>
-          {[
-            ...LINKS,
-            signedIn
-              ? { text: "Dashboard", href: dashboardHref }
-              : { text: "Log in", href: "/login" },
-          ].map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className={styles.menuLink}
-                onClick={() => setMenuOpen(false)}
-                tabIndex={menuOpen ? 0 : -1}
-              >
-                {l.text}
-              </Link>
-            </li>
-          ))}
-          {signedIn ? (
-            <li>
-              <button
-                type='button'
-                className={styles.menuLink}
-                onClick={() => {
-                  setMenuOpen(false);
-                  logOut();
-                }}
-                tabIndex={menuOpen ? 0 : -1}
-              >
-                Log out
-              </button>
-            </li>
-          ) : null}
-        </ul>
+        {inAdmin ? (
+          <div className={styles.adminMenu}>
+            {ADMIN_NAV_GROUPS.map((group) => (
+              <section key={group.label} className={styles.adminGroup}>
+                <p className={styles.adminGroupLabel}>{group.label}</p>
+                <ul className={styles.adminGrid}>
+                  {group.items.map((item) => {
+                    const active = isAdminNavActive(pathname, item.href);
+                    return (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className={`${styles.adminItem} ${active ? styles.adminItemActive : ""}`}
+                          aria-current={active ? "page" : undefined}
+                          onClick={closeMenu}
+                          tabIndex={menuTab}
+                        >
+                          <span className={styles.adminIcon} aria-hidden='true'>
+                            {item.icon}
+                          </span>
+                          {item.title}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
+            ))}
 
+            <section className={styles.adminGroup}>
+              <p className={styles.adminGroupLabel}>Account</p>
+              <ul className={styles.adminGrid}>
+                <li>
+                  <Link
+                    href='/dashboard'
+                    className={styles.adminItem}
+                    onClick={closeMenu}
+                    tabIndex={menuTab}
+                  >
+                    User dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/driver-dashboard'
+                    className={styles.adminItem}
+                    onClick={closeMenu}
+                    tabIndex={menuTab}
+                  >
+                    Driver dashboard
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    type='button'
+                    className={styles.adminItem}
+                    onClick={() => {
+                      closeMenu();
+                      logOut();
+                    }}
+                    tabIndex={menuTab}
+                  >
+                    Log out
+                  </button>
+                </li>
+              </ul>
+            </section>
+
+            <section className={styles.adminGroup}>
+              <p className={styles.adminGroupLabel}>Website</p>
+              <ul className={styles.adminGrid}>
+                {LINKS.map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className={styles.adminItem}
+                      onClick={closeMenu}
+                      tabIndex={menuTab}
+                    >
+                      {l.text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </div>
+        ) : (
+          <ul className={styles.menuLinks}>
+            {[
+              ...LINKS,
+              signedIn
+                ? { text: "Dashboard", href: dashboardHref }
+                : { text: "Log in", href: "/login" },
+            ].map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className={styles.menuLink}
+                  onClick={() => setMenuOpen(false)}
+                  tabIndex={menuOpen ? 0 : -1}
+                >
+                  {l.text}
+                </Link>
+              </li>
+            ))}
+            {signedIn ? (
+              <li>
+                <button
+                  type='button'
+                  className={styles.menuLink}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    logOut();
+                  }}
+                  tabIndex={menuOpen ? 0 : -1}
+                >
+                  Log out
+                </button>
+              </li>
+            ) : null}
+          </ul>
+        )}
+
+        {/* In the admin, the button starts an admin booking. */}
         <Link
-          href='/book'
+          href={inAdmin ? "/admin/bookings/new" : "/book"}
           className={styles.menuBook}
           onClick={() => setMenuOpen(false)}
           tabIndex={menuOpen ? 0 : -1}
         >
-          Book now
+          {inAdmin ? "New booking" : "Book now"}
           <span className={styles.bookBox} aria-hidden='true'>
             <Arrow className={styles.bookArrow} />
           </span>
